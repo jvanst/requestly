@@ -1,4 +1,4 @@
-# request-tracker
+# Requestly
 
 ## Project setup
 ```

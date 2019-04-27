@@ -22,8 +22,13 @@ const router = new Router({
     },
     {
       path: '/register',
-      name: 'register',
+      name: 'Register',
       component: () => import(/* webpackChunkName: "register" */ './views/Register.vue')
+    },
+    {
+      path: '/recover',
+      name: 'Recover',
+      component: () => import(/* webpackChunkName: "recover" */ './views/Recover.vue')
     },
     {
       path: '/request/create',

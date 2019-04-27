@@ -55,7 +55,7 @@
           </v-flex>
           <v-flex xs12 class="pt-4">
             <router-link to="/register" class="black--text pr-2">Need an Account?</router-link>
-            <router-link to="#" class="black--text pl-2">Forgot your password?</router-link>
+            <router-link to="/recover" class="black--text pl-2">Forgot your password?</router-link>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -89,12 +89,8 @@ export default {
           this.showSnackbar('Successfully logged in', 'success')
           this.$router.replace('/')
         })
-        .catch((error) => {
-          this.showSnackbar(error.message, 'error')
-        })
-        .finally(() => {
-          this.loading = false
-        })
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => this.loading = false)
     },
     google () {
       this.loading = true
@@ -103,12 +99,8 @@ export default {
           this.showSnackbar('Successfully logged in', 'success')
           this.$router.replace('/')
         })
-        .catch((error) => {
-          this.showSnackbar(error.message, 'error')
-        })
-        .finally(() => {
-          this.loading = false
-        })
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => this.loading = false)
     }
   }
 }

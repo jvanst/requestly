@@ -1,6 +1,5 @@
 
 import Vue from 'vue'
-import '@/components/helpers/snackbar.vue'
 
 const data = {
   snackbarVisible: false,

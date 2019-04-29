@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'form-validation',
+  name: 'FormValidation',
   data: () => ({
     valid: true
   }),

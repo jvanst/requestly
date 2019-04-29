@@ -64,26 +64,27 @@
 
 <script>
 export default {
+  name: 'Register',
   data: () => ({
     email: '',
     password: '',
     displayName: '',
-    loading: false,
+    loading: false
   }),
   methods: {
     register () {
-      this.loading = true;
+      this.loading = true
       this.$store.dispatch('user/register', {
         email: this.email,
         password: this.password,
         displayName: this.displayName
       })
-      .then(() => {
+        .then(() => {
           this.showSnackbar('Successfully Registered', 'success')
           this.$router.replace('/')
         })
         .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => this.loading = false)
+        .finally(() => (this.loading = false))
     }
   }
 }

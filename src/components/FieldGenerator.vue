@@ -43,9 +43,9 @@
 
 <script>
 export default {
-  name: 'field-generator',
+  name: 'FieldGenerator',
   components: {
-    FileUpload: () => import('@/components/helpers/file-upload.vue')
+    FileUpload: () => import('@/components/FileUpload.vue')
   },
   props: {
     fields: {

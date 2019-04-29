@@ -50,18 +50,18 @@ export default {
   data: () => ({
     loading: false,
     email: '',
-    dark: false,
+    dark: false
   }),
   methods: {
-    recover(email) {
-      this.loading = true;
+    recover (email) {
+      this.loading = true
       this.$store.dispatch('user/recover', email)
         .then(() => {
           this.showSnackbar('Recovery email sent', 'success')
           this.$router.replace('/login')
         })
         .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => this.loading = false)
+        .finally(() => (this.loading = false))
     }
   }
 }

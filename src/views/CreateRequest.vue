@@ -98,9 +98,10 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
+  name: 'CreateRequest',
   components: {
-    FormValidation: () => import('@/components/helpers/form-validation.vue'),
-    FieldGenerator: () => import('@/components/helpers/field-generator.vue')
+    FormValidation: () => import('@/components/FormValidation.vue'),
+    FieldGenerator: () => import('@/components/FieldGenerator.vue')
   },
   data: () => ({
     stepperValue: 1,

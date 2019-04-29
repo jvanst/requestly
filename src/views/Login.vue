@@ -67,6 +67,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  name: 'Login',
   data: () => ({
     email: '',
     password: '',
@@ -90,7 +91,7 @@ export default {
           this.$router.replace('/')
         })
         .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => this.loading = false)
+        .finally(() => (this.loading = false))
     },
     google () {
       this.loading = true
@@ -100,7 +101,7 @@ export default {
           this.$router.replace('/')
         })
         .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => this.loading = false)
+        .finally(() => (this.loading = false))
     }
   }
 }

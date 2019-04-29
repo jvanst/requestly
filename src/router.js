@@ -9,15 +9,12 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ './views/Home.vue'),
-      meta: {
-        requiresAuth: true
-      }
+      name: 'Board',
+      component: () => import(/* webpackChunkName: "board" */ './views/Board.vue')
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
     },
     {
@@ -33,7 +30,7 @@ const router = new Router({
     {
       path: '/request/create',
       name: 'create-request',
-      component: () => import(/* webpackChunkName: "create-request" */ './views/Create.vue'),
+      component: () => import(/* webpackChunkName: "create-request" */ './views/CreateRequest.vue'),
       meta: {
         requiresAuth: true
       }

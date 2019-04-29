@@ -1,6 +1,6 @@
 // Initialize firebase first
 import firebase from 'firebase/app'
-import config from './config/firebase.json'
+import './firebase'
 
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
@@ -22,8 +22,7 @@ new Vue({
   router,
   store,
   vuetify: new Vuetify({}),
-  created () {
-    firebase.initializeApp(config)
+  beforeCreate () {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(user => {
       if (user) {

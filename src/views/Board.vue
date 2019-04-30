@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import draggable from 'vuedraggable'
 
 export default {
@@ -40,29 +39,34 @@ export default {
     BoardToolbar: () => import('@/components/BoardToolbar'),
     BoardPipeline: () => import('@/components/BoardPipeline')
   },
-  created() {
+  created () {
     this.fetch()
   },
   data: () => ({
-    loading: false,
+    loading: false
   }),
   computed: {
     pipelines: {
-      get() {
+      get () {
         return this.$store.state.pipelines.data
       },
-      set(value) {
-        this.$store.commit('pipelines/SET_PIPELINES', value)
+      set (value) {
+        this.$store.commit('pipelines/UPDATE_ORDER', value)
+        this.$store.dispatch('pipelines/updateBatch')
+          .catch((error) => this.showSnackbar(error.message, 'error'))
       }
     }
   },
   methods: {
-    fetch() {
-      this.loading = true;
-      this.$store.dispatch('pipelines/fetch')
+    fetch () {
+      this.loading = true
+      Promise.all([
+        this.$store.dispatch('pipelines/fetch'),
+        this.$store.dispatch('requests/fetch')
+      ])
         .catch((error) => this.showSnackbar(error.message, 'error'))
         .finally(() => (this.loading = false))
-    },
+    }
   }
 }
 </script>

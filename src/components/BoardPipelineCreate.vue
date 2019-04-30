@@ -48,24 +48,24 @@
 </template>
 
 <script>
-  export default {
-    name: 'CreatePipeline',
-    data: () => ({
-      menu: false,
-      title: '',
-      loading: false
-    }),
-    methods: {
-      create() {
-        this.loading = true
-        this.$store.dispatch('pipelines/create', this.title)
-          .then(() => {
-            this.title = ''
-            this.menu = false
-          })
-          .catch((error) => this.showSnackbar(error.message, 'error'))
-          .finally(() => (this.loading = false))
-      }
+export default {
+  name: 'CreatePipeline',
+  data: () => ({
+    menu: false,
+    title: '',
+    loading: false
+  }),
+  methods: {
+    create () {
+      this.loading = true
+      this.$store.dispatch('pipelines/create', this.title)
+        .then(() => {
+          this.title = ''
+          this.menu = false
+        })
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => (this.loading = false))
     }
   }
+}
 </script>

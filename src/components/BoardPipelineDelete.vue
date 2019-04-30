@@ -18,7 +18,6 @@
         <v-spacer></v-spacer>
         <v-btn
           color="error"
-          text
           :loading="loading"
           @click="remove()"
         >
@@ -43,12 +42,12 @@ export default {
         return this.value
       },
       set (value) {
-         this.$emit('input', value)
+        this.$emit('input', value)
       }
     }
   },
   methods: {
-    remove() {
+    remove () {
       this.loading = true
       this.$store.dispatch('pipelines/delete', this.pipeline.id)
         .then(() => {

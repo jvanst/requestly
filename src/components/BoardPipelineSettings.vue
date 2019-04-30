@@ -44,17 +44,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'PipelineSettings',
-    props: ['pipeline'],
-    components: {
-      PipelineRename: () => import('@/components/BoardPipelineRename'),
-      PipelineDelete: () => import('@/components/BoardPipelineDelete')
-    },
-    data: () => ({
-      menu: false,
-      deleteDialog: false,
-      renameDialog: false,
-    }),
-  }
+export default {
+  name: 'PipelineSettings',
+  props: ['pipeline'],
+  components: {
+    PipelineRename: () => import('@/components/BoardPipelineRename'),
+    PipelineDelete: () => import('@/components/BoardPipelineDelete')
+  },
+  data: () => ({
+    menu: false,
+    deleteDialog: false,
+    renameDialog: false
+  })
+}
 </script>

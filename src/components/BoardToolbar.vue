@@ -10,10 +10,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'BoardToolbar',
-    components: {
-      BoardPipelineCreate: () => import('@/components/BoardPipelineCreate')
-    }
+export default {
+  name: 'BoardToolbar',
+  components: {
+    BoardPipelineCreate: () => import('@/components/BoardPipelineCreate')
   }
+}
 </script>

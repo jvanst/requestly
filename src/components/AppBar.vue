@@ -22,7 +22,7 @@
         Login
       </v-btn>
     </v-toolbar-items>
-    
+
     <user-menu v-if="user.isLoggedIn" class="ml-3"/>
 
   </v-app-bar>

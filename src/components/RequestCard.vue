@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card :to="`/request/${request.id}`">
     <v-list>
       <v-list-item>
         <v-list-item-content>

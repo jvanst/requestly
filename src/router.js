@@ -28,8 +28,17 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "recover" */ './views/Recover.vue')
     },
     {
+      path: '/request/:id',
+      name: 'Request',
+      component: () => import(/* webpackChunkName: "request" */ './views/Request.vue'),
+      props: true,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/request/create',
-      name: 'create-request',
+      name: 'Create Request',
       component: () => import(/* webpackChunkName: "create-request" */ './views/CreateRequest.vue'),
       meta: {
         requiresAuth: true

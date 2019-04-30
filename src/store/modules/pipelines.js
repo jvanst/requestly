@@ -36,6 +36,19 @@ const actions = {
     newObject.id = id
     commit('UPDATE_PIPELINE', newObject)
   },
+  // updateBatch sets the remote state equal to local
+  async updateBatch ({ commit, state }) {
+    const batch = firebase.firestore().batch()
+
+    state.data.forEach((p) => {
+      const doc = { ...p }
+      delete doc.id
+      const ref = pipelineRef.doc(p.id)
+      batch.set(ref, doc)
+    })
+
+    await batch.commit()
+  },
   async delete ({ commit }, id) {
     await pipelineRef.doc(id).delete()
     commit('DELETE_PIPELINE', id)
@@ -54,6 +67,12 @@ const mutations = {
   },
   DELETE_PIPELINE (state, id) {
     state.data.splice(state.data.findIndex(p => p.id === id), 1)
+  },
+  UPDATE_ORDER (state, newOrder = []) {
+    newOrder.forEach((p, index) => { // Fix order property
+      p.order = index
+    })
+    state.data = newOrder // Set new order
   }
 }
 

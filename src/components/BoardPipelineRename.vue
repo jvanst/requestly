@@ -23,7 +23,6 @@
         <v-spacer></v-spacer>
         <v-btn
           color="primary"
-          text
           :loading="loading"
           @click="update()"
         >
@@ -48,26 +47,26 @@ export default {
         return this.value
       },
       set (value) {
-         this.$emit('input', value)
+        this.$emit('input', value)
       }
     }
   },
   methods: {
-    update() {
+    update () {
       this.loading = true
       this.$store.dispatch('pipelines/update', {
-          id: this.pipeline.id,
-          payload: {
-            title: this.title
-          }
-        })
+        id: this.pipeline.id,
+        payload: {
+          title: this.title
+        }
+      })
         .then(() => {
           this.menu = false
           this.dialog = false
         })
         .catch((error) => this.showSnackbar(error.message, 'error'))
         .finally(() => (this.loading = false))
-    },
+    }
   }
 }
 </script>

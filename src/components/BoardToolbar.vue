@@ -5,7 +5,7 @@
     class="transparent"
     >
       <v-spacer/>
-      <create-pipeline/>
+      <board-pipeline-create/>
   </v-toolbar>
 </template>
 
@@ -13,7 +13,7 @@
   export default {
     name: 'BoardToolbar',
     components: {
-      CreatePipeline: () => import('@/components/CreatePipeline')
+      BoardPipelineCreate: () => import('@/components/BoardPipelineCreate')
     }
   }
 </script>

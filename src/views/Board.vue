@@ -4,12 +4,15 @@
         <v-flex shrink>
           <BoardToolbar/>
         </v-flex>
-        <v-flex grow class="pa-1">
-          <v-layout
-            row
-            fill-height
-            justify-start
-            align-start
+        <v-flex v-if="loading">
+          loading
+        </v-flex>
+        <v-flex grow class="pa-1" v-else>
+          <draggable
+            class="layout row fill-height justify-start align-start"
+            v-model="pipelines"
+            group="pipelines"
+            handle=".pipeline-header"
           >
             <v-flex
               v-for="(pipelines, i) in pipelines"
@@ -20,7 +23,7 @@
             >
               <board-pipeline :pipeline="pipelines"/>
             </v-flex>
-          </v-layout>
+          </draggable>
         </v-flex>
       </v-layout>
     </v-container>
@@ -28,10 +31,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'Board',
   components: {
+    draggable,
     BoardToolbar: () => import('@/components/BoardToolbar'),
     BoardPipeline: () => import('@/components/BoardPipeline')
   },
@@ -42,9 +47,14 @@ export default {
     loading: false,
   }),
   computed: {
-    ...mapState({
-      pipelines: state => state.pipelines.data
-    })
+    pipelines: {
+      get() {
+        return this.$store.state.pipelines.data
+      },
+      set(value) {
+        this.$store.commit('pipelines/SET_PIPELINES', value)
+      }
+    }
   },
   methods: {
     fetch() {

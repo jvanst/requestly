@@ -26,6 +26,7 @@
           <v-text-field
           label="Title"
           v-model="title"
+          v-on:keyup.enter="create()"
           >
           </v-text-field>
         </v-card-text>
@@ -36,6 +37,7 @@
             color="primary"
             :disabled="!title"
             @click.native="create()"
+            :loading="loading"
           >
             Create
           </v-btn>
@@ -57,6 +59,10 @@
       create() {
         this.loading = true
         this.$store.dispatch('pipelines/create', this.title)
+          .then(() => {
+            this.title = ''
+            this.menu = false
+          })
           .catch((error) => this.showSnackbar(error.message, 'error'))
           .finally(() => (this.loading = false))
       }

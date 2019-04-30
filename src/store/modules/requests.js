@@ -2,12 +2,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-const requestRef = (id) =>
-  firebase
-    .firestore()
-    .collection('pipelines')
-    .doc(id)
-    .collection('requests')
+const requestRef = firebase.firestore().collection('requests')
 
 const state = {
   data: {}
@@ -15,7 +10,7 @@ const state = {
 
 const actions = {
   async fetch ({ state, commit, rootState }, id) {
-    const result = await requestRef(id).get()
+    const result = await requestRef.get()
 
     let data = []
     for (let request of result.docs) {
@@ -26,7 +21,6 @@ const actions = {
     }
 
     commit('SET_REQUESTS', { id, data })
-    commit('pipelines/SET_REQUEST_REF', { id, ref: rootState.requests.data[id] }, { root: true })
   }
 }
 

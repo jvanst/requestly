@@ -1,22 +1,32 @@
 <template>
   <v-sheet
     color="grey lighten-4"
-    class="pa-2"
     elevation="1"
     height="100%"
   >
-      <div class="overline pt-1 pl-1">
-        {{ pipeline.requests.length }} Requests
-      </div>
-      <div class="subtitle-1 font-weight-medium pl-1 pb-2">
-        {{ pipeline.title }}
-      </div>
-      <div v-if="loading">
+      <v-list dense class="transparent pipeline-header">
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-subtitle class="overline">
+              <!-- {{ pipeline.requests.length }} -->
+              Requests
+            </v-list-item-subtitle>
+            <v-list-item-title class="subtitle-1 font-weight-medium">
+              {{ pipeline.title }}
+            </v-list-item-title>
+          </v-list-item-content>
+          <v-list-item-action>
+            <board-pipeline-settings :pipeline="pipeline"/>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+      <v-divider/>
+      <!-- <div v-if="loading">
         Loading
       </div>
       <draggable
         v-else
-        class="layout column"
+        class="layout column ma-2"
         v-model="pipeline.requests"
         group="requests"
         style="height: 90%;"
@@ -30,7 +40,7 @@
         >
           <request-card :request="request"/>
         </v-flex>
-      </draggable>
+      </draggable> -->
   </v-sheet>
 </template>
 
@@ -43,10 +53,8 @@ export default {
   props: ['pipeline'],
   components: {
     draggable,
-    RequestCard: () => import('@/components/RequestCard.vue')
-  },
-  created() {
-    this.fetch()
+    RequestCard: () => import('@/components/RequestCard.vue'),
+    BoardPipelineSettings: () => import('@/components/BoardPipelineSettings')
   },
   data: () => ({
     loading: false,

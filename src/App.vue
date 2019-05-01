@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <app-bar/>
-    <nav-bar/>
+    <nav-drawer/>
     <v-content id="content">
       <router-view />
       <snack-bar/>
@@ -14,7 +14,7 @@ export default {
   name: 'app',
   components: {
     AppBar: () => import(/* webpackPreload: true */ '@/components/AppBar.vue'),
-    NavBar: () => import(/* webpackPreload: true */ '@/components/NavBar.vue'),
+    NavDrawer: () => import(/* webpackPreload: true */ '@/components/NavDrawer.vue'),
     SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
   }
 }

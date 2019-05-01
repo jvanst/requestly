@@ -59,6 +59,11 @@ export default {
   },
   methods: {
     fetch () {
+      // Do not re-fetch if already available in vuex
+      if (this.$store.state.requests.fetched && this.$store.state.pipelines.fetched) {
+        return
+      }
+
       this.loading = true
       Promise.all([
         this.$store.dispatch('pipelines/fetch'),

@@ -5,7 +5,8 @@ import 'firebase/firestore'
 const pipelineRef = firebase.firestore().collection('pipelines')
 
 const state = {
-  data: []
+  data: [],
+  fetched: false
 }
 
 const actions = {
@@ -20,6 +21,7 @@ const actions = {
       })
     }
     commit('SET_PIPELINES', data)
+    commit('SET_FETCHED', true)
   },
   async create ({ commit, state }, title) {
     const order = state.data.length
@@ -56,6 +58,9 @@ const actions = {
 }
 
 const mutations = {
+  SET_FETCHED (state, value) {
+    state.fetched = value
+  },
   SET_PIPELINES (state, value) {
     state.data = value
   },

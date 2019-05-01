@@ -5,7 +5,8 @@ import 'firebase/firestore'
 const requestRef = firebase.firestore().collection('requests')
 
 const state = {
-  data: []
+  data: [],
+  fetched: false
 }
 
 const getters = {
@@ -14,6 +15,13 @@ const getters = {
 }
 
 const actions = {
+  async fetchById ({ commit }, id) {
+    const result = await requestRef.doc(id).get()
+    commit('SET_REQUESTS', [{
+      id: result.id,
+      ...result.data()
+    }])
+  },
   async fetch ({ commit }) {
     const result = await requestRef.get()
 
@@ -25,6 +33,7 @@ const actions = {
       })
     }
     commit('SET_REQUESTS', data)
+    commit('SET_FETCHED', true)
   },
   async create ({ commit }, payload) {
     const result = await requestRef.add(payload)
@@ -43,6 +52,9 @@ const actions = {
 }
 
 const mutations = {
+  SET_FETCHED (state, value) {
+    state.fetched = value
+  },
   SET_REQUESTS (state, value) {
     state.data = value
   },

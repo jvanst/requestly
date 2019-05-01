@@ -1,18 +1,19 @@
 <template>
-  <v-toolbar
-    flat
-    dense
-    class="transparent"
-    >
-      <v-spacer/>
+  <v-layout class="pt-2 pl-2 pr-2">
+    <v-flex xs6>
+      <board-pipeline-refresh/>
+    </v-flex>
+    <v-flex xs6 class="text-xs-right">
       <board-pipeline-create/>
-  </v-toolbar>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 export default {
   name: 'BoardToolbar',
   components: {
+    BoardPipelineRefresh: () => import('@/components/BoardPipelineRefresh'),
     BoardPipelineCreate: () => import('@/components/BoardPipelineCreate')
   }
 }

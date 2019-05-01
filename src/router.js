@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store'
+// import store from './store'
 
 Vue.use(Router)
 
@@ -43,23 +43,39 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/forms/',
+      name: 'Forms',
+      component: () => import(/* webpackChunkName: "forms" */ './views/Forms.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/forms/create',
+      name: 'Create Request Type',
+      component: () => import(/* webpackChunkName: "create-form" */ './views/CreateForm.vue'),
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.state.user.isLoggedIn) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if (!store.state.user.isLoggedIn) {
+//       next({
+//         path: '/login',
+//         query: { redirect: to.fullPath }
+//       })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

@@ -18,17 +18,9 @@ Vue.config.productionTip = false
 
 Vue.use(Vuetify)
 
-Vue.mixin({
-  data () {
-    return {
-      darkTheme: false
-    }
-  },
-  methods: {
-    setDarkTheme (value) {
-      this.darkTheme = false
-    }
-  }
+Vue.filter('capitalizeFirstLetter', s => {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
 })
 
 new Vue({

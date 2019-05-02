@@ -23,22 +23,31 @@
     </v-layout>
     <v-card class="mt-2">
       <v-list>
-        <v-list-item>
+        <v-list-item v-if="loading">
           <v-list-item-content>
             <v-list-item-title>
-              Sample Request Title
+              Loading
             </v-list-item-title>
-            <v-list-item-subtitle>
-              Type: Enhancement
-            </v-list-item-subtitle>
           </v-list-item-content>
-          <v-list-tile-action>
-            <v-btn icon>
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
-          </v-list-tile-action>
         </v-list-item>
-        <v-divider/>
+        <template v-else v-for="(form, i) in forms">
+          <v-list-item :key="'form'+i" :to="{ name: 'Edit Form', params: { 'id': form.id }}">
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ form.title }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                {{ form.description }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action-text>
+              <v-btn icon :to="{ name: 'Edit Form', params: { 'id': form.id }}">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+            </v-list-item-action-text>
+          </v-list-item>
+          <v-divider :key="i"/>
+        </template>
       </v-list>
     </v-card>
   </v-container>
@@ -46,6 +55,29 @@
 
 <script>
 export default {
-  name: 'RequestTypes'
+  name: 'Forms',
+  data: () => ({
+    loading: false
+  }),
+  created () {
+    this.fetch()
+  },
+  computed: {
+    forms () {
+      return this.$store.state.forms.data
+    }
+  },
+  methods: {
+    fetch () {
+      // Do not re-fetch if already available in vuex
+      if (this.$store.state.forms.fetched) {
+        return
+      }
+      this.loading = true
+      this.$store.dispatch('forms/fetch')
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => (this.loading = false))
+    }
+  }
 }
 </script>

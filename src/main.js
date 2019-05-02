@@ -18,6 +18,19 @@ Vue.config.productionTip = false
 
 Vue.use(Vuetify)
 
+Vue.mixin({
+  data () {
+    return {
+      darkTheme: false
+    }
+  },
+  methods: {
+    setDarkTheme (value) {
+      this.darkTheme = false
+    }
+  }
+})
+
 new Vue({
   router,
   store,

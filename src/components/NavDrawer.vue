@@ -26,15 +26,6 @@
           <v-list-item-title>Board</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item link to="/requests">
-        <v-list-item-icon>
-          <v-icon>mdi-timeline-text-outline</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>Timeline</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
     </v-list>
 
     <template v-slot:append>

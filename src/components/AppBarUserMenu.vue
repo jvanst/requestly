@@ -12,9 +12,11 @@
     </template>
     <v-card>
       <v-list>
-        <v-list-item @click.native="setDark(!dark)">
+        <v-list-item>
           <v-list-item-action>
-            <v-switch :value="dark"></v-switch>
+            <v-switch
+              v-model="dark"
+            ></v-switch>
           </v-list-item-action>
           <v-list-item-title>Dark Mode</v-list-item-title>
         </v-list-item>
@@ -33,18 +35,20 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'AppBarUserMenu',
-  data: () => ({
-    dark: false
-  }),
   computed: {
     ...mapState({
       user: state => state.user
-    })
+    }),
+    dark: {
+      get () {
+        return this.$store.state.ui.dark
+      },
+      set (value) {
+        this.$store.commit('ui/SET_DARK', value)
+      }
+    }
   },
   methods: {
-    setDark (value) {
-      this.dark = value
-    },
     logout () {
       this.$store.dispatch('user/logout')
       this.$router.go('/login')

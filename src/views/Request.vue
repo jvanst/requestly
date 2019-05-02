@@ -1,23 +1,39 @@
 <template>
-  <v-container>
-    <v-card>
-    <v-toolbar
-      flat
-    >
-      <v-btn
-        to="/"
-        text
-      >
-        <v-icon left>mdi-keyboard-backspace</v-icon> Back
-      </v-btn>
-    </v-toolbar>
-    <v-card-text>
-      Request {{ id }}
-    </v-card-text>
-    <v-card-text>
-      {{ request }}
-    </v-card-text>
-    </v-card>
+  <v-container grid-list-lg>
+    <v-layout>
+      <v-flex xs9>
+        <v-card>
+          <v-card-title>
+            {{ request.title }}
+          </v-card-title>
+
+          <template  v-for="(section, index) in Object.keys(request.content)">
+
+            <v-card-title :key="'content-title'+index">
+              {{ section }}
+            </v-card-title>
+
+            <v-card-text :key="'content-section'+index">
+              {{ request.content[section] }}
+            </v-card-text>
+
+          </template>
+        </v-card>
+      </v-flex>
+      <v-flex xs3>
+        <v-layout row warp>
+          <v-flex xs12>
+            <div class="pa-3">
+              <v-subheader class="pl-0">
+                Pipeline
+              </v-subheader>
+              {{ request.pipelineId }}
+            </div>
+            <v-divider/>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -25,7 +41,7 @@
 export default {
   name: 'Request',
   props: ['id'],
-  mounted () {
+  created () {
     this.fetch()
   },
   data: () => ({

@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    color="grey lighten-4"
+    :color="dark ? 'grey darken-4' : 'grey lighten-4'"
     elevation="1"
     height="100%"
   >
@@ -52,13 +52,11 @@ export default {
     BoardPipelineSettings: () => import('@/components/BoardPipelineSettings')
   },
   computed: {
-    requests: {
-      get () {
-        return this.$store.getters['requests/getByPipelineId'](this.pipeline.id)
-      },
-      set (value) {
-
-      }
+    requests () {
+      return this.$store.getters['requests/getByPipelineId'](this.pipeline.id)
+    },
+    dark () {
+      return this.$store.state.ui.dark
     }
   },
   methods: {

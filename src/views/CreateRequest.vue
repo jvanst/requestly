@@ -1,13 +1,15 @@
 <template>
   <v-container>
     <span class="headline">Create a Request</span>
+      <v-container v-if="loading">
+        LOADING
+      </v-container>
 
-      <v-container>
+      <v-container v-else>
 
         <v-stepper
           v-model="stepperValue"
           vertical
-          style="box-shadow: none;border: none;"
         >
 
           <v-stepper-step
@@ -16,8 +18,8 @@
             step="1"
           >
             Type
-            <small v-if="request.type">
-              {{ typeById(request.type).name }}
+            <small v-if="formId">
+              {{ form.title }}
             </small>
           </v-stepper-step>
 
@@ -27,25 +29,25 @@
                 <v-flex
                   xs12>
                   <v-select
-                    v-model="request.type"
-                    :items="types"
+                    v-model="formId"
+                    :items="forms"
                     item-value="id"
-                    item-text="name"
+                    item-text="title"
                     label="Choose a type"
                     required
                   ></v-select>
                 </v-flex>
                 <v-flex
                   xs12
-                  v-for="(request, index) in types"
+                  v-for="(form, index) in forms"
                   :key="index + 'flex'"
                   class="caption">
-                    <b>{{ request.name }}</b>: {{ request.description }}
+                    <b>{{ form.title }}</b>: {{ form.description }}
                 </v-flex>
               </v-layout>
 
               <v-btn
-                :disabled="!request.type"
+                :disabled="!formId"
                 color="primary"
                 @click="stepperValue = 2"
               >Continue</v-btn>
@@ -53,8 +55,9 @@
 
           </v-stepper-content>
 
+          <div v-if="form">
           <template
-            v-for="(step, i) in typeById(request.type).steps"
+            v-for="(step, i) in form.steps"
           >
             <v-stepper-step
               :key="'step-' + i"
@@ -87,6 +90,27 @@
             </v-stepper-content>
 
           </template>
+          </div>
+
+          <v-stepper-step
+            :key="'step-' + (form ? form.steps.length : 0) + 2"
+            :step="(form ? form.steps.length : 0) + 2"
+            :complete="stepperValue > ((form ? form.steps.length : 0) + 1)"
+            :editable="stepperValue > ((form ? form.steps.length : 0) + 1)"
+          >
+            Confirm
+          </v-stepper-step>
+
+          <v-stepper-content :step="(form ? form.steps.length : 0) + 2">
+            <v-container>
+              <v-btn
+                @click="create()"
+                :loading="creating"
+                color="primary"
+              >Submit</v-btn>
+            </v-container>
+
+          </v-stepper-content>
 
         </v-stepper>
 
@@ -95,7 +119,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreateRequest',
@@ -105,27 +129,41 @@ export default {
   },
   data: () => ({
     stepperValue: 1,
+    formId: null,
     request: {
-      content: {},
-      title: null,
-      type: 1
-    }
+      content: {}
+    },
+    loading: false,
+    creating: false
   }),
-  mounted () {
-    this.$store.dispatch('type/fetchTypes')
+  created () {
+    this.fetch()
   },
   computed: {
     ...mapState({
-      types: state => state.type.data
+      forms: state => state.forms.data
     }),
-    ...mapGetters({
-      typeById: 'type/byId'
-    })
+    form () {
+      return this.$store.getters['forms/getById'](this.formId)
+    }
   },
   methods: {
-    submit () {
-      this.$store.dispatch('request/create', this.request)
-        .then(() => this.$router.go('/'))
+    fetch () {
+      // Do not re-fetch if already available in vuex
+      if (this.$store.state.forms.fetched) {
+        return
+      }
+      this.loading = true
+      this.$store.dispatch('forms/fetch')
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => (this.loading = false))
+    },
+    create () {
+      this.creating = true
+      this.$store.dispatch('requests/create', this.request)
+        .then(() => this.$router.replace('/'))
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => (this.creating = false))
     }
   }
 }

@@ -9,8 +9,8 @@
   >
 
   <v-toolbar-title>
-        Requestly
-      </v-toolbar-title>
+    Requestly
+  </v-toolbar-title>
 
     <v-spacer/>
 

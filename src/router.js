@@ -28,18 +28,18 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "recover" */ './views/Recover.vue')
     },
     {
-      path: '/request/:id',
-      name: 'Request',
-      component: () => import(/* webpackChunkName: "request" */ './views/Request.vue'),
-      props: true,
+      path: '/request/create',
+      name: 'Create Request',
+      component: () => import(/* webpackChunkName: "create-request" */ './views/CreateRequest.vue'),
       meta: {
         requiresAuth: true
       }
     },
     {
-      path: '/request/create',
-      name: 'Create Request',
-      component: () => import(/* webpackChunkName: "create-request" */ './views/CreateRequest.vue'),
+      path: '/request/:id',
+      name: 'Request',
+      component: () => import(/* webpackChunkName: "request" */ './views/Request.vue'),
+      props: true,
       meta: {
         requiresAuth: true
       }
@@ -54,8 +54,17 @@ const router = new Router({
     },
     {
       path: '/forms/create',
-      name: 'Create Request Type',
-      component: () => import(/* webpackChunkName: "create-form" */ './views/CreateForm.vue'),
+      name: 'Create Form',
+      component: () => import(/* webpackChunkName: "create-form" */ './views/FormBuilder.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/forms/edit/:id',
+      name: 'Edit Form',
+      props: true,
+      component: () => import(/* webpackChunkName: "create-edit" */ './views/FormBuilder.vue'),
       meta: {
         requiresAuth: true
       }

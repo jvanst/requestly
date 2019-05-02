@@ -87,7 +87,7 @@
             </v-card>
 
           </v-dialog>
-          
+
         </v-flex>
       </v-layout>
     </v-flex>
@@ -112,7 +112,7 @@ export default {
     ]
   }),
   methods: {
-    addField() {
+    addField () {
       this.fields.push({
         label: this.label,
         description: this.description,
@@ -125,9 +125,9 @@ export default {
       this.type = ''
       this.required = true
     },
-    removeField(index) {
+    removeField (index) {
       this.fields.splice(index, 1)
-    },
+    }
   }
 }
 </script>

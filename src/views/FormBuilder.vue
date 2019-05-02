@@ -1,11 +1,24 @@
 <template>
   <v-container grid-list-lg>
-    
 
-    <v-layout wrap>
+    <v-layout v-if="loading" wrap>
+      <v-flex xs12 >
+       LOADING
+      </v-flex>
+    </v-layout>
 
-      <v-flex xs12 class="headline">
-        Create Form
+    <v-layout v-else wrap>
+
+      <v-flex xs6 class="headline">
+        <span v-if="form">Edit Form: {{ form.title }}</span>
+        <span v-else>Create Form</span>
+      </v-flex>
+
+      <v-flex xs6 class="text-xs-right">
+        <v-btn icon @click.native="deleteDialog = true" v-if="form">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+        <form-delete v-model="deleteDialog" :form="form"/>
       </v-flex>
 
       <v-flex xs12>
@@ -16,7 +29,7 @@
           hide-details
           ></v-text-field>
       </v-flex>
-      
+
       <v-flex xs12>
         <v-textarea
           box
@@ -30,6 +43,7 @@
       </v-flex>
 
     </v-layout>
+
     <v-layout wrap>
 
       <v-flex xs12 class="title">
@@ -40,7 +54,7 @@
         Steps help break up the request form into pieces. <br>
         You are required to have at least one step, with one title field.
       </v-flex>
-      
+
       <v-flex xs12>
         <v-card
           v-if="!request.steps.length"
@@ -62,7 +76,7 @@
                 <v-btn icon @click="removeStep(i)"><v-icon>mdi-delete</v-icon></v-btn>
               </template>
             </v-expansion-panel-header>
-            
+
             <v-expansion-panel-content>
               <field-builder :fields="step.fields"/>
             </v-expansion-panel-content>
@@ -101,12 +115,14 @@
 
               <v-card-actions>
                 <v-spacer/>
+
                 <v-btn
                   color="primary"
                   @click.native="addStep()"
                 >
                   Create
                 </v-btn>
+
               </v-card-actions>
 
             </v-card>
@@ -118,9 +134,24 @@
         <v-divider/>
       </v-flex>
 
-      <v-flex xs6/>
+      <v-flex xs6>
+        <v-btn text to="/forms" exact>
+          Back
+        </v-btn>
+      </v-flex>
+
       <v-flex xs6 class="text-xs-right">
         <v-btn
+          v-if="form"
+          :loading="loading"
+          color="primary"
+          @click.native="update()"
+        >
+          Update
+        </v-btn>
+        <v-btn
+          v-else
+          :loading="loading"
           color="primary"
           @click="create()"
         >
@@ -133,12 +164,17 @@
 
 <script>
 export default {
-  name: 'CreateRequestType',
+  props: ['id'],
+  name: 'FormBuilder',
   components: {
     FieldBuilder: () => import('@/components/FieldBuilder'),
+    FormDelete: () => import('@/components/FormDelete')
   },
   data: () => ({
+    editing: true,
+    loading: false,
     dialog: false,
+    deleteDialog: false,
     stepTitle: '',
     request: {
       title: '',
@@ -152,12 +188,23 @@ export default {
               description: 'Give your request a title',
               type: 'textfield',
               required: true
-            },
+            }
           ]
         }
       ]
-    },
+    }
   }),
+  computed: {
+    form () {
+      return this.$store.getters['forms/getById'](this.id)
+    }
+  },
+  created () {
+    // If Id exists then we want to edit this form
+    if (this.id) {
+      this.fetch()
+    }
+  },
   methods: {
     addStep () {
       this.request.steps.push({
@@ -170,10 +217,37 @@ export default {
     removeStep (index) {
       this.request.steps.splice(index, 1)
     },
+    fetch () {
+      this.editing = true
+
+      // Do not re-fetch if already available in vuex
+      if (this.form) {
+        this.request = this.form
+        return
+      }
+      this.loading = true
+      this.$store.dispatch('forms/fetchById', this.id)
+        .then(() => (this.request = this.form))
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => (this.loading = false))
+    },
     create () {
       this.loading = true
       this.$store.dispatch('forms/create', this.request)
-        .then(() => this.$router.go('/forms'))
+        .then(() => {
+          this.$router.replace('/forms')
+          this.showSnackbar('Succesfully created', 'success')
+        })
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => (this.loading = false))
+    },
+    update () {
+      this.loading = true
+      this.$store.dispatch('forms/update', { id: this.id, payload: this.request })
+        .then(() => {
+          this.$router.replace('/forms')
+          this.showSnackbar('Succesfully updated', 'success')
+        })
         .catch((error) => this.showSnackbar(error.message, 'error'))
         .finally(() => (this.loading = false))
     }

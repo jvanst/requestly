@@ -26,25 +26,28 @@
           <v-list-item-title>Board</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-    </v-list>
+      <v-subheader>
+        Manage
+      </v-subheader>
+        <v-list-item link to="/labels/">
+          <v-list-item-icon>
+            <v-icon>mdi-label-outline</v-icon>
+          </v-list-item-icon>
 
-    <template v-slot:append>
-      <v-list
-        dense
-        nav
-        shaped
-      >
+          <v-list-item-content>
+            <v-list-item-title>Labels</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item link to="/forms/">
           <v-list-item-icon>
             <v-icon>mdi-shape</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Form Builder</v-list-item-title>
+            <v-list-item-title>Forms</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </template>
   </v-navigation-drawer>
 </template>
 

@@ -43,7 +43,7 @@
             </v-avatar>
           </v-flex>
           <v-flex>
-            <v-card>
+            <v-card class="pa-2">
               <template  v-for="(section, index) in Object.keys(request.content)">
                 <v-card-title
                   class="title"
@@ -56,6 +56,7 @@
                 </v-card-text>
               </template>
             </v-card>
+            <request-timeline :request="request"/>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -77,7 +78,12 @@
               <v-subheader class="pl-0">
                 Labels
               </v-subheader>
-              {{ request.title }}
+              <v-chip
+                color="orange"
+                label
+              >
+                <b>Enhancement</b>
+              </v-chip>
             </div>
           </v-flex>
           <v-flex>
@@ -93,6 +99,9 @@
 export default {
   name: 'Request',
   props: ['id'],
+  components: {
+    RequestTimeline: () => import('@/components/RequestTimeline')
+  },
   created () {
     this.fetch()
   },

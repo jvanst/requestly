@@ -6,7 +6,7 @@
           <v-flex xs12>
             <v-form>
               <v-text-field
-                light
+
                 label="Email"
                 type="email"
                 name="email"
@@ -16,7 +16,7 @@
                 @keyup.enter="login()"
               ></v-text-field>
               <v-text-field
-                light
+
                 label="Password"
                 type="password"
                 name="password"

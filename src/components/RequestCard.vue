@@ -10,19 +10,18 @@
             {{ request.title }}
           </v-list-item-subtitle>
         </v-list-item-content>
-        <v-list-tile-avatar>
+        <v-list-item-avatar>
           <v-icon>mdi-account-circle</v-icon>
-        </v-list-tile-avatar>
+        </v-list-item-avatar>
       </v-list-item>
     </v-list>
     <v-divider/>
     <v-card-actions>
-      <v-chip
+      <Label
+        title="Enhancement"
         color="orange"
-        label
-      >
-        <b>Enhancement</b>
-      </v-chip>
+        description="New feature or request"
+      />
     </v-card-actions>
   </v-card>
 </template>
@@ -30,6 +29,9 @@
 <script>
 export default {
   name: 'RequestCard',
-  props: ['request']
+  props: ['request'],
+  components: {
+    Label: () => import('@/components/Label.vue')
+  }
 }
 </script>

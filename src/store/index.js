@@ -5,6 +5,7 @@ import userModule from './modules/user'
 import formsModule from './modules/forms'
 import pipelineModule from './modules/pipelines'
 import requestModule from './modules/requests'
+import labelsModule from './modules/labels'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     user: userModule,
     forms: formsModule,
     pipelines: pipelineModule,
-    requests: requestModule
+    requests: requestModule,
+    labels: labelsModule
   }
 })

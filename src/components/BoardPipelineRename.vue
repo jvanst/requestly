@@ -60,10 +60,7 @@ export default {
           title: this.title
         }
       })
-        .then(() => {
-          this.menu = false
-          this.dialog = false
-        })
+        .then(() => (this.dialog = false))
         .catch((error) => this.showSnackbar(error.message, 'error'))
         .finally(() => (this.loading = false))
     }

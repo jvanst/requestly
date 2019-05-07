@@ -2,16 +2,16 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import snackbar from '@/helpers/snackbar'
 
-const ref = firebase.firestore().collection('requests')
+const ref = firebase.firestore().collection('forms')
 
 const fetchById = async (id) => {
-  let data = {}
+  let data = []
 
   try {
     const result = await ref.doc(id).get()
 
     data = {
-      id: result.id,
+      id,
       ...result.data()
     }
   } catch (error) {
@@ -24,12 +24,12 @@ const fetch = async () => {
   let data = []
 
   try {
-    const result = await ref.where('closed', '==', false).get()
+    const result = await ref.get()
 
-    for (let request of result.docs) {
+    for (let form of result.docs) {
       data.push({
-        id: request.id,
-        ...request.data()
+        id: form.id,
+        ...form.data()
       })
     }
   } catch (error) {
@@ -42,26 +42,12 @@ const create = async (payload) => {
   let data = null
 
   try {
-    const firstPipeline =
-      await firebase
-        .firestore()
-        .collection('pipelines')
-        .orderBy('order')
-        .limit(1)
-        .get()
-
-    // Set request to first pipeline
-    payload.pipelineId = firstPipeline.docs[0].id
-
-    // Move content title
-    payload.title = payload.content.title
-    delete payload.content.title
-
-    // Set to open
-    payload.closed = false
-
     const result = await ref.add(payload)
-    data = { id: result.id, ...payload }
+
+    data = {
+      id: result.id,
+      ...payload
+    }
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
@@ -76,9 +62,18 @@ const update = async ({ id, payload }) => {
   }
 }
 
+const remove = async (id) => {
+  try {
+    await ref.doc(id).delete()
+  } catch (error) {
+    snackbar.showSnackbar(error.message, 'error')
+  }
+}
+
 export default {
   fetchById,
   fetch,
   create,
-  update
+  update,
+  delete: remove
 }

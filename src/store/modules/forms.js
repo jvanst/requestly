@@ -1,11 +1,7 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
-const formsRef = firebase.firestore().collection('forms')
+import api from '@/api/forms'
 
 const state = {
-  data: [],
-  fetched: false
+  data: []
 }
 
 const getters = {
@@ -13,60 +9,39 @@ const getters = {
 }
 
 const actions = {
-  async fetchById ({ commit }, id) {
-    const result = await formsRef.doc(id).get()
-    commit('SET_FORMS', [{
-      id: result.id,
-      ...result.data()
-    }])
+  fetchById ({ commit }, id) {
+    return api.fetchById(id)
+      .then((result) => commit('ADD', result))
   },
-  async fetch ({ commit }) {
-    const result = await formsRef.get()
-
-    let data = []
-    for (let request of result.docs) {
-      data.push({
-        id: request.id,
-        ...request.data()
-      })
-    }
-    commit('SET_FORMS', data)
-    commit('SET_FETCHED', true)
+  fetch ({ commit }) {
+    return api.fetch()
+      .then((result) => commit('SET', result))
   },
-  async create ({ commit }, payload) {
-    const result = await formsRef.add(payload)
-    commit('ADD_FORM', { id: result.id, ...payload })
+  create ({ commit }, payload) {
+    return api.create(payload)
+      .then((result) => commit('ADD', result))
   },
-  async update ({ commit }, { id, payload }) {
-    // Merge the new payload object with existing data
-    const newObject = { ...state.data.find(p => p.id === id), ...payload }
-    delete newObject.id
-
-    await formsRef.doc(id).set(newObject)
-
-    newObject.id = id
-    commit('UPDATE_FORM', newObject)
+  update ({ commit }, { id, payload }) {
+    return api.update({ id, payload })
+      .then(() => commit('UPDATE', { id, ...payload }))
   },
-  async delete ({ commit }, id) {
-    await formsRef.doc(id).delete()
-    commit('DELETE_FORM', id)
+  delete ({ commit }, id) {
+    return api.delete(id)
+      .then(() => commit('DELETE'))
   }
 }
 
 const mutations = {
-  SET_FETCHED (state, value) {
-    state.fetched = value
-  },
-  SET_FORMS (state, value) {
+  SET (state, value) {
     state.data = value
   },
-  ADD_FORM (state, request) {
+  ADD (state, request) {
     state.data.push(request)
   },
-  UPDATE_FORM (state, payload) {
+  UPDATE (state, payload) {
     state.data.splice(state.data.findIndex(p => p.id === payload.id), 1, payload)
   },
-  DELETE_FORM (state, id) {
+  DELETE (state, id) {
     state.data.splice(state.data.findIndex(p => p.id === id), 1)
   }
 }

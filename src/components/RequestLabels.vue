@@ -1,16 +1,12 @@
 <template>
   <div>
-    <div v-if="loading">
-    </div>
-    <div v-else>
-      <div
-        v-for="label in request.labels"
-        :key="label.id"
-        class="mr-1 mb-1"
-        style="display:inline-block"
-      >
-        <Label :label="getLabel(label.id)" />
-      </div>
+    <div
+      v-for="label in request.labels"
+      :key="label"
+      class="mr-1 mb-1"
+      style="display:inline-block"
+    >
+      <Label :label="getLabel(label)" />
     </div>
   </div>
 </template>
@@ -22,9 +18,6 @@ export default {
   components: {
     Label: () => import('@/components/Label')
   },
-  data: () => ({
-    loading: false
-  }),
   methods: {
     getLabel (id) {
       return this.$store.getters['labels/getById'](id)

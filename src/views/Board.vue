@@ -66,7 +66,7 @@ export default {
       this.loading = true
       await this.$store.dispatch('pipelines/fetch')
       await this.$store.dispatch('requests/fetch')
-      this.$store.dispatch('labels/fetch')
+      await this.$store.dispatch('labels/fetch')
       this.loading = false
     }
   }

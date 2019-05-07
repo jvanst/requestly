@@ -114,15 +114,10 @@ export default {
     }
   },
   methods: {
-    fetch () {
-      // Do not re-fetch if already available in vuex
-      if (this.request) {
-        return
-      }
+    async fetch () {
       this.loading = true
-      this.$store.dispatch('requests/fetchById', this.id)
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('requests/fetchById', this.id)
+      this.loading = false
     }
   }
 }

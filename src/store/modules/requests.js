@@ -12,22 +12,22 @@ const getters = {
 
 const actions = {
   fetchById ({ commit }, id) {
-    api.fetchById(id)
+    return api.fetchById(id)
       .then(result => commit('ADD', result))
   },
   fetch ({ commit }) {
-    api.fetch()
+    return api.fetch()
       .then(result => commit('SET', result))
   },
   create ({ commit, rootGetters }, { payload, formId }) {
-    api.create({
-      payload,
+    return api.create({
+      ...payload,
       labels: rootGetters['forms/getById'](formId).labels
     })
       .then(result => commit('ADD', result))
   },
   update ({ commit }, { id, payload }) {
-    api.update({ id, payload })
+    return api.update({ id, payload })
       .then(() => commit('UPDATE', { id, ...payload }))
   }
 }

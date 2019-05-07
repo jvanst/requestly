@@ -69,15 +69,10 @@ export default {
     }
   },
   methods: {
-    fetch () {
-      // Do not re-fetch if already available in vuex
-      if (this.$store.state.labels.fetched) {
-        return
-      }
+    async fetch () {
       this.loading = true
-      this.$store.dispatch('labels/fetch')
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('labels/fetch')
+      this.loading = false
     }
   }
 }

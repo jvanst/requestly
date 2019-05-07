@@ -56,15 +56,14 @@ export default {
     loading: false
   }),
   methods: {
-    create () {
+    async create () {
       this.loading = true
       this.$store.dispatch('pipelines/create', this.title)
         .then(() => {
           this.title = ''
           this.menu = false
+          this.loading = false
         })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
     }
   }
 }

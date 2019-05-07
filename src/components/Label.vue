@@ -1,20 +1,29 @@
 <template>
-  <v-tooltip bottom>
+  <v-tooltip bottom v-if="label.title">
     <template v-slot:activator="{ on }">
       <v-chip
-        :color="color"
+        :color="label.color"
         label
       >
-        <b>{{ title }}</b>
+        <b>{{ label.title }}</b>
       </v-chip>
     </template>
-    <span>{{ description }}</span>
+    <span>{{ label.description }}</span>
   </v-tooltip>
 </template>
 
 <script>
 export default {
   name: 'Label',
-  props: ['title', 'color', 'description']
+  props: {
+    label: {
+      type: Object,
+      default: () => ({
+        title: '',
+        description: '',
+        color: ''
+      })
+    }
+  }
 }
 </script>

@@ -1,6 +1,9 @@
 <template>
   <v-container grid-list-lg class="scroll-y">
-    <v-layout wrap>
+    <v-layout xs12 v-if="loading">
+      LOADING
+    </v-layout>
+    <v-layout wrap v-else>
       <v-flex xs12>
         <v-layout wrap>
           <v-flex xs12 class="headline pb-0">
@@ -67,7 +70,7 @@
               <v-subheader class="pl-0">
                 Pipeline
               </v-subheader>
-              {{ request.pipelineId }}
+              <request-pipeline :request="request"/>
             </div>
           </v-flex>
           <v-flex>
@@ -78,12 +81,7 @@
               <v-subheader class="pl-0">
                 Labels
               </v-subheader>
-              <v-chip
-                color="orange"
-                label
-              >
-                <b>Enhancement</b>
-              </v-chip>
+              <request-labels :request="request"/>
             </div>
           </v-flex>
           <v-flex>
@@ -100,7 +98,9 @@ export default {
   name: 'Request',
   props: ['id'],
   components: {
-    RequestTimeline: () => import('@/components/RequestTimeline')
+    RequestTimeline: () => import('@/components/RequestTimeline'),
+    RequestLabels: () => import('@/components/RequestLabels'),
+    RequestPipeline: () => import('@/components/RequestPipeline')
   },
   created () {
     this.fetch()

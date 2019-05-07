@@ -17,11 +17,7 @@
     </v-list>
     <v-divider/>
     <v-card-actions>
-      <Label
-        title="Enhancement"
-        color="orange"
-        description="New feature or request"
-      />
+      <request-labels :request="request"/>
     </v-card-actions>
   </v-card>
 </template>
@@ -31,7 +27,7 @@ export default {
   name: 'RequestCard',
   props: ['request'],
   components: {
-    Label: () => import('@/components/Label.vue')
+    RequestLabels: () => import('@/components/RequestLabels')
   }
 }
 </script>

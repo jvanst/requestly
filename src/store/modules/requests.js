@@ -1,12 +1,8 @@
 
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
-const requestRef = firebase.firestore().collection('requests')
+import api from '@/api/requests'
 
 const state = {
-  data: [],
-  fetched: false
+  data: []
 }
 
 const getters = {
@@ -15,80 +11,35 @@ const getters = {
 }
 
 const actions = {
-  async fetchById ({ commit }, id) {
-    const result = await requestRef.doc(id).get()
-    commit('SET_REQUESTS', [{
-      id: result.id,
-      ...result.data()
-    }])
+  fetchById ({ commit }, id) {
+    api.fetchById(id)
+      .then(result => commit('ADD', result))
   },
-  async fetch ({ commit }) {
-    const result = await requestRef.where('closed', '==', false).get()
-
-    let data = []
-    for (let request of result.docs) {
-      data.push({
-        id: request.id,
-        ...request.data()
-      })
-    }
-    commit('SET_REQUESTS', data)
-    commit('SET_FETCHED', true)
+  fetch ({ commit }) {
+    api.fetch()
+      .then(result => commit('SET', result))
   },
-  async fetchClosed ({ commit }) {
-    const result = await requestRef.where('closed', '==', true).get()
-
-    let data = []
-    for (let request of result.docs) {
-      data.push({
-        id: request.id,
-        ...request.data()
-      })
-    }
-    commit('SET_REQUESTS_CLOSED', data)
-    commit('SET_FETCHED_CLOSED', true)
+  create ({ commit, rootGetters }, { payload, formId }) {
+    api.create({
+      payload,
+      labels: rootGetters['forms/getById'](formId).labels
+    })
+      .then(result => commit('ADD', result))
   },
-  async create ({ commit }, payload) {
-    // Put the request in the first pipeline
-    const firstPipeline = await firebase.firestore().collection('pipelines').orderBy('order').limit(1).get()
-    payload.pipelineId = firstPipeline.docs[0].id
-
-    // Move content title
-    payload.title = payload.content.title
-    delete payload.content.title
-
-    const result = await requestRef.add(payload)
-    commit('ADD_REQUEST', { id: result.id, ...payload })
-  },
-  async update ({ commit }, { id, payload }) {
-    // Merge the new payload object with existing data
-    const newObject = { ...state.data.find(p => p.id === id), ...payload }
-    delete newObject.id
-
-    await requestRef.doc(id).set(newObject)
-
-    newObject.id = id
-    commit('UPDATE_REQUEST', newObject)
+  update ({ commit }, { id, payload }) {
+    api.update({ id, payload })
+      .then(() => commit('UPDATE', { id, ...payload }))
   }
 }
 
 const mutations = {
-  SET_FETCHED (state, value) {
-    state.fetched = value
-  },
-  SET_FETCHED_CLOSED (state, value) {
-    state.closedFetched = value
-  },
-  SET_REQUESTS (state, value) {
+  SET (state, value) {
     state.data = value
   },
-  SET_REQUESTS_CLOSED (state, value) {
-    state.closedData = value
-  },
-  ADD_REQUEST (state, request) {
+  ADD (state, request) {
     state.data.push(request)
   },
-  UPDATE_REQUEST (state, payload) {
+  UPDATE (state, payload) {
     state.data.splice(state.data.findIndex(p => p.id === payload.id), 1, payload)
   }
 }

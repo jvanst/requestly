@@ -21,7 +21,6 @@ export default {
         this.$store.dispatch('pipelines/fetch'),
         this.$store.dispatch('requests/fetch')
       ])
-        .catch((error) => this.showSnackbar(error.message, 'error'))
         .finally(() => (this.loading = false))
     }
   }

@@ -14,8 +14,8 @@
         <span v-else>Create Form</span>
       </v-flex>
 
-      <v-flex xs6 class="text-xs-right">
-        <v-btn icon @click.native="deleteDialog = true" v-if="form">
+      <v-flex xs6 class="text-xs-right" v-if="id">
+        <v-btn icon @click.native="deleteDialog = true" >
           <v-icon>mdi-delete</v-icon>
         </v-btn>
         <form-delete v-model="deleteDialog" :form="form"/>
@@ -133,6 +133,42 @@
       <v-flex xs12>
         <v-divider/>
       </v-flex>
+    </v-layout>
+
+    <v-layout wrap>
+
+      <v-flex xs12 class="title">
+        Labels
+      </v-flex>
+
+      <v-flex xs12 class="mb-2">
+        Here you can pick labels that will be automatically applied.
+      </v-flex>
+
+      <v-flex>
+          <div v-if="loadingLabels">
+            LOADING
+          </div>
+          <div v-else>
+            <v-btn
+              v-for="label in labels"
+              :key="label.id"
+              @click="toggleLabel(label.id)"
+              :color="label.color"
+              class="mr-2"
+              >
+              {{ label.title }}
+              <v-icon
+                v-if="request.labels.find(e => e === label.id)"
+                right
+              >mdi-check-circle-outline</v-icon>
+            </v-btn>
+          </div>
+      </v-flex>
+
+      <v-flex xs12>
+        <v-divider/>
+      </v-flex>
 
       <v-flex xs6>
         <v-btn text to="/forms" exact>
@@ -173,12 +209,14 @@ export default {
   data: () => ({
     editing: true,
     loading: false,
+    loadingLabels: false,
     dialog: false,
     deleteDialog: false,
     stepTitle: '',
     request: {
       title: '',
       description: '',
+      labels: [],
       steps: [
         {
           title: 'Details',
@@ -197,6 +235,9 @@ export default {
   computed: {
     form () {
       return this.$store.getters['forms/getById'](this.id)
+    },
+    labels () {
+      return this.$store.state.labels.data
     }
   },
   created () {
@@ -204,6 +245,7 @@ export default {
     if (this.id) {
       this.fetch()
     }
+    this.fetchLabels()
   },
   methods: {
     addStep () {
@@ -216,6 +258,25 @@ export default {
     },
     removeStep (index) {
       this.request.steps.splice(index, 1)
+    },
+    toggleLabel (id) {
+      let label = this.request.labels.findIndex(e => e === id)
+
+      if (label !== -1) {
+        this.request.labels.splice(label, 1)
+        return
+      }
+      this.request.labels.push(id)
+    },
+    fetchLabels () {
+      // Do not re-fetch if already available in vuex
+      if (this.$store.state.labels.fetched) {
+        return
+      }
+      this.loadingLabels = true
+      this.$store.dispatch('labels/fetch')
+        .catch((error) => this.showSnackbar(error.message, 'error'))
+        .finally(() => (this.loadingLabels = false))
     },
     fetch () {
       this.editing = true

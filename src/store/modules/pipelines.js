@@ -1,76 +1,48 @@
-
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
-const pipelineRef = firebase.firestore().collection('pipelines')
+import api from '@/api/pipelines'
 
 const state = {
-  data: [],
-  fetched: false
+  data: []
+}
+
+const getters = {
+  getById: state => id => state.data.find(r => r.id === id)
 }
 
 const actions = {
-  async fetch ({ commit }) {
-    const result = await pipelineRef.orderBy('order').get()
-
-    let data = []
-    for (let pipeline of result.docs) {
-      data.push({
-        id: pipeline.id,
-        ...pipeline.data()
-      })
-    }
-    commit('SET_PIPELINES', data)
-    commit('SET_FETCHED', true)
+  fetch ({ commit }) {
+    return api.fetch()
+      .then(result => commit('SET', result))
   },
-  async create ({ commit, state }, title) {
-    const order = state.data.length
-    const result = await pipelineRef.add({ title, order })
-    commit('ADD_PIPELINE', { id: result.id, title, order })
-  },
-  async update ({ commit }, { id, payload }) {
-    // Merge the new payload object with existing data
-    const newObject = { ...state.data.find(p => p.id === id), ...payload }
-    delete newObject.id
-
-    await pipelineRef.doc(id).set(newObject)
-
-    newObject.id = id
-    commit('UPDATE_PIPELINE', newObject)
-  },
-  // updateBatch sets the remote state equal to local
-  async updateBatch ({ commit, state }) {
-    const batch = firebase.firestore().batch()
-
-    state.data.forEach((p) => {
-      const doc = { ...p }
-      delete doc.id
-      const ref = pipelineRef.doc(p.id)
-      batch.set(ref, doc)
+  create ({ commit, state }, title) {
+    return api.create({
+      title,
+      order: state.data.length
     })
-
-    await batch.commit()
+      .then(result => commit('ADD', result))
   },
-  async delete ({ commit }, id) {
-    await pipelineRef.doc(id).delete()
-    commit('DELETE_PIPELINE', id)
+  update ({ commit }, { id, payload }) {
+    return api.update([{ id, ...payload }])
+      .then(() => commit('UPDATE', { id, ...payload }))
+  },
+  updateBatch ({ state }) {
+    return api.update(state.data)
+  },
+  delete ({ commit }, id) {
+    return api.delete(id).then(() => commit('DELETE', id))
   }
 }
 
 const mutations = {
-  SET_FETCHED (state, value) {
-    state.fetched = value
-  },
-  SET_PIPELINES (state, value) {
+  SET (state, value) {
     state.data = value
   },
-  ADD_PIPELINE (state, value) {
+  ADD (state, value) {
     state.data.push(value)
   },
-  UPDATE_PIPELINE (state, payload) {
+  UPDATE (state, payload) {
     state.data.splice(state.data.findIndex(p => p.id === payload.id), 1, payload)
   },
-  DELETE_PIPELINE (state, id) {
+  DELETE (state, id) {
     state.data.splice(state.data.findIndex(p => p.id === id), 1)
   },
   UPDATE_ORDER (state, newOrder = []) {
@@ -84,6 +56,7 @@ const mutations = {
 export default {
   namespaced: true,
   state,
+  getters,
   actions,
   mutations
 }

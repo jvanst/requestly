@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    :color="dark ? 'grey darken-4' : 'grey lighten-4'"
+    :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
     elevation="1"
     height="100%"
   >
@@ -52,18 +52,31 @@ export default {
     BoardPipelineSettings: () => import('@/components/BoardPipelineSettings')
   },
   computed: {
-    requests () {
-      return this.$store.getters['requests/getByPipelineId'](this.pipeline.id)
-    },
-    dark () {
-      return this.$store.state.ui.dark
+    requests: {
+      get () {
+        return this.$store.getters['requests/getByPipelineId'](this.pipeline.id)
+      },
+      set () {}
     }
   },
   methods: {
+    /*
+    * When handling draging, its important that we inverse the standard vuex
+    * paradime for the UX to remain seemless. First we update the vuex store
+    * then send the update out to the API
+    */
     handleChange ({ added, removed, moved }) {
       if (added) {
+        // Request to be updated
         const request = this.$store.getters['requests/getById'](added.element.id)
-        this.$store.commit('requests/UPDATE_REQUEST', { ...request, pipelineId: this.pipeline.id })
+
+        // Update store
+        this.$store.commit('requests/UPDATE', {
+          ...request,
+          pipelineId: this.pipeline.id
+        })
+
+        // Update API
         this.$store.dispatch('requests/update', {
           id: request.id,
           payload: {
@@ -71,15 +84,7 @@ export default {
             pipelineId: this.pipeline.id
           }
         })
-          .catch((error) => this.showSnackbar(error.message, 'error'))
       }
-    },
-    create (id) {
-      this.$store.dispatch('requests/create', {
-        pipelineId: id,
-        title: 'test request'
-      })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
     }
   }
 }

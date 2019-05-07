@@ -51,26 +51,23 @@ export default {
         return this.$store.state.pipelines.data
       },
       set (value) {
+        /*
+        * When handling draging, its important that we inverse the vuex
+        * paradime for the UX to remain seemless. First we update the vuex store
+        * then send the update out to the API
+        */
         this.$store.commit('pipelines/UPDATE_ORDER', value)
         this.$store.dispatch('pipelines/updateBatch')
-          .catch((error) => this.showSnackbar(error.message, 'error'))
       }
     }
   },
   methods: {
-    fetch () {
-      // Do not re-fetch if already available in vuex
-      if (this.$store.state.requests.fetched && this.$store.state.pipelines.fetched) {
-        return
-      }
-
+    async fetch () {
       this.loading = true
-      Promise.all([
-        this.$store.dispatch('pipelines/fetch'),
-        this.$store.dispatch('requests/fetch')
-      ])
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('pipelines/fetch')
+      await this.$store.dispatch('requests/fetch')
+      this.$store.dispatch('labels/fetch')
+      this.loading = false
     }
   }
 }

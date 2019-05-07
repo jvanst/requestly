@@ -160,7 +160,7 @@ export default {
     },
     create () {
       this.creating = true
-      this.$store.dispatch('requests/create', this.request)
+      this.$store.dispatch('requests/create', { payload: this.request, formId: this.formId })
         .then(() => this.$router.replace('/'))
         .catch((error) => this.showSnackbar(error.message, 'error'))
         .finally(() => (this.creating = false))

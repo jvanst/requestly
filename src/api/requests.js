@@ -57,9 +57,6 @@ const create = async (payload) => {
     payload.title = payload.content.title
     delete payload.content.title
 
-    // Set to open
-    payload.closed = false
-
     const result = await ref.add(payload)
     data = { id: result.id, ...payload }
   } catch (error) {

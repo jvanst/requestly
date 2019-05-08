@@ -16,7 +16,7 @@
       </v-list-item>
     </v-list>
     <v-divider/>
-    <v-card-actions>
+    <v-card-actions class="pb-1">
       <request-labels :request="request"/>
     </v-card-actions>
   </v-card>

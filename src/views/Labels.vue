@@ -36,9 +36,7 @@
             <td>{{ label.color }}</td>
             <td class="text-xs-right">
               <Label
-                :title="label.title"
-                :description="label.description"
-                :color="label.color"
+                :label="label"
               />
             </td>
           </tr>

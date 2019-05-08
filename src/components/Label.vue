@@ -4,6 +4,7 @@
       <v-chip
         :color="label.color"
         label
+        dark
       >
         <b>{{ label.title }}</b>
       </v-chip>

@@ -35,9 +35,9 @@
       <v-flex xs12 class="pr-2">
         <v-divider/>
       </v-flex>
-      <v-flex xs9 id="scrolling-techniques-8">
+      <v-flex xs9>
         <v-layout>
-          <v-flex>
+          <v-flex shrink>
             <v-avatar
               tile
               class="round-avatar"
@@ -45,49 +45,14 @@
               <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
             </v-avatar>
           </v-flex>
-          <v-flex>
-            <v-card class="pa-2">
-              <template  v-for="(section, index) in Object.keys(request.content)">
-                <v-card-title
-                  class="title"
-                  :key="'content-title'+index">
-                  {{ section | capitalizeFirstLetter }}
-                </v-card-title>
-
-                <v-card-text :key="'content-section'+index">
-                  {{ request.content[section] }}
-                </v-card-text>
-              </template>
-            </v-card>
+          <v-flex grow>
+            <request-single :request="request"/>
             <request-timeline :request="request"/>
           </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs3>
-        <v-layout row wrap>
-          <v-flex xs12>
-            <div class="pl-2">
-              <v-subheader class="pl-0">
-                Pipeline
-              </v-subheader>
-              <request-pipeline :request="request"/>
-            </div>
-          </v-flex>
-          <v-flex>
-            <v-divider/>
-          </v-flex>
-          <v-flex xs12>
-            <div class="pl-2">
-              <v-subheader class="pl-0">
-                Labels
-              </v-subheader>
-              <request-labels :request="request"/>
-            </div>
-          </v-flex>
-          <v-flex>
-            <v-divider/>
-          </v-flex>
-        </v-layout>
+        <request-single-sidebar :request="request"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -98,9 +63,9 @@ export default {
   name: 'Request',
   props: ['id'],
   components: {
-    RequestTimeline: () => import('@/components/RequestTimeline'),
-    RequestLabels: () => import('@/components/RequestLabels'),
-    RequestPipeline: () => import('@/components/RequestPipeline')
+    RequestSingle: () => import('@/components/RequestSingle'),
+    RequestSingleSidebar: () => import('@/components/RequestSingleSidebar'),
+    RequestTimeline: () => import('@/components/RequestTimeline')
   },
   created () {
     this.fetch()

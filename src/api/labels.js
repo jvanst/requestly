@@ -26,7 +26,10 @@ const create = async (payload) => {
   let data = null
 
   try {
-    const result = await ref.add(payload)
+    const result = await ref.add({
+      ...payload,
+      createdBy: firebase.auth().currentUser.uid
+    })
 
     data = {
       id: result.id,

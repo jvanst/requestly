@@ -57,6 +57,10 @@ const create = async (payload) => {
     payload.title = payload.content.title
     delete payload.content.title
 
+    console.log(payload)
+    // Add user
+    payload.createdBy = firebase.auth().currentUser.uid
+
     const result = await ref.add(payload)
     data = { id: result.id, ...payload }
   } catch (error) {

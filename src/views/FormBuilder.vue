@@ -278,39 +278,24 @@ export default {
         .catch((error) => this.showSnackbar(error.message, 'error'))
         .finally(() => (this.loadingLabels = false))
     },
-    fetch () {
+    async fetch () {
       this.editing = true
-
-      // Do not re-fetch if already available in vuex
-      if (this.form) {
-        this.request = this.form
-        return
-      }
       this.loading = true
-      this.$store.dispatch('forms/fetchById', this.id)
-        .then(() => (this.request = this.form))
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('forms/fetchById', this.id)
+      this.request = this.form
+      this.loading = false
     },
-    create () {
+    async create () {
       this.loading = true
-      this.$store.dispatch('forms/create', this.request)
-        .then(() => {
-          this.$router.replace('/forms')
-          this.showSnackbar('Succesfully created', 'success')
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('forms/create', this.request)
+      this.loading = false
+      this.$router.replace('/forms')
     },
-    update () {
+    async update () {
       this.loading = true
-      this.$store.dispatch('forms/update', { id: this.id, payload: this.request })
-        .then(() => {
-          this.$router.replace('/forms')
-          this.showSnackbar('Succesfully updated', 'success')
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('forms/update', { id: this.id, payload: this.request })
+      this.loading = false
+      this.$router.replace('/forms')
     }
   }
 }

@@ -26,7 +26,11 @@ const create = async ({ title, order }) => {
   let data = null
 
   try {
-    const result = await ref.add({ title, order })
+    const result = await ref.add({
+      title,
+      order,
+      createdBy: firebase.auth().currentUser.uid
+    })
 
     data = {
       id: result.id,

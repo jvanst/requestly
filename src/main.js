@@ -11,17 +11,14 @@ import store from './store/'
 import './helpers/registerServiceWorker'
 import './helpers/snackbar'
 
+import './filters/string'
+
 import 'vuetify/src/styles/main.sass'
 import '@mdi/font/css/materialdesignicons.css'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuetify)
-
-Vue.filter('capitalizeFirstLetter', s => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
-})
 
 new Vue({
   router,

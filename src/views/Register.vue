@@ -72,19 +72,15 @@ export default {
     loading: false
   }),
   methods: {
-    register () {
+    async register () {
       this.loading = true
-      this.$store.dispatch('user/register', {
+      await this.$store.dispatch('user/register', {
         email: this.email,
         password: this.password,
         displayName: this.displayName
       })
-        .then(() => {
-          this.showSnackbar('Successfully Registered', 'success')
-          this.$router.replace('/')
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      this.$router.replace('/')
+      this.loading = false
     }
   }
 }

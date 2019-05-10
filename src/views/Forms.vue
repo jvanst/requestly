@@ -66,7 +66,7 @@ export default {
   methods: {
     async fetch () {
       this.loading = true
-      this.$store.dispatch('forms/fetch')
+      await this.$store.dispatch('forms/fetch')
       this.loading = false
     }
   }

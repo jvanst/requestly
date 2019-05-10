@@ -1,5 +1,4 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import api from '@/api/users'
 
 const state = {
   isLoggedIn: false,
@@ -7,23 +6,23 @@ const state = {
 }
 
 const actions = {
-  async register ({ commit }, { email, password, displayName }) {
-    await firebase.auth().createUserWithEmailAndPassword(email, password)
-
-    const user = firebase.auth().currentUser
-    await user.updateProfile({ displayName, photoURL: null })
+  fetchById ({ commit }, id) {
+    return api.fetchById(id)
   },
-  async login ({ commit }, { email, password }) {
-    await firebase.auth().signInWithEmailAndPassword(email, password)
+  register ({ commit }, { email, password, displayName }) {
+    return api.register(email, password, displayName)
   },
-  async loginWithGoogle ({ commit }) {
-    await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+  login ({ commit }, { email, password }) {
+    return api.login(email, password)
   },
-  async logout ({ commit }) {
-    await firebase.auth().signOut()
+  loginWithGoogle ({ commit }) {
+    return api.loginWithGoogle()
   },
-  async recover ({ commit }, email) {
-    await firebase.auth().sendPasswordResetEmail(email)
+  logout ({ commit }) {
+    return api.logout()
+  },
+  recover ({ commit }, email) {
+    return api.recover(email)
   }
 }
 

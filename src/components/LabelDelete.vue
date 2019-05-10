@@ -45,14 +45,11 @@ export default {
     loading: false
   }),
   methods: {
-    remove () {
+    async remove () {
       this.loading = true
-      this.$store.dispatch('labels/delete', this.label.id)
-        .then(() => {
-          this.dialog = false
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('labels/delete', this.label.id)
+      this.dialog = false
+      this.loading = false
     }
   }
 }

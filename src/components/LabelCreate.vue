@@ -66,19 +66,16 @@ export default {
     loading: false
   }),
   methods: {
-    create () {
+    async create () {
       this.loading = true
-      this.$store.dispatch('labels/create', this.label)
-        .then(() => {
-          this.dialog = false
-          this.label = {
-            title: '',
-            description: '',
-            color: ''
-          }
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('labels/create', this.label)
+      this.dialog = false
+      this.label = {
+        title: '',
+        description: '',
+        color: ''
+      }
+      this.loading = false
     }
   }
 }

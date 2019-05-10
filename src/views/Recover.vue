@@ -53,15 +53,11 @@ export default {
     dark: false
   }),
   methods: {
-    recover (email) {
+    async recover (email) {
       this.loading = true
-      this.$store.dispatch('user/recover', email)
-        .then(() => {
-          this.showSnackbar('Recovery email sent', 'success')
-          this.$router.replace('/login')
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('user/recover', email)
+      this.$router.replace('/login')
+      this.loading = false
     }
   }
 }

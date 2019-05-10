@@ -82,6 +82,7 @@ export default {
     async fetch () {
       this.loading = true
       await this.$store.dispatch('requests/fetchById', this.id)
+      await this.$store.dispatch('user/fetchById', this.request.createdBy)
       this.loading = false
     }
   }

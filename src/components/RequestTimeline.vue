@@ -114,45 +114,39 @@ export default {
 
       this.input = null
     },
-    close () {
-      this.$store.dispatch('requests/update', {
+    async close () {
+      await this.$store.dispatch('requests/update', {
         id: this.request.id,
         payload: {
           ...this.request,
           closed: true
         }
       })
-        .then(() => {
-          const time = (new Date()).toTimeString()
-          this.events.push({
-            id: this.nonce++,
-            text: 'Closed this issue',
-            time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
-              return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
-            })
-          })
+      const time = (new Date()).toTimeString()
+      this.events.push({
+        id: this.nonce++,
+        text: 'Closed this issue',
+        time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+          return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
         })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
+      })
     },
-    open () {
-      this.$store.dispatch('requests/update', {
+    async open () {
+      await this.$store.dispatch('requests/update', {
         id: this.request.id,
         payload: {
           ...this.request,
           closed: false
         }
       })
-        .then(() => {
-          const time = (new Date()).toTimeString()
-          this.events.push({
-            id: this.nonce++,
-            text: 'Reopened this issue',
-            time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
-              return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
-            })
-          })
+      const time = (new Date()).toTimeString()
+      this.events.push({
+        id: this.nonce++,
+        text: 'Reopened this issue',
+        time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+          return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
         })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
+      })
     }
   }
 }

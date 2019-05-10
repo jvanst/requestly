@@ -47,15 +47,12 @@ export default {
     }
   },
   methods: {
-    remove () {
+    async remove () {
       this.loading = true
-      this.$store.dispatch('pipelines/delete', this.pipeline.id)
-        .then(() => {
-          this.menu = false
-          this.dialog = false
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('pipelines/delete', this.pipeline.id)
+      this.menu = false
+      this.dialog = false
+      this.loading = true
     }
   }
 }

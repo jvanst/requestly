@@ -148,20 +148,16 @@ export default {
     }
   },
   methods: {
-    fetch () {
-      // Do not re-fetch if already available in vuex
-      if (this.$store.state.forms.fetched) {
-        return
-      }
+    async fetch () {
       this.loading = true
-      this.$store.dispatch('forms/fetch')
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('forms/fetch')
+      this.loading = false
     },
-    create () {
+    async create () {
       this.creating = true
-      this.$store.dispatch('requests/create', { payload: this.request, formId: this.formId })
-        .then(() => this.$router.replace('/'))
+      await this.$store.dispatch('requests/create', { payload: this.request, formId: this.formId })
+      this.$router.replace('/')
+      this.creating = false
     }
   }
 }

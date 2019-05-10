@@ -5,56 +5,40 @@ import snackbar from '@/helpers/snackbar'
 const ref = firebase.firestore().collection('forms')
 
 const fetchById = async (id) => {
-  let data = []
-
   try {
     const result = await ref.doc(id).get()
-
-    data = {
-      id,
-      ...result.data()
-    }
+    return { ...result.data(), id }
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const fetch = async () => {
-  let data = []
-
   try {
+    const data = []
     const result = await ref.get()
-
     for (let form of result.docs) {
       data.push({
-        id: form.id,
-        ...form.data()
+        ...form.data(),
+        id: form.id
       })
+      return data
     }
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const create = async (payload) => {
-  let data = null
-
   try {
     const result = await ref.add({
       ...payload,
       createdBy: firebase.auth().currentUser.uid
     })
-
-    data = {
-      id: result.id,
-      ...payload
-    }
+    return { ...payload, id: result.id }
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const update = async ({ id, payload }) => {

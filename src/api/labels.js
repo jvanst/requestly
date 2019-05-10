@@ -5,40 +5,31 @@ import snackbar from '@/helpers/snackbar'
 const ref = firebase.firestore().collection('labels')
 
 const fetch = async () => {
-  let data = []
-
   try {
+    const data = []
     const result = await ref.get()
-
     for (let label of result.docs) {
       data.push({
         id: label.id,
         ...label.data()
       })
     }
+    return data
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const create = async (payload) => {
-  let data = null
-
   try {
     const result = await ref.add({
       ...payload,
       createdBy: firebase.auth().currentUser.uid
     })
-
-    data = {
-      id: result.id,
-      ...payload
-    }
+    return { ...payload, id: result.id }
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const update = async ({ id, payload }) => {

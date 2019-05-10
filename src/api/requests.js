@@ -5,43 +5,33 @@ import snackbar from '@/helpers/snackbar'
 const ref = firebase.firestore().collection('requests')
 
 const fetchById = async (id) => {
-  let data = {}
-
   try {
     const result = await ref.doc(id).get()
-
-    data = {
-      id: result.id,
-      ...result.data()
-    }
+    return { ...result.data(), id: result.id }
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const fetch = async () => {
-  let data = []
-
   try {
+    const data = []
     const result = await ref.where('closed', '==', false).get()
-
     for (let request of result.docs) {
       data.push({
         id: request.id,
         ...request.data()
       })
     }
+    return data
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const create = async (payload) => {
-  let data = null
-
   try {
+    // Get the default pipeline
     const firstPipeline =
       await firebase
         .firestore()
@@ -50,23 +40,16 @@ const create = async (payload) => {
         .limit(1)
         .get()
 
-    // Set request to first pipeline
     payload.pipelineId = firstPipeline.docs[0].id
-
-    // Move content title
-    payload.title = payload.content.title
+    payload.createdBy = firebase.auth().currentUser.uid // Set userId
+    payload.title = payload.content.title // Move content title
     delete payload.content.title
 
-    console.log(payload)
-    // Add user
-    payload.createdBy = firebase.auth().currentUser.uid
-
     const result = await ref.add(payload)
-    data = { id: result.id, ...payload }
+    return { id: result.id, ...payload }
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }
-  return data
 }
 
 const update = async ({ id, payload }) => {

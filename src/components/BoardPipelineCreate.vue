@@ -58,12 +58,10 @@ export default {
   methods: {
     async create () {
       this.loading = true
-      this.$store.dispatch('pipelines/create', this.title)
-        .then(() => {
-          this.title = ''
-          this.menu = false
-          this.loading = false
-        })
+      await this.$store.dispatch('pipelines/create', this.title)
+      this.title = ''
+      this.menu = false
+      this.loading = false
     }
   }
 }

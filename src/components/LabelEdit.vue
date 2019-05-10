@@ -62,17 +62,14 @@ export default {
     loading: false
   }),
   methods: {
-    update () {
+    async update () {
       this.loading = true
-      this.$store.dispatch('labels/update', {
+      await this.$store.dispatch('labels/update', {
         id: this.label.id,
         payload: this.label
       })
-        .then(() => {
-          this.dialog = false
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      this.dialog = false
+      this.loading = false
     }
   }
 }

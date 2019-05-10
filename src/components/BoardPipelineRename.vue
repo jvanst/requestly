@@ -52,17 +52,16 @@ export default {
     }
   },
   methods: {
-    update () {
+    async update () {
       this.loading = true
-      this.$store.dispatch('pipelines/update', {
+      await this.$store.dispatch('pipelines/update', {
         id: this.pipeline.id,
         payload: {
           title: this.title
         }
       })
-        .then(() => (this.dialog = false))
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      this.dialog = false
+      this.loading = false
     }
   }
 }

@@ -72,7 +72,7 @@ const router = new Router({
     {
       path: '/labels/',
       name: 'Labels',
-      component: () => import(/* webpackChunkName: "create-edit" */ './views/Labels.vue'),
+      component: () => import(/* webpackChunkName: "labels" */ './views/Labels.vue'),
       meta: {
         requiresAuth: true
       }

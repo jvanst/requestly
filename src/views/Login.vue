@@ -79,29 +79,17 @@ export default {
     })
   },
   methods: {
-    login () {
+    async login () {
       this.loading = true
-      this.$store.dispatch('user/login',
-        {
-          email: this.email,
-          password: this.password
-        })
-        .then(() => {
-          this.showSnackbar('Successfully logged in', 'success')
-          this.$router.replace('/')
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('user/login', { email: this.email, password: this.password })
+      this.$router.replace('/')
+      this.loading = false
     },
-    google () {
+    async google () {
       this.loading = true
-      this.$store.dispatch('user/loginWithGoogle')
-        .then(() => {
-          this.showSnackbar('Successfully logged in', 'success')
-          this.$router.replace('/')
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      await this.$store.dispatch('user/loginWithGoogle')
+      this.$router.replace('/')
+      this.loading = false
     }
   }
 }

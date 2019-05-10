@@ -1,5 +1,6 @@
 // Initialize firebase first
 import firebase from 'firebase/app'
+import 'firebase/auth'
 import './firebase'
 
 import Vue from 'vue'

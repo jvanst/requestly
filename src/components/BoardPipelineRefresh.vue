@@ -15,13 +15,13 @@ export default {
     loading: false
   }),
   methods: {
-    refresh () {
+    async refresh () {
       this.loading = true
-      Promise.all([
+      await Promise.all([
         this.$store.dispatch('pipelines/fetch'),
         this.$store.dispatch('requests/fetch')
       ])
-        .finally(() => (this.loading = false))
+      this.loading = false
     }
   }
 }

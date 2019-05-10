@@ -47,16 +47,12 @@ export default {
     }
   },
   methods: {
-    remove () {
+    async remove () {
       this.loading = true
+      await this.$store.dispatch('forms/delete', this.form.id)
       this.$router.replace('/forms/')
-      this.$store.dispatch('forms/delete', this.form.id)
-        .then(() => {
-          this.dialog = false
-          this.showSnackbar('Successfuly deleted', 'success')
-        })
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loading = false))
+      this.dialog = false
+      this.loading = false
     }
   }
 }

@@ -241,10 +241,7 @@ export default {
     }
   },
   created () {
-    // If Id exists then we want to edit this form
-    if (this.id) {
-      this.fetch()
-    }
+    this.fetch()
     this.fetchLabels()
   },
   methods: {
@@ -268,17 +265,15 @@ export default {
       }
       this.request.labels.push(id)
     },
-    fetchLabels () {
-      // Do not re-fetch if already available in vuex
-      if (this.$store.state.labels.fetched) {
-        return
-      }
+    async fetchLabels () {
       this.loadingLabels = true
-      this.$store.dispatch('labels/fetch')
-        .catch((error) => this.showSnackbar(error.message, 'error'))
-        .finally(() => (this.loadingLabels = false))
+      await this.$store.dispatch('labels/fetch')
+      this.loadingLabels = false
     },
     async fetch () {
+      if (!this.id) {
+        return
+      }
       this.editing = true
       this.loading = true
       await this.$store.dispatch('forms/fetchById', this.id)

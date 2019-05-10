@@ -13,7 +13,7 @@ const getters = {
 const actions = {
   fetchById ({ commit }, id) {
     return api.fetchById(id)
-      .then(result => commit('ADD', result))
+      .then(result => commit('UPDATE', result))
   },
   fetch ({ commit }) {
     return api.fetch()
@@ -24,7 +24,7 @@ const actions = {
       ...payload,
       labels: rootGetters['forms/getById'](formId).labels
     })
-      .then(result => commit('ADD', result))
+      .then(result => commit('UPDATE', result))
   },
   update ({ commit }, { id, payload }) {
     return api.update({ id, payload })
@@ -36,11 +36,14 @@ const mutations = {
   SET (state, value) {
     state.data = value
   },
-  ADD (state, request) {
-    state.data.push(request)
-  },
   UPDATE (state, payload) {
-    state.data.splice(state.data.findIndex(p => p.id === payload.id), 1, payload)
+    const index = state.data.findIndex(p => p.id === payload.id)
+
+    if (index) {
+      state.data.splice(state.data.findIndex(p => p.id === payload.id), 1, payload)
+    } else {
+      state.data.push(payload)
+    }
   }
 }
 

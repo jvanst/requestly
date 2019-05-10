@@ -8,10 +8,10 @@ const fetch = async () => {
   try {
     const data = []
     const result = await ref.get()
-    for (let label of result.docs) {
+    for (let item of result.docs) {
       data.push({
-        id: label.id,
-        ...label.data()
+        ...item.data(),
+        id: item.id
       })
     }
     return data
@@ -34,6 +34,7 @@ const create = async (payload) => {
 
 const update = async ({ id, payload }) => {
   try {
+    delete payload.id
     await ref.doc(id).set(payload)
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')

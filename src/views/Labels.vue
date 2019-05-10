@@ -68,9 +68,18 @@ export default {
   },
   methods: {
     async fetch () {
-      this.loading = true
+      // If data has been loaded previously
+      if (!this.loaded()) {
+        this.loading = true
+      }
       await this.$store.dispatch('labels/fetch')
       this.loading = false
+    },
+    loaded () {
+      if (this.$store.state.labels.data.length) {
+        return true
+      }
+      return false
     }
   }
 }

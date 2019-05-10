@@ -9,13 +9,13 @@ const getters = {
 }
 
 const actions = {
-  fetchById ({ commit }, id) {
-    return api.fetchById(id)
-      .then((result) => commit('ADD', result))
-  },
   fetch ({ commit }) {
     return api.fetch()
       .then((result) => commit('SET', result))
+  },
+  fetchById ({ commit }, id) {
+    return api.fetchById(id)
+      .then((result) => commit('ADD', result))
   },
   create ({ commit }, payload) {
     return api.create(payload)

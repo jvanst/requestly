@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-2">
+  <v-card class="pa-2" style="min-width: 100%;">
     <template  v-for="(section, index) in Object.keys(request.content)">
       <v-card-title
         class="title"

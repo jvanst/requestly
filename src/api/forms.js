@@ -17,13 +17,13 @@ const fetch = async () => {
   try {
     const data = []
     const result = await ref.get()
-    for (let form of result.docs) {
+    for (let item of result.docs) {
       data.push({
-        ...form.data(),
-        id: form.id
+        ...item.data(),
+        id: item.id
       })
-      return data
     }
+    return data
   } catch (error) {
     snackbar.showSnackbar(error.message, 'error')
   }

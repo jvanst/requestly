@@ -11,7 +11,7 @@
           </v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-avatar>
-          <v-icon>mdi-account-circle</v-icon>
+          <request-author :request="request" :size="36"/>
         </v-list-item-avatar>
       </v-list-item>
     </v-list>
@@ -27,7 +27,8 @@ export default {
   name: 'RequestCard',
   props: ['request'],
   components: {
-    RequestLabels: () => import('@/components/RequestLabels')
+    RequestLabels: () => import('@/components/RequestLabels'),
+    RequestAuthor: () => import('@/components/RequestAuthor')
   }
 }
 </script>

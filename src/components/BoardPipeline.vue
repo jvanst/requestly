@@ -30,7 +30,7 @@
       >
         <v-flex
           v-for="request in requests"
-          :key="request.id"
+          :key="'flex'+request.id"
           mb-2
           shrink
         >

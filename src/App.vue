@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" :dark="dark">
+  <v-app id="app" :dark="$store.state.ui.dark">
     <app-bar/>
     <nav-drawer/>
     <v-content id="content">
@@ -16,11 +16,6 @@ export default {
     AppBar: () => import(/* webpackPreload: true */ '@/components/AppBar.vue'),
     NavDrawer: () => import(/* webpackPreload: true */ '@/components/NavDrawer.vue'),
     SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
-  },
-  computed: {
-    dark () {
-      return this.$store.state.ui.dark
-    }
   }
 }
 </script>

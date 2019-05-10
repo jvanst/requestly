@@ -31,6 +31,7 @@ new Vue({
       if (user) {
         this.$store.commit('user/SET_LOGGEDIN', true)
         this.$store.commit('user/SET_USER', user)
+        this.$store.dispatch('user/fetch')
       } else {
         this.$store.commit('user/SET_LOGGEDIN', false)
         this.$store.commit('user/SET_USER', {})

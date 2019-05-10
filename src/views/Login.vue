@@ -37,8 +37,17 @@
             </v-form>
           </v-flex>
           <v-flex xs12 class="pt-3 pb-3 mt-3 mb-2">
-            <div style="height: 12px; border-bottom: 1px solid #212121; text-align: center">
-              <span class="subheading grey lighten-5 grey--text text--darken-4 pr-3 pl-3">
+            <div
+             :style="$store.state.ui.dark ? 'border-bottom: 1px solid rgba(255,255,255,0.7);' : 'border-bottom: 1px solid #212121;'"
+              style="height: 12px; text-align: center"
+            >
+              <span
+              :class="{
+                  'white grey--text text--darken-4': !$store.state.ui.dark,
+                  'grey darken-4 grey--text text--lighten-2': $store.state.ui.dark
+              }"
+              class="subheading pr-3 pl-3"
+              >
                 Sign in With
               </span>
             </div>
@@ -54,8 +63,8 @@
             </v-btn>
           </v-flex>
           <v-flex xs12 class="pt-4">
-            <router-link to="/register" class="black--text pr-2">Need an Account?</router-link>
-            <router-link to="/recover" class="black--text pl-2">Forgot your password?</router-link>
+            <router-link to="/register" :class="{ 'black--text': !$store.state.ui.dark, 'white--text': $store.state.ui.dark }" class="pr-3">Need an Account?</router-link>
+            <router-link to="/recover" :class="{ 'black--text': !$store.state.ui.dark, 'white--text': $store.state.ui.dark }">Forgot your password?</router-link>
           </v-flex>
         </v-layout>
       </v-flex>

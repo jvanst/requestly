@@ -38,14 +38,9 @@
       <v-flex xs9>
         <v-layout>
           <v-flex shrink>
-            <v-avatar
-              tile
-              class="round-avatar"
-              >
-              <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
-            </v-avatar>
+            <request-author :request="request"/>
           </v-flex>
-          <v-flex grow>
+          <v-flex>
             <request-single :request="request"/>
             <request-timeline :request="request"/>
           </v-flex>
@@ -65,7 +60,8 @@ export default {
   components: {
     RequestSingle: () => import('@/components/RequestSingle'),
     RequestSingleSidebar: () => import('@/components/RequestSingleSidebar'),
-    RequestTimeline: () => import('@/components/RequestTimeline')
+    RequestTimeline: () => import('@/components/RequestTimeline'),
+    RequestAuthor: () => import('@/components/RequestAuthor')
   },
   created () {
     this.fetch()
@@ -82,15 +78,9 @@ export default {
     async fetch () {
       this.loading = true
       await this.$store.dispatch('requests/fetchById', this.id)
-      await this.$store.dispatch('user/fetchById', this.request.createdBy)
+      await this.$store.dispatch('labels/fetch')
       this.loading = false
     }
   }
 }
 </script>
-
-<style>
-.round-avatar {
-  border-radius: 4px;
-}
-</style>

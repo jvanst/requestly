@@ -41,6 +41,7 @@ const create = async (payload) => {
         .get()
 
     payload.pipelineId = firstPipeline.docs[0].id
+    payload.closed = false
     payload.createdBy = firebase.auth().currentUser.uid // Set userId
     payload.title = payload.content.title // Move content title
     delete payload.content.title

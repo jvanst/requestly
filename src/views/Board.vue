@@ -71,11 +71,24 @@ export default {
   },
   methods: {
     async fetch () {
-      this.loading = true
-      await this.$store.dispatch('pipelines/fetch')
-      await this.$store.dispatch('requests/fetch')
-      await this.$store.dispatch('labels/fetch')
+      // If data has been loaded previously
+      if (!this.loaded()) {
+        this.loading = true
+      }
+      await Promise.all([
+        this.$store.dispatch('pipelines/fetch'),
+        this.$store.dispatch('requests/fetch'),
+        this.$store.dispatch('labels/fetch')
+      ])
       this.loading = false
+    },
+    loaded () {
+      if (this.$store.state.pipelines.data.length &&
+        this.$store.state.requests.data.length &&
+        this.$store.state.labels.data.length) {
+        return true
+      }
+      return false
     }
   }
 }

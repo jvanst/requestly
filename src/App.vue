@@ -16,6 +16,9 @@ export default {
     AppBar: () => import(/* webpackPreload: true */ '@/components/AppBar.vue'),
     NavDrawer: () => import(/* webpackPreload: true */ '@/components/NavDrawer.vue'),
     SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
+  },
+  created () {
+    console.log(this.$vuetify)
   }
 }
 </script>

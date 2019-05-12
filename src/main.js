@@ -4,27 +4,22 @@ import 'firebase/auth'
 import './firebase'
 
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
 import App from './App.vue'
 import router from './router'
 import store from './store/'
+import vuetify from './plugins/vuetify'
 
 import './helpers/registerServiceWorker'
 import './helpers/snackbar'
 
 import './filters/string'
 
-import 'vuetify/src/styles/main.sass'
-import '@mdi/font/css/materialdesignicons.css'
-
 Vue.config.productionTip = false
-
-Vue.use(Vuetify)
 
 new Vue({
   router,
   store,
-  vuetify: new Vuetify({}),
+  vuetify,
   beforeCreate () {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(user => {

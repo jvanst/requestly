@@ -10,5 +10,8 @@ module.exports = {
         fiber: require('fibers')
       }
     }
+  },
+  pwa: {
+    name: 'Requestly'
   }
 }

@@ -1,11 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <v-avatar
-        color="primary"
-        >
-        <v-icon dark>mdi-account</v-icon>
-      </v-avatar>
+      <request-author-skeleton/>
     </div>
     <div v-else>
       <v-tooltip bottom>
@@ -34,6 +30,9 @@ export default {
       type: Number,
       default: 48
     }
+  },
+  components: {
+    RequestAuthorSkeleton: () => import('@/components/RequestAuthorSkeleton')
   },
   data: () => ({
     user: {},

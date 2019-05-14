@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-lg class="scroll-y">
-    <v-layout xs12 v-if="loading">
-      LOADING
+    <v-layout wrap v-if="loading">
+      <request-skeleton/>
     </v-layout>
     <v-layout wrap v-else>
       <v-flex xs12>
@@ -61,7 +61,8 @@ export default {
     RequestSingle: () => import('@/components/RequestSingle'),
     RequestSingleSidebar: () => import('@/components/RequestSingleSidebar'),
     RequestTimeline: () => import('@/components/RequestTimeline'),
-    RequestAuthor: () => import('@/components/RequestAuthor')
+    RequestAuthor: () => import('@/components/RequestAuthor'),
+    RequestSkeleton: () => import('@/components/RequestSkeleton')
   },
   created () {
     this.fetch()

@@ -38,8 +38,7 @@ const mutations = {
   },
   UPDATE (state, payload) {
     const index = state.data.findIndex(p => p.id === payload.id)
-
-    if (index) {
+    if (index !== -1) {
       state.data.splice(state.data.findIndex(p => p.id === payload.id), 1, payload)
     } else {
       state.data.push(payload)

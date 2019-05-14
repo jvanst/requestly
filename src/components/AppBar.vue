@@ -14,7 +14,7 @@
 
     <v-spacer/>
 
-    <v-toolbar-items v-if="!user.isLoggedIn">
+    <v-toolbar-items v-if="!$store.state.isLoggedIn">
       <v-btn
         text
         to="/login"
@@ -23,7 +23,7 @@
       </v-btn>
     </v-toolbar-items>
 
-    <user-menu v-if="user.isLoggedIn" class="ml-3"/>
+    <user-menu v-if="$store.state.isLoggedIn" class="ml-3"/>
 
   </v-app-bar>
 </template>
@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.user
+      user: state => state
     })
   }
 }

@@ -52,19 +52,19 @@
 
               <v-card-text>
                 <v-text-field
-                  box
+                  filled
                   label="Title"
                   v-model="label"
                   ></v-text-field>
 
                 <v-textarea
-                  box
+                  filled
                   label="Description"
                   v-model="description"
                 ></v-textarea>
 
                 <v-select
-                  box
+                  filled
                   label="Field Type"
                   v-model="type"
                   :items="fieldTypes"

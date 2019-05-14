@@ -74,7 +74,7 @@ export default {
   methods: {
     async register () {
       this.loading = true
-      await this.$store.dispatch('user/register', {
+      await this.$store.dispatch('register', {
         email: this.email,
         password: this.password,
         displayName: this.displayName

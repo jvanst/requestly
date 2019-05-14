@@ -90,13 +90,13 @@ export default {
   methods: {
     async login () {
       this.loading = true
-      await this.$store.dispatch('user/login', { email: this.email, password: this.password })
+      await this.$store.dispatch('login', { email: this.email, password: this.password })
       this.$router.replace('/')
       this.loading = false
     },
     async google () {
       this.loading = true
-      await this.$store.dispatch('user/loginWithGoogle')
+      await this.$store.dispatch('loginWithGoogle')
       this.$router.replace('/')
       this.loading = false
     }

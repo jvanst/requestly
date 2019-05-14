@@ -36,7 +36,7 @@
     >
       <template v-slot:icon>
         <v-avatar>
-          <v-img v-if="user.data.photoURL" :src="user.data.photoURL" />
+          <v-img v-if="user.photoURL" :src="user.photoURL" />
           <v-icon v-else>mdi-account-circle</v-icon>
         </v-avatar>
       </template>
@@ -47,7 +47,7 @@
             v-model="input"
             hide-details
             label="Leave a comment..."
-            box
+            filled
             @keydown.enter="comment"
           ></v-textarea>
         </v-card-text>

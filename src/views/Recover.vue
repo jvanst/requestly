@@ -55,7 +55,7 @@ export default {
   methods: {
     async recover (email) {
       this.loading = true
-      await this.$store.dispatch('user/recover', email)
+      await this.$store.dispatch('recover', email)
       this.$router.replace('/login')
       this.loading = false
     }

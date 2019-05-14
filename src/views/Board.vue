@@ -20,6 +20,7 @@
           v-model="pipelines"
           group="pipelines"
           handle=".pipeline-header"
+          :disabled="$store.state.role !== 'admin'"
         >
           <v-flex
             v-for="(pipelines, i) in pipelines"

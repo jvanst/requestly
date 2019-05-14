@@ -44,7 +44,7 @@ export default {
   methods: {
     async fetch () {
       this.loading = true
-      this.user = await this.$store.dispatch('user/fetchById', this.request.createdBy)
+      this.user = await this.$store.dispatch('users/fetchById', this.request.createdBy)
       this.loading = false
     }
   }

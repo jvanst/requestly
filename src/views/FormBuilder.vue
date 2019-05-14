@@ -23,7 +23,7 @@
 
       <v-flex xs12>
         <v-text-field
-          box
+          filled
           label="Title"
           v-model="request.title"
           hide-details
@@ -32,7 +32,7 @@
 
       <v-flex xs12>
         <v-textarea
-          box
+          filled
           label="Description"
           v-model="request.description"
         ></v-textarea>
@@ -106,7 +106,7 @@
 
               <v-card-text>
                 <v-text-field
-                  box
+                  filled
                   label="Title"
                   v-model="stepTitle"
                   ></v-text-field>

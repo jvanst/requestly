@@ -4,7 +4,11 @@
     elevation="1"
     height="100%"
   >
-      <v-list dense class="transparent pipeline-header">
+      <v-list
+        dense
+        class="transparent"
+        :class="{ 'pipeline-header' : $store.state.role === 'admin' }"
+      >
         <v-list-item>
           <v-list-item-content>
             <v-list-item-subtitle class="overline">
@@ -27,6 +31,7 @@
         group="requests"
         style="height: 90%;"
         @change="handleChange"
+        :disabled="$store.state.role !== 'admin'"
       >
         <v-flex
           v-for="request in requests"

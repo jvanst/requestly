@@ -6,7 +6,7 @@
     >
     <template v-slot:activator="{ on }">
       <v-avatar v-on="on" size="34">
-        <v-img v-if="user.data.photoURL" :src="user.data.photoURL" />
+        <v-img v-if="user.photoURL" :src="user.photoURL" />
         <v-icon v-else>mdi-account-circle</v-icon>
       </v-avatar>
     </template>
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     async logout () {
-      await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('logout')
       this.$router.go('/login')
     }
   }

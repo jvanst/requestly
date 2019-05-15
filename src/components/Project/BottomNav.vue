@@ -35,12 +35,12 @@
 </template>
 
 <script>
-  export default {
-    name: 'BottomNav',
-    data () {
-      return {
-        bottomNav: 'recent'
-      }
+export default {
+  name: 'BottomNav',
+  data () {
+    return {
+      bottomNav: 'recent'
     }
   }
+}
 </script>

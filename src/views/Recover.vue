@@ -7,37 +7,40 @@
       style="max-width:500px;margin:auto"
     >
       <v-flex>
-        <v-card flat>
-          <v-card-title>
-            <span class="headline pl-3 pt-3">Recover</span>
+        <v-card class="pa-3">
+          <v-card-title class="mb-2 text-xs-center">
+            <span class="headlines">Recover</span>
           </v-card-title>
-          <v-layout wrap class="pr-4 pl-4 pb-4">
-            <v-flex xs12 class="pl-2 pr-2">
-              <v-text-field
-                label="Email"
-                type="email"
-                name="email"
-                v-model="email"
-                :disabled="loading"
-                @keyup.enter="recover(email)"
-              ></v-text-field>
-            </v-flex>
-            <v-flex class="pt-3 pl-2">
-              <router-link
-                to="/login"
-                :class="{ 'black--text': !dark, 'white--text': dark }"
-                >Back to login</router-link
-              >
-            </v-flex>
-            <v-flex xs6 class="text-xs-right">
-              <v-btn
-                class="secondary"
-                :loading="loading"
-                @click.native="recover(email)"
-                >Recover</v-btn
-              >
-            </v-flex>
-          </v-layout>
+          <v-card-text>
+            <v-layout wrap>
+              <v-flex xs12>
+                <v-text-field
+                  label="Email"
+                  type="email"
+                  name="email"
+                  v-model="email"
+                  :disabled="loading"
+                  @keyup.enter="recover(email)"
+                  outlined
+                ></v-text-field>
+              </v-flex>
+              <v-flex class="pt-3 pl-2">
+                <router-link
+                  to="/login"
+                  :class="{ 'black--text': !dark, 'white--text': dark }"
+                  >Back to login</router-link
+                >
+              </v-flex>
+              <v-flex xs6 class="text-xs-right">
+                <v-btn
+                  class="secondary"
+                  :loading="loading"
+                  @click.native="recover(email)"
+                  >Recover</v-btn
+                >
+              </v-flex>
+            </v-layout>
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>

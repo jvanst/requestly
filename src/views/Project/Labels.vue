@@ -50,10 +50,10 @@
 export default {
   name: 'Labels',
   components: {
-    Label: () => import('@/components/Label.vue'),
-    LabelCreate: () => import('@/components/LabelCreate.vue'),
-    LabelEdit: () => import('@/components/LabelEdit.vue'),
-    LabelDelete: () => import('@/components/LabelDelete.vue')
+    Label: () => import('@/components/Project/Label.vue'),
+    LabelCreate: () => import('@/components/Project/LabelCreate.vue'),
+    LabelEdit: () => import('@/components/Project/LabelEdit.vue'),
+    LabelDelete: () => import('@/components/Project/LabelDelete.vue')
   },
   data: () => ({
     loading: false

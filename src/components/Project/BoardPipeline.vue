@@ -53,8 +53,8 @@ export default {
   props: ['pipeline'],
   components: {
     draggable,
-    RequestCard: () => import('@/components/RequestCard.vue'),
-    BoardPipelineSettings: () => import('@/components/BoardPipelineSettings')
+    RequestCard: () => import('@/components/Project/RequestCard.vue'),
+    BoardPipelineSettings: () => import('@/components/Project/BoardPipelineSettings')
   },
   computed: {
     requests: {

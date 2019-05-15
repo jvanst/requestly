@@ -16,7 +16,7 @@ export default {
   name: 'RequestLabels',
   props: ['request'],
   components: {
-    Label: () => import('@/components/Label')
+    Label: () => import('@/components/Project/Label')
   },
   methods: {
     getLabel (id) {

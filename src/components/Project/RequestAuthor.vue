@@ -32,7 +32,7 @@ export default {
     }
   },
   components: {
-    RequestAuthorSkeleton: () => import('@/components/RequestAuthorSkeleton')
+    RequestAuthorSkeleton: () => import('@/components/Project/RequestAuthorSkeleton')
   },
   data: () => ({
     user: {},

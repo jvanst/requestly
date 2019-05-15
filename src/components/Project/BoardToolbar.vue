@@ -13,8 +13,8 @@
 export default {
   name: 'BoardToolbar',
   components: {
-    BoardPipelineRefresh: () => import('@/components/BoardPipelineRefresh'),
-    BoardPipelineCreate: () => import('@/components/BoardPipelineCreate')
+    BoardPipelineRefresh: () => import('@/components/Project/BoardPipelineRefresh'),
+    BoardPipelineCreate: () => import('@/components/Project/BoardPipelineCreate')
   }
 }
 </script>

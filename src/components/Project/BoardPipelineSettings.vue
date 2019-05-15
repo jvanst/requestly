@@ -48,8 +48,8 @@ export default {
   name: 'PipelineSettings',
   props: ['pipeline'],
   components: {
-    PipelineRename: () => import('@/components/BoardPipelineRename'),
-    PipelineDelete: () => import('@/components/BoardPipelineDelete')
+    PipelineRename: () => import('@/components/Project/BoardPipelineRename'),
+    PipelineDelete: () => import('@/components/Project/BoardPipelineDelete')
   },
   data: () => ({
     menu: false,

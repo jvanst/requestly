@@ -58,11 +58,11 @@ export default {
   name: 'Request',
   props: ['id'],
   components: {
-    RequestSingle: () => import('@/components/RequestSingle'),
-    RequestSingleSidebar: () => import('@/components/RequestSingleSidebar'),
-    RequestTimeline: () => import('@/components/RequestTimeline'),
-    RequestAuthor: () => import('@/components/RequestAuthor'),
-    RequestSkeleton: () => import('@/components/RequestSkeleton')
+    RequestSingle: () => import('@/components/Project/RequestSingle'),
+    RequestSingleSidebar: () => import('@/components/Project/RequestSingleSidebar'),
+    RequestTimeline: () => import('@/components/Project/RequestTimeline'),
+    RequestAuthor: () => import('@/components/Project/RequestAuthor'),
+    RequestSkeleton: () => import('@/components/Project/RequestSkeleton')
   },
   created () {
     this.fetch()

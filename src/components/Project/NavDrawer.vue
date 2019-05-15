@@ -17,7 +17,7 @@
         nav
         shaped
       >
-      <v-list-item link to="/">
+      <v-list-item link to="/board">
         <v-list-item-icon>
           <v-icon>mdi-view-dashboard-outline</v-icon>
         </v-list-item-icon>

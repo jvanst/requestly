@@ -34,7 +34,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'AppBar',
   components: {
-    UserMenu: () => import('@/components/AppBarUserMenu.vue')
+    UserMenu: () => import('@/components/Project/AppBarUserMenu.vue')
   },
   computed: {
     ...mapState({

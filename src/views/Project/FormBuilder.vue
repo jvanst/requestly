@@ -203,8 +203,8 @@ export default {
   props: ['id'],
   name: 'FormBuilder',
   components: {
-    FieldBuilder: () => import('@/components/FieldBuilder'),
-    FormDelete: () => import('@/components/FormDelete')
+    FieldBuilder: () => import('@/components/Project/FieldBuilder'),
+    FormDelete: () => import('@/components/Project/FormDelete')
   },
   data: () => ({
     editing: true,

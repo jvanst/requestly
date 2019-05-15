@@ -30,8 +30,8 @@ export default {
   name: 'RequestSingleBar',
   props: ['request'],
   components: {
-    RequestLabels: () => import('@/components/RequestLabels'),
-    RequestPipeline: () => import('@/components/RequestPipeline')
+    RequestLabels: () => import('@/components/Project/RequestLabels'),
+    RequestPipeline: () => import('@/components/Project/RequestPipeline')
   }
 }
 </script>

@@ -48,7 +48,7 @@
 export default {
   name: 'RequestSkeleton',
   components: {
-    RequestAuthorSkeleton: () => import('@/components/RequestAuthorSkeleton')
+    RequestAuthorSkeleton: () => import('@/components/Project/RequestAuthorSkeleton')
   }
 }
 </script>

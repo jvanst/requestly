@@ -44,9 +44,9 @@ export default {
   name: 'Board',
   components: {
     draggable,
-    BoardPipelineSkeleton: () => import('@/components/BoardPipelineSkeleton'),
-    BoardToolbar: () => import('@/components/BoardToolbar'),
-    BoardPipeline: () => import('@/components/BoardPipeline')
+    BoardPipelineSkeleton: () => import('@/components/Project/BoardPipelineSkeleton'),
+    BoardToolbar: () => import('@/components/Project/BoardToolbar'),
+    BoardPipeline: () => import('@/components/Project/BoardPipeline')
   },
   created () {
     this.fetch()

@@ -27,8 +27,8 @@ export default {
   name: 'RequestCard',
   props: ['request'],
   components: {
-    RequestLabels: () => import('@/components/RequestLabels'),
-    RequestAuthor: () => import('@/components/RequestAuthor')
+    RequestLabels: () => import('@/components/Project/RequestLabels'),
+    RequestAuthor: () => import('@/components/Project/RequestAuthor')
   }
 }
 </script>

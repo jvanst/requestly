@@ -6,7 +6,7 @@
     >
     <v-btn
       color="primary"
-      to="/request/create"
+      :to="{ name: 'Create Request' }"
       class="ma-3"
     >
       <v-icon left>mdi-plus</v-icon>

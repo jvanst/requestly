@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import ProjectAPI from '@/api/Projects'
+import ProjectAPI from '@/api/projects'
 
 export default {
   name: 'CreateProject',

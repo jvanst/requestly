@@ -217,19 +217,7 @@ export default {
       title: '',
       description: '',
       labels: [],
-      steps: [
-        {
-          title: 'Details',
-          fields: [
-            {
-              label: 'Title',
-              description: 'Give your request a title',
-              type: 'textfield',
-              required: true
-            }
-          ]
-        }
-      ]
+      steps: []
     }
   }),
   computed: {

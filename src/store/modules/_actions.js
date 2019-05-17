@@ -1,8 +1,8 @@
-import ProjectAPI from '@/api/Projects'
-import FormsAPI from '@/api/Forms'
-import LabelsAPI from '@/api/Labels'
-import PipelinesAPI from '@/api/Pipelines'
-import RequestsAPI from '@/api/Requests'
+import ProjectAPI from '@/api/projects'
+import FormsAPI from '@/api/forms'
+import LabelsAPI from '@/api/labels'
+import PipelinesAPI from '@/api/pipelines'
+import RequestsAPI from '@/api/requests'
 
 import snackbar from '@/helpers/snackbar'
 

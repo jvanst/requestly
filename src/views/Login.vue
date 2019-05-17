@@ -81,7 +81,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import AuthAPI from '@/api/Auth'
+import AuthAPI from '@/api/auth'
 
 export default {
   name: 'Login',

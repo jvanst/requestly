@@ -25,7 +25,16 @@
 
           <v-stepper-content step="1">
             <v-container>
-              <v-layout wrap class="mb-4">
+              <v-layout wrap>
+                <v-flex
+                  xs12>
+                  <v-text-field
+                    v-model="request.title"
+                    label="Title your request"
+                    outlined
+                    required
+                  ></v-text-field>
+                </v-flex>
                 <v-flex
                   xs12>
                   <v-select
@@ -34,18 +43,11 @@
                     item-value="id"
                     item-text="title"
                     label="Choose a type"
+                    outlined
                     required
                   ></v-select>
                 </v-flex>
-                <v-flex
-                  xs12
-                  v-for="(form, index) in forms"
-                  :key="index + 'flex'"
-                  class="caption">
-                    <b>{{ form.title }}</b>: {{ form.description }}
-                </v-flex>
               </v-layout>
-
               <v-btn
                 :disabled="!formId"
                 color="primary"
@@ -56,40 +58,41 @@
           </v-stepper-content>
 
           <div v-if="form">
-          <template
-            v-for="(step, i) in form.steps"
-          >
-            <v-stepper-step
-              :key="'step-' + i"
-              :step="2 + i"
-              :complete="stepperValue > (2 + i)"
-              :editable="stepperValue > (2 + i)"
+            <template
+              v-for="(step, i) in form.steps"
             >
-              {{ step.title }}
-            </v-stepper-step>
+              <v-stepper-step
+                :key="'step-' + i"
+                :step="2 + i"
+                :complete="stepperValue > (2 + i)"
+                :editable="stepperValue > (2 + i)"
+              >
+                {{ step.title }}
+              </v-stepper-step>
 
-            <v-stepper-content
-              :key="'step-content-' + i"
-              :step="2 + i"
-            >
-              <form-validation v-on:valid="stepperValue += 1">
-                <template v-slot:default>
-                  <field-generator
-                    :fields="step.fields"
-                    :content="request.content"
-                  />
-                </template>
+              <v-stepper-content
+                :key="'step-content-' + i"
+                :step="2 + i"
+              >
 
-                <template v-slot:button>
-                  <v-btn
-                    color="primary"
-                  >Continue</v-btn>
-                </template>
+                <form-validation v-on:valid="stepperValue += 1">
+                  <template v-slot:default>
+                    <field-generator
+                      :fields="step.fields"
+                      :content="request.content"
+                    />
+                  </template>
 
-              </form-validation>
-            </v-stepper-content>
+                  <template v-slot:button>
+                    <v-btn
+                      color="primary"
+                    >Continue</v-btn>
+                  </template>
 
-          </template>
+                </form-validation>
+              </v-stepper-content>
+
+            </template>
           </div>
 
           <v-stepper-step
@@ -131,6 +134,7 @@ export default {
     stepperValue: 1,
     formId: null,
     request: {
+      title: null,
       content: {}
     },
     loading: false,
@@ -155,8 +159,12 @@ export default {
     },
     async create () {
       this.creating = true
-      await this.$store.dispatch('requests/create', { payload: this.request, formId: this.formId })
-      this.$router.replace('/')
+      await this.$store.dispatch('requests/create', {
+        title: this.request.title,
+        content: this.request.content,
+        formId: this.formId
+      })
+      this.$router.replace({ name: 'Board' })
       this.creating = false
     }
   }

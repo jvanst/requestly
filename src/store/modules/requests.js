@@ -1,20 +1,7 @@
-import _getters from './_getters'
-import _actions from './_actions'
-import _mutations from './_mutations'
+import _module from './_module'
 
-export default {
-  namespaced: true,
-  state: {
-    data: []
-  },
-  getters: {
-    ..._getters,
-    getByPipelineId: state => id => state.data.filter(r => r.pipelineId === id)
-  },
-  actions: {
-    ..._actions('pipelines')
-  },
-  mutations: {
-    ..._mutations
-  }
+const getters = {
+  getByPipelineId: state => id => state.data.filter(r => r.pipelineId === id)
 }
+
+export default _module('requests', { getters })

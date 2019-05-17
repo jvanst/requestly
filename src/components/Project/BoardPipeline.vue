@@ -31,7 +31,6 @@
         group="requests"
         style="height: 90%;"
         @change="handleChange"
-        :disabled="$store.state.role !== 'admin'"
       >
         <v-flex
           v-for="request in requests"

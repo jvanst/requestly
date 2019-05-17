@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="`/request/${request.id}`">
+  <v-card :to="{ name: 'Request', params: { id: request.id } }">
     <v-list>
       <v-list-item>
         <v-list-item-content>

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import AuthAPI from '@/api/Auth'
+import AuthAPI from '@/api/auth'
 
 export default {
   name: 'Recover',

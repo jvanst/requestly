@@ -26,7 +26,7 @@
 
     <v-spacer/>
 
-    <v-toolbar-items v-if="!$store.state.user">
+    <v-toolbar-items v-if="!$store.state.isLoggedIn">
       <v-btn
         text
         to="/login"

@@ -30,8 +30,10 @@ new Vue({
           uid: user.uid,
           email: user.email
         })
+        this.$store.commit('SET_LOGGEDIN', true)
       } else {
         this.$store.commit('SET_USER', {})
+        this.$store.commit('SET_LOGGEDIN', false)
       }
     })
   },

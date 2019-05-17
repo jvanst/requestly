@@ -162,7 +162,11 @@ export default {
       await this.$store.dispatch('requests/create', {
         title: this.request.title,
         content: this.request.content,
-        formId: this.formId
+        formId: this.formId,
+        pipelineId: this.$store.state.pipelines.data[0].id,
+        closed: false,
+        creatorId: this.$store.state.user.uid,
+        labels: this.form.labels
       })
       this.$router.replace({ name: 'Board' })
       this.creating = false

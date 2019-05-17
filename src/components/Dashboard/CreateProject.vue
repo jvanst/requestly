@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import ProjectAPI from '@/api/projects'
-
 export default {
   name: 'CreateProject',
   data: () => ({
@@ -72,8 +70,7 @@ export default {
   methods: {
     async create () {
       this.loading = true
-      await ProjectAPI.put(this.tag, { title: this.title })
-      this.$emit('create', { id: this.tag, title: this.title })
+      this.$store.dispatch('projects/put', { id: this.tag, payload: { title: this.title } })
       this.title = ''
       this.tag = ''
       this.dialog = false

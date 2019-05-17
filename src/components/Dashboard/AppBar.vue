@@ -11,7 +11,7 @@
 
     <v-spacer/>
 
-    <user-menu v-if="$store.state.user" class="ml-3"/>
+    <user-menu v-if="$store.state.isLoggedIn" class="ml-3"/>
 
   </v-app-bar>
 </template>

@@ -8,40 +8,49 @@ exports.createProfile = functions.auth.user()
     return admin.firestore().doc('users/' + user.uid).set({
       email: user.email,
       displayName: user.displayName,
-      role: 'author',
       photoURL: user.photoURL
     })
   })
 
-exports.createLabel = functions.firestore
-  .document('labels/{labelId}').onCreate((snap, context) => {
+exports.createProject = functions.firestore
+  .document('projects/{projectId}').onCreate((snap, context) => {
     return snap.ref.set({
       ...snap.data(),
-      date: admin.firestore.FieldValue.serverTimestamp()
+      createdOn: admin.firestore.FieldValue.serverTimestamp()
+    })
+      .then(() => {
+        admin.firestore()
+          .collection('projects')
+          .doc(context.params.projectId)
+          .collection('permissions')
+          .doc(snap.data().creatorId)
+          .set({
+            role: 'admin',
+            createdOn: admin.firestore.FieldValue.serverTimestamp()
+          })
+      })
+  })
+
+exports.createLabel = functions.firestore
+  .document('projects/{projectId}/labels/{labelId}').onCreate((snap, context) => {
+    return snap.ref.set({
+      ...snap.data(),
+      createdOn: admin.firestore.FieldValue.serverTimestamp()
     })
   })
 
 exports.createRequest = functions.firestore
-  .document('requests/{requestId}').onCreate((snap, context) => {
+  .document('projects/{projectId}/requests/{requestId}').onCreate((snap, context) => {
     return snap.ref.set({
       ...snap.data(),
-      date: admin.firestore.FieldValue.serverTimestamp(),
-      closed: false
+      createdOn: admin.firestore.FieldValue.serverTimestamp()
     })
   })
 
 exports.createForm = functions.firestore
-  .document('forms/{formsId}').onCreate((snap, context) => {
+  .document('projects/{projectId}/forms/{formsId}').onCreate((snap, context) => {
     return snap.ref.set({
       ...snap.data(),
-      date: admin.firestore.FieldValue.serverTimestamp()
-    })
-  })
-
-exports.createProject = functions.firestore
-  .document('project/{projectId}').onCreate((snap, context) => {
-    return snap.ref.set({
-      ...snap.data(),
-      date: admin.firestore.FieldValue.serverTimestamp()
+      createdOn: admin.firestore.FieldValue.serverTimestamp()
     })
   })

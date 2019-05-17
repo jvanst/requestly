@@ -15,7 +15,7 @@
         </v-subheader>
         <v-layout row wrap>
           <v-flex xs3 class="pt-3">
-            <CreateProject @create="addProject"/>
+            <CreateProject/>
           </v-flex>
           <template v-for="project in projects">
             <v-flex :key="'flex'+project.id" xs3>
@@ -39,28 +39,17 @@
 </template>
 
 <script>
-import ProjectAPI from '@/api/projects'
-
 export default {
   name: 'Dashboard',
   data: () => ({
-    loading: false,
-    projects: []
+    loading: false
   }),
   components: {
     CreateProject: () => import('@/components/Dashboard/CreateProject')
   },
-  created () {
-    this.fetch()
-  },
-  methods: {
-    async fetch () {
-      this.loading = true
-      this.projects = await ProjectAPI.fetch()
-      this.loading = false
-    },
-    addProject (payload) {
-      this.projects.push(payload)
+  computed: {
+    projects () {
+      return this.$store.state.projects.data
     }
   }
 }

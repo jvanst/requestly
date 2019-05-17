@@ -58,7 +58,10 @@ export default {
   methods: {
     async create () {
       this.loading = true
-      await this.$store.dispatch('pipelines/create', { title: this.title })
+      await this.$store.dispatch('pipelines/create', {
+        title: this.title,
+        order: this.$store.state.pipelines.data.length
+      })
       this.title = ''
       this.menu = false
       this.loading = false

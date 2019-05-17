@@ -35,16 +35,22 @@ export default {
     RequestAuthorSkeleton: () => import('@/components/Project/RequestAuthorSkeleton')
   },
   data: () => ({
-    user: {},
     loading: false
   }),
+  computed: {
+    user () {
+      return this.$store.getters['users/getById'](this.request.creatorId)
+    }
+  },
   created () {
     this.fetch()
   },
   methods: {
     async fetch () {
       this.loading = true
-      this.user = await this.$store.dispatch('users/fetchById', this.request.createdBy)
+      if (!this.user) {
+        await this.$store.dispatch('users/fetchById', this.request.creatorId)
+      }
       this.loading = false
     }
   }

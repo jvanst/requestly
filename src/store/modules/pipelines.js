@@ -4,7 +4,7 @@ import PipelinesAPI from '@/api/pipelines'
 
 const actions = {
   updateBatch (context) {
-    return new PipelinesAPI(context.rootState.project.id).updateBatch(context.state.data)
+    return new PipelinesAPI(context.rootState.projects.activeId).updateBatch(context.state.data)
   }
 }
 const mutations = {

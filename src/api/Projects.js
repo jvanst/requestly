@@ -3,10 +3,8 @@ import 'firebase/firestore'
 
 import Endpoint from './_endpoint'
 
-class ProjectAPI extends Endpoint {
+export default class ProjectAPI extends Endpoint {
   constructor () {
     super(firebase.firestore().collection('projects'))
   }
 }
-
-export default new ProjectAPI()

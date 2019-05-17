@@ -1,13 +1,12 @@
 <template>
   <v-sheet
-    :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
+    :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-3'"
     elevation="1"
     height="100%"
   >
       <v-list
         dense
-        class="transparent"
-        :class="{ 'pipeline-header' : $store.state.role === 'admin' }"
+        class="transparent pipeline-header"
       >
         <v-list-item>
           <v-list-item-content>
@@ -81,7 +80,7 @@ export default {
         })
 
         // Update API
-        this.$store.dispatch('requests/PUT', {
+        this.$store.dispatch('requests/put', {
           id: request.id,
           payload: {
             ...request,

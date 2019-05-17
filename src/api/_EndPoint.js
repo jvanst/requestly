@@ -1,3 +1,6 @@
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
 export default class Endpoint {
   constructor (ref) {
     this.ref = ref
@@ -18,11 +21,11 @@ export default class Endpoint {
     return data
   }
   async create (payload) {
-    const result = await this.ref.add(payload)
+    const result = await this.ref.add({ ...payload, creatorId: firebase.auth().currentUser.uid })
     return { ...payload, id: result.id }
   }
   async put (id, payload) {
-    await this.ref.doc(id).set(payload)
+    await this.ref.doc(id).set({ ...payload, creatorId: firebase.auth().currentUser.uid })
     return { ...payload, id }
   }
   async delete (id) {

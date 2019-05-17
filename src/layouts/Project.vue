@@ -19,7 +19,20 @@ export default {
     SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
   },
   created () {
-    this.$store.commit('SET_PROJECT', { id: this.$route.params.projectId })
+    this.$store.commit('projects/SET_ACTIVE', this.$route.params.projectId)
+    this.fetch()
+  },
+  computed: {
+    projects () {
+      return this.$store.state.projects.data
+    }
+  },
+  methods: {
+    async fetch () {
+      this.loading = true
+      await this.$store.dispatch('projects/fetch')
+      this.loading = false
+    }
   }
 }
 </script>

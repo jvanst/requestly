@@ -3,11 +3,8 @@ import 'firebase/firestore'
 
 import Endpoint from './_endpoint'
 
-export default class Users extends Endpoint {
-  constructor (projectId) {
-    super(firebase.firestore()
-      .collection('projects')
-      .doc(projectId)
-      .collection('users'))
+export default class UserAPI extends Endpoint {
+  constructor () {
+    super(firebase.firestore().collection('users'))
   }
 }

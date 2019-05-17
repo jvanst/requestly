@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import AuthAPI from '@/api/Auth'
+
 export default {
   name: 'Recover',
   data: () => ({
@@ -58,7 +60,7 @@ export default {
   methods: {
     async recover (email) {
       this.loading = true
-      await this.$store.dispatch('recover', email)
+      await AuthAPI.recover(email)
       this.$router.replace('/login')
       this.loading = false
     }

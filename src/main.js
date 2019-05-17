@@ -24,16 +24,13 @@ new Vue({
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.$store.commit('SET_LOGGEDIN', true)
         this.$store.commit('SET_USER', {
           displayName: user.displayName,
           photoURL: user.photoURL,
           uid: user.uid,
           email: user.email
         })
-        this.$store.dispatch('fetchUser')
       } else {
-        this.$store.commit('SET_LOGGEDIN', false)
         this.$store.commit('SET_USER', {})
       }
     })

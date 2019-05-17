@@ -34,7 +34,18 @@ const router = new Router({
       ]
     },
     {
-      path: '/project/:id',
+      path: '/dashboard',
+      component: () => import(/* webpackChunkName: "dashboard" */ './layouts/Dashboard.vue'),
+      children: [
+        {
+          path: '/',
+          name: 'Dashboard',
+          component: () => import(/* webpackChunkName: "dashboard-index" */ './views/Dashboard/Dashboard.vue')
+        }
+      ]
+    },
+    {
+      path: '/project/:projectId',
       component: () => import(/* webpackChunkName: "home" */ './layouts/Project.vue'),
       props: true,
       children: [
@@ -44,54 +55,41 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "board" */ './views/Project/Board.vue')
         },
         {
-          path: '/request/create',
+          path: 'request/create/',
           name: 'Create Request',
-          component: () => import(/* webpackChunkName: "create-request" */ './views/Project/CreateRequest.vue'),
-          meta: {
-            requiresAuth: true
-          }
+          component: () => import(/* webpackChunkName: "create-request" */ './views/Project/CreateRequest.vue')
         },
         {
-          path: '/request/:id',
+          path: 'request/:id/',
           name: 'Request',
           component: () => import(/* webpackChunkName: "request" */ './views/Project/Request.vue'),
-          props: true,
-          meta: {
-            requiresAuth: true
-          }
+          props: true
         },
         {
-          path: '/forms/',
+          path: 'forms/',
           name: 'Forms',
-          component: () => import(/* webpackChunkName: "forms" */ './views/Project/Forms.vue'),
-          meta: {
-            requiresAuth: true
-          }
+          component: () => import(/* webpackChunkName: "forms" */ './views/Project/Forms.vue')
         },
         {
-          path: '/forms/create',
+          path: 'forms/create/',
           name: 'Create Form',
-          component: () => import(/* webpackChunkName: "create-form" */ './views/Project/FormBuilder.vue'),
-          meta: {
-            requiresAuth: true
-          }
+          component: () => import(/* webpackChunkName: "create-form" */ './views/Project/FormBuilder.vue')
         },
         {
-          path: '/forms/edit/:id',
+          path: 'forms/edit/:id/',
           name: 'Edit Form',
           props: true,
-          component: () => import(/* webpackChunkName: "create-edit" */ './views/Project/FormBuilder.vue'),
-          meta: {
-            requiresAuth: true
-          }
+          component: () => import(/* webpackChunkName: "create-edit" */ './views/Project/FormBuilder.vue')
         },
         {
-          path: '/labels/',
+          path: 'labels/',
           name: 'Labels',
-          component: () => import(/* webpackChunkName: "labels" */ './views/Project/Labels.vue'),
-          meta: {
-            requiresAuth: true
-          }
+          component: () => import(/* webpackChunkName: "labels" */ './views/Project/Labels.vue')
+        },
+        {
+          path: 'users/',
+          name: 'Users',
+          components: () => import(/* webpackChunkName: "Users" */ './views/Project/Users.vue')
         }
       ]
     }

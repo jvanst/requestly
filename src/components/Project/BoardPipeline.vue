@@ -76,13 +76,13 @@ export default {
         const request = this.$store.getters['requests/getById'](added.element.id)
 
         // Update store
-        this.$store.commit('requests/UPDATE', {
+        this.$store.commit('requests/ADD', {
           ...request,
           pipelineId: this.pipeline.id
         })
 
         // Update API
-        this.$store.dispatch('requests/update', {
+        this.$store.dispatch('requests/PUT', {
           id: request.id,
           payload: {
             ...request,

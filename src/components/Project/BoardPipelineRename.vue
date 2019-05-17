@@ -54,7 +54,7 @@ export default {
   methods: {
     async update () {
       this.loading = true
-      await this.$store.dispatch('pipelines/update', {
+      await this.$store.dispatch('pipelines/put', {
         id: this.pipeline.id,
         payload: {
           title: this.title

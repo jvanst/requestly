@@ -284,13 +284,13 @@ export default {
       this.loading = true
       await this.$store.dispatch('forms/create', this.request)
       this.loading = false
-      this.$router.replace('/forms')
+      this.$router.replace({ name: 'Forms' })
     },
     async update () {
       this.loading = true
-      await this.$store.dispatch('forms/update', { id: this.id, payload: this.request })
+      await this.$store.dispatch('forms/put', { id: this.id, payload: this.request })
       this.loading = false
-      this.$router.replace('/forms')
+      this.$router.replace({ name: 'Forms' })
     }
   }
 }

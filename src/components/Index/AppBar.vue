@@ -26,7 +26,7 @@
 
     <v-spacer/>
 
-    <v-toolbar-items v-if="!$store.state.isLoggedIn">
+    <v-toolbar-items v-if="!$store.state.user">
       <v-btn
         text
         to="/login"
@@ -38,7 +38,7 @@
     <v-btn
       v-else
       outlined
-      to="/project/1/"
+      to="/dashboard"
     >
       Dashboard
     </v-btn>

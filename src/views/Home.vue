@@ -47,6 +47,9 @@
                 <v-carousel-item>
                   Software Projects
                 </v-carousel-item>
+                <v-carousel-item>
+                  Business Inquiries
+                </v-carousel-item>
               </v-carousel>
               <v-btn
                 depressed
@@ -115,7 +118,7 @@
                 Open source, Free to use
               </v-card-title>
               <v-card-text>
-                Requestly will always be free to use, with open source technology at its core.
+                Requestly will always be free to use, with its open source core available on github.
                 If you want full control of your data, you can host requestly privately.
               </v-card-text>
             </v-card>
@@ -163,34 +166,33 @@
             <v-flex xs12 md4>
               <v-card flat>
                 <v-card-title class="title">
-                  Detailed requests, refined to your standards
+                  Accept and manage inquries
                 </v-card-title>
                 <v-card-text>
-                  Requestly provides unique form building controls which help streamline requests
-                  from stakeholders.
+                  Feature suggestions, bug reports, tasks, discussion topics, etc...
+                  Requestly helps manage any type of inqury.
                 </v-card-text>
               </v-card>
             </v-flex>
             <v-flex xs12 md4>
               <v-card flat>
                 <v-card-title class="title">
-                  Streamlined communication
-                  and notifications
+                  Invite your team, clients, shareholders, and the public
                 </v-card-title>
                 <v-card-text>
-                  Keep all parties informed about the status of requests.
-                  A breakdown in communication leads to frustration and reduced trust.
+                  Open your request board to the people that matter most for your scenario.
+                  Invite a select few to collaborate, or let anyone on the web join!
                 </v-card-text>
               </v-card>
             </v-flex>
             <v-flex xs12 md4>
               <v-card flat>
                 <v-card-title class="title">
-                  Open source, Free to use
+                  Keep everyone on the same page
                 </v-card-title>
                 <v-card-text>
-                  Requestly will always be free to use, with open source technology at its core.
-                  If you want full control of your data, you can host requestly privately.
+                  Email wasn't intended for group discussions, and issues get buried in slack.
+                  Requestly keeps discussions clear for all parties and all participates up to date.
                 </v-card-text>
               </v-card>
             </v-flex>

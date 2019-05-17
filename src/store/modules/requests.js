@@ -1,55 +1,20 @@
-
-import api from '@/api/requests'
-
-const state = {
-  data: []
-}
-
-const getters = {
-  getById: state => id => state.data.find(r => r.id === id),
-  getByPipelineId: state => id => state.data.filter(r => r.pipelineId === id)
-}
-
-const actions = {
-  fetchById ({ commit }, id) {
-    return api.fetchById(id)
-      .then(result => commit('UPDATE', result))
-  },
-  fetch ({ commit }) {
-    return api.fetch()
-      .then(result => commit('SET', result))
-  },
-  create ({ commit, rootGetters }, { payload, formId }) {
-    return api.create({
-      ...payload,
-      labels: rootGetters['forms/getById'](formId).labels
-    })
-      .then(result => commit('UPDATE', result))
-  },
-  update ({ commit }, { id, payload }) {
-    return api.update({ id, payload })
-      .then(() => commit('UPDATE', { id, ...payload }))
-  }
-}
-
-const mutations = {
-  SET (state, value) {
-    state.data = value
-  },
-  UPDATE (state, payload) {
-    const index = state.data.findIndex(p => p.id === payload.id)
-    if (index !== -1) {
-      state.data.splice(state.data.findIndex(p => p.id === payload.id), 1, payload)
-    } else {
-      state.data.push(payload)
-    }
-  }
-}
+import _getters from './_getters'
+import _actions from './_actions'
+import _mutations from './_mutations'
 
 export default {
   namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
+  state: {
+    data: []
+  },
+  getters: {
+    ..._getters,
+    getByPipelineId: state => id => state.data.filter(r => r.pipelineId === id)
+  },
+  actions: {
+    ..._actions('pipelines')
+  },
+  mutations: {
+    ..._mutations
+  }
 }

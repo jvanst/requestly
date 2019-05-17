@@ -50,7 +50,7 @@ export default {
     async remove () {
       this.loading = true
       await this.$store.dispatch('forms/delete', this.form.id)
-      this.$router.replace('/forms/')
+      this.$router.replace({ name: 'Forms' })
       this.dialog = false
       this.loading = false
     }

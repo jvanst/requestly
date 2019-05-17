@@ -11,11 +11,15 @@
 
 <script>
 export default {
+  props: ['productId'],
   name: 'Project',
   components: {
     AppBar: () => import(/* webpackPreload: true */ '@/components/Project/AppBar.vue'),
     NavDrawer: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawer.vue'),
     SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
+  },
+  created () {
+    this.$store.commit('SET_PROJECT', { id: this.$route.params.projectId })
   }
 }
 </script>

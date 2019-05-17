@@ -90,6 +90,8 @@
 </template>
 
 <script>
+import AuthAPI from '@/api/Auth'
+
 export default {
   name: 'Register',
   data: () => ({
@@ -101,11 +103,7 @@ export default {
   methods: {
     async register () {
       this.loading = true
-      await this.$store.dispatch('register', {
-        email: this.email,
-        password: this.password,
-        displayName: this.displayName
-      })
+      await AuthAPI.register(this.email, this.password, this.displayName)
       this.$router.replace('/')
       this.loading = false
     }

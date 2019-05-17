@@ -115,7 +115,7 @@ export default {
       this.input = null
     },
     async close () {
-      await this.$store.dispatch('requests/update', {
+      await this.$store.dispatch('requests/put', {
         id: this.request.id,
         payload: {
           ...this.request,
@@ -132,7 +132,7 @@ export default {
       })
     },
     async open () {
-      await this.$store.dispatch('requests/update', {
+      await this.$store.dispatch('requests/put', {
         id: this.request.id,
         payload: {
           ...this.request,

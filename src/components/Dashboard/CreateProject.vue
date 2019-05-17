@@ -1,23 +1,25 @@
 <template>
-  <v-menu
-      v-model="menu"
-      :close-on-content-click="false"
-      :nudge-width="200"
-      offset-x
+  <v-dialog
+      v-model="dialog"
+      width="500px"
     >
-
       <template v-slot:activator="{ on }">
-        <v-btn
-          depressed
-          v-on="on"
-          >
-            <v-icon>mdi-shape-square-plus</v-icon>
-          </v-btn>
+        <v-card height="200" class="mt-2" v-on="on">
+          <v-layout
+            column
+            align-center
+            justify-center
+            fill-height
+            >
+            <v-icon size="64">mdi-plus</v-icon>
+            Add Project
+          </v-layout>
+        </v-card>
       </template>
 
       <v-card>
         <v-card-title class="subtitle-1">
-          Create a Pipeline
+          Create a Project
         </v-card-title>
 
         <v-divider/>
@@ -26,6 +28,15 @@
           <v-text-field
           label="Title"
           v-model="title"
+          v-on:keyup.enter="create()"
+          >
+          </v-text-field>
+        </v-card-text>
+
+        <v-card-text class="pb-0 pt-0">
+          <v-text-field
+          label="Project Tag"
+          v-model="tag"
           v-on:keyup.enter="create()"
           >
           </v-text-field>
@@ -44,23 +55,28 @@
         </v-card-actions>
 
       </v-card>
-    </v-menu>
+    </v-dialog>
 </template>
 
 <script>
+import ProjectAPI from '@/api/Projects'
+
 export default {
-  name: 'CreatePipeline',
+  name: 'CreateProject',
   data: () => ({
-    menu: false,
+    dialog: false,
     title: '',
+    tag: '',
     loading: false
   }),
   methods: {
     async create () {
       this.loading = true
-      await this.$store.dispatch('pipelines/create', { title: this.title })
+      await ProjectAPI.put(this.tag, { title: this.title })
+      this.$emit('create', { id: this.tag, title: this.title })
       this.title = ''
-      this.menu = false
+      this.tag = ''
+      this.dialog = false
       this.loading = false
     }
   }

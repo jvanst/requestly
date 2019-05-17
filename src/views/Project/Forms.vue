@@ -11,7 +11,7 @@
       <v-card-actions>
         <v-btn
           color="primary"
-          to="/forms/create"
+          :to="{ name: 'Create Form' }"
         >
           Create <v-icon right>mdi-plus</v-icon>
         </v-btn>

@@ -81,6 +81,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import AuthAPI from '@/api/Auth'
 
 export default {
   name: 'Login',
@@ -97,13 +98,13 @@ export default {
   methods: {
     async login () {
       this.loading = true
-      await this.$store.dispatch('login', { email: this.email, password: this.password })
+      await AuthAPI.login(this.email, this.password)
       this.$router.replace('/')
       this.loading = false
     },
     async google () {
       this.loading = true
-      await this.$store.dispatch('loginWithGoogle')
+      await AuthAPI.loginWithGoogle()
       this.$router.replace('/')
       this.loading = false
     }

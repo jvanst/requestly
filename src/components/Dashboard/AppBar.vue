@@ -3,25 +3,13 @@
     app
     dense
     tile
-    flat
-    clipped-left
-    class="elevation-1"
   >
 
-  <v-toolbar-title>
-    Requestly
-  </v-toolbar-title>
+    <v-toolbar-title class="pr-4">
+      Requestly
+    </v-toolbar-title>
 
     <v-spacer/>
-
-    <v-toolbar-items v-if="!$store.state.user">
-      <v-btn
-        text
-        to="/login"
-      >
-        Login
-      </v-btn>
-    </v-toolbar-items>
 
     <user-menu v-if="$store.state.user" class="ml-3"/>
 

@@ -64,7 +64,7 @@ export default {
   methods: {
     async update () {
       this.loading = true
-      await this.$store.dispatch('labels/update', {
+      await this.$store.dispatch('labels/put', {
         id: this.label.id,
         payload: this.label
       })

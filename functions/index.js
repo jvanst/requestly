@@ -37,3 +37,11 @@ exports.createForm = functions.firestore
       date: admin.firestore.FieldValue.serverTimestamp()
     })
   })
+
+exports.createProject = functions.firestore
+  .document('project/{projectId}').onCreate((snap, context) => {
+    return snap.ref.set({
+      ...snap.data(),
+      date: admin.firestore.FieldValue.serverTimestamp()
+    })
+  })

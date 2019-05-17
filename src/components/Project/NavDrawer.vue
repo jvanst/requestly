@@ -17,7 +17,7 @@
         nav
         shaped
       >
-      <v-list-item link to="/board">
+      <v-list-item link :to="{ name: 'Board' }" exact>
         <v-list-item-icon>
           <v-icon>mdi-view-dashboard-outline</v-icon>
         </v-list-item-icon>
@@ -28,7 +28,6 @@
       </v-list-item>
     </v-list>
     <v-list
-        v-if="$store.state.role === 'admin'"
         dense
         nav
         shaped
@@ -36,7 +35,7 @@
       <v-subheader>
         Manage
       </v-subheader>
-        <v-list-item link to="/labels/">
+        <v-list-item link :to="{ name: 'Labels' }">
           <v-list-item-icon>
             <v-icon>mdi-label-outline</v-icon>
           </v-list-item-icon>
@@ -45,7 +44,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/forms/">
+        <v-list-item link :to="{ name: 'Forms' }">
           <v-list-item-icon>
             <v-icon>mdi-shape</v-icon>
           </v-list-item-icon>
@@ -54,7 +53,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/users/">
+        <v-list-item link :to="{ name: 'Users' }">
           <v-list-item-icon>
             <v-icon>mdi-account-supervisor</v-icon>
           </v-list-item-icon>

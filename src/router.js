@@ -1,8 +1,23 @@
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
 import Vue from 'vue'
 import Router from 'vue-router'
 // import store from './store'
 
 Vue.use(Router)
+
+function authGuard (to, from, next) {
+  new Promise((resolve, reject) => {
+    firebase.auth().onAuthStateChanged(() => {
+      resolve()
+    }, (error) => {
+      reject(error)
+    })
+  })
+    .then(() => next())
+    .catch(() => next({ name: 'Login' }))
+}
 
 const router = new Router({
   mode: 'history',
@@ -36,6 +51,7 @@ const router = new Router({
     {
       path: '/dashboard',
       component: () => import(/* webpackChunkName: "dashboard" */ './layouts/Dashboard.vue'),
+      beforeEnter: authGuard,
       children: [
         {
           path: '/',

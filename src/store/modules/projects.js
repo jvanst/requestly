@@ -9,6 +9,10 @@ const state = {
   activeId: null
 }
 
+const getters = {
+  isUserAdmin: (state, getters) => uid => getters.getById(state.activeId).permissions
+}
+
 const actions = {
   async fetch (context, uid) {
     try {
@@ -26,4 +30,4 @@ const mutations = {
   }
 }
 
-export default _module('projects', { state, actions, mutations })
+export default _module('projects', { state, getters, actions, mutations })

@@ -14,6 +14,11 @@ exports.createProfile = functions.auth.user()
 
 exports.createProject = functions.firestore
   .document('projects/{projectId}').onCreate((snap, context) => {
+    const permissions = {}
+    permissions[snap.data().creatorId] = {
+      active: true,
+      role: 'admin'
+    }
     return snap.ref.set({
       ...snap.data(),
       createdOn: admin.firestore.FieldValue.serverTimestamp()
@@ -22,11 +27,9 @@ exports.createProject = functions.firestore
         admin.firestore()
           .collection('projects')
           .doc(context.params.projectId)
-          .collection('permissions')
-          .doc(snap.data().creatorId)
           .set({
-            role: 'admin',
-            createdOn: admin.firestore.FieldValue.serverTimestamp()
+            ...snap.data(),
+            permissions
           })
       })
   })

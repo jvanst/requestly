@@ -3,7 +3,6 @@ import 'firebase/auth'
 
 import Vue from 'vue'
 import Router from 'vue-router'
-// import store from './store'
 
 Vue.use(Router)
 
@@ -63,10 +62,11 @@ const router = new Router({
     {
       path: '/project/:projectId',
       component: () => import(/* webpackChunkName: "home" */ './layouts/Project.vue'),
+      beforeEnter: authGuard,
       props: true,
       children: [
         {
-          path: '/',
+          path: '',
           name: 'Board',
           component: () => import(/* webpackChunkName: "board" */ './views/Project/Board.vue')
         },
@@ -105,26 +105,11 @@ const router = new Router({
         {
           path: 'users/',
           name: 'Users',
-          components: () => import(/* webpackChunkName: "Users" */ './views/Project/Users.vue')
+          component: () => import(/* webpackChunkName: "users" */ './views/Project/Users.vue')
         }
       ]
     }
   ]
 })
-
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (!store.state.user.isLoggedIn) {
-//       next({
-//         path: '/login',
-//         query: { redirect: to.fullPath }
-//       })
-//     } else {
-//       next()
-//     }
-//   } else {
-//     next()
-//   }
-// })
 
 export default router

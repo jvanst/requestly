@@ -13,7 +13,7 @@ export default class ProjectAPI extends Endpoint {
   }
   async fetch (uid) {
     const data = []
-    const result = await this.ref.where('permissions', 'array-contains', uid).get()
+    const result = await this.ref.where(`permissions.${uid}.active`, '==', true).get()
     for (let item of result.docs) {
       data.push({
         ...item.data(),

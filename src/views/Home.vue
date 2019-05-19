@@ -42,6 +42,9 @@
                   Bug Reports
                 </v-carousel-item>
                 <v-carousel-item>
+                  Team Communication
+                </v-carousel-item>
+                <v-carousel-item>
                   Stakeholder demands
                 </v-carousel-item>
                 <v-carousel-item>

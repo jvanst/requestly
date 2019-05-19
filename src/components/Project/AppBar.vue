@@ -38,6 +38,7 @@
                 <v-list-item
                   :key="'tile'+project.id"
                   :to="{ name: 'Board', params: { projectId: project.id }}"
+                  @click="$router.go({ name: 'Board', params: { projectId: project.id }})"
                 >
                   {{ project.title }}
                 </v-list-item>

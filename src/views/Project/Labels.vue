@@ -7,9 +7,6 @@
       <v-card-text>
         Here you can manage labels. Labels help to give classifications to requests.
       </v-card-text>
-      <v-card-actions>
-        <label-create/>
-      </v-card-actions>
     </v-card>
     <v-card v-if="loading">
       LOADING
@@ -43,6 +40,7 @@
         </tbody>
       </v-simple-table>
     </v-card>
+    <label-create/>
   </v-container>
 </template>
 

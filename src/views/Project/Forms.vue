@@ -8,14 +8,6 @@
         Here you can manage request forms. Forms give strict format on how requests are built,<br>
         this helps enforce a communication standard between those creating requests and others managing them.
       </v-card-text>
-      <v-card-actions>
-        <v-btn
-          color="primary"
-          :to="{ name: 'Create Form' }"
-        >
-          Create <v-icon right>mdi-plus</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-card>
     <v-card class="mt-3">
       <v-list>
@@ -46,6 +38,17 @@
         </template>
       </v-list>
     </v-card>
+    <v-btn
+      color="primary"
+      fab
+      fixed
+      bottom
+      right
+      large
+      :to="{ name: 'Create Form' }"
+    >
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
   </v-container>
 </template>
 

@@ -3,7 +3,7 @@
     <div id="skew-background-1" />
     <v-layout row wrap>
       <v-flex xs12>
-        <v-card flat height="300" class="transparent pa-3">
+        <v-card flat class="transparent pa-3">
           <h3 class="display-1 white--text">
             Welcome to Requestly!
           </h3>

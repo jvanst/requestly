@@ -10,7 +10,17 @@ const state = {
 }
 
 const getters = {
-  isUserAdmin: (state, getters) => uid => getters.getById(state.activeId).permissions
+  isUserAdmin: (state, getters) => uid => {
+    const project = getters.getById(state.activeId)
+
+    if (!project) {
+      return false
+    }
+    if (project.permissions[uid] && project.permissions[uid].role === 'admin') {
+      return true
+    }
+    return true
+  }
 }
 
 const actions = {

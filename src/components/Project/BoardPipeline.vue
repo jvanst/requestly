@@ -6,7 +6,10 @@
   >
       <v-list
         dense
-        class="transparent pipeline-header"
+        class="transparent"
+        :class="{
+          'pipeline-header' : $store.getters['projects/isUserAdmin']($store.state.user.uid)
+        }"
       >
         <v-list-item>
           <v-list-item-content>
@@ -19,7 +22,10 @@
             </v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <board-pipeline-settings :pipeline="pipeline"/>
+            <board-pipeline-settings
+              v-if="$store.getters['projects/isUserAdmin']($store.state.user.uid)"
+              :pipeline="pipeline"
+            />
           </v-list-item-action>
         </v-list-item>
       </v-list>
@@ -30,6 +36,7 @@
         group="requests"
         style="height: 90%;"
         @change="handleChange"
+        :disabled="!$store.getters['projects/isUserAdmin']($store.state.user.uid)"
       >
         <v-flex
           v-for="request in requests"

@@ -106,6 +106,11 @@ const router = new Router({
           path: 'users/',
           name: 'Users',
           component: () => import(/* webpackChunkName: "users" */ './views/Project/Users.vue')
+        },
+        {
+          path: 'settings/',
+          name: 'Settings',
+          component: () => import(/* webpackChunkName: "settings" */ './views/Project/Settings.vue')
         }
       ]
     }

@@ -50,7 +50,7 @@
 
     <v-spacer/>
 
-    <v-toolbar-items v-if="!$store.state.user">
+    <v-toolbar-items v-if="!$store.state.isLoggedIn">
       <v-btn
         text
         to="/login"
@@ -59,7 +59,7 @@
       </v-btn>
     </v-toolbar-items>
 
-    <user-menu v-if="$store.state.user" class="ml-3"/>
+    <user-menu v-else class="ml-3"/>
 
   </v-app-bar>
 </template>

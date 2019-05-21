@@ -6,9 +6,14 @@
       <template v-slot:activator="{ on }">
         <v-btn
           class="primary"
+          fab
+          fixed
+          bottom
+          right
+          large
           v-on="on"
         >
-          Create <v-icon right>mdi-plus</v-icon>
+          <v-icon>mdi-plus</v-icon>
         </v-btn>
       </template>
     <v-card>

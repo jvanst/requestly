@@ -20,6 +20,7 @@
           v-model="pipelines"
           group="pipelines"
           handle=".pipeline-header"
+          :disabled="!$store.getters['projects/isUserAdmin']($store.state.user.uid)"
         >
           <v-flex
             v-for="(pipelines, i) in pipelines"

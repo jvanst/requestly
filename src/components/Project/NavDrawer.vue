@@ -31,6 +31,7 @@
         dense
         nav
         shaped
+        v-if="$store.getters['projects/isUserAdmin']($store.state.user.uid)"
       >
       <v-subheader>
         Manage
@@ -59,6 +60,15 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Users</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="{ name: 'Settings' }">
+          <v-list-item-icon>
+            <v-icon>mdi-settings</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Settings</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

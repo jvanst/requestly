@@ -1,6 +1,14 @@
 <template>
   <v-container>
     <v-card>
+      <v-card-title>
+        <v-icon left>mdi-information-outline</v-icon> Users
+      </v-card-title>
+      <v-card-text>
+        Here you can manage users, and thier permissions.
+      </v-card-text>
+    </v-card>
+    <v-card class="mt-3">
       <v-simple-table>
         <thead>
           <tr>
@@ -11,9 +19,9 @@
         </thead>
         <tbody>
           <tr v-for="(user, index) in users" :key="'user'+index">
-            <td>{{ user.name }}</td>
-            <td>{{ user.role }}</td>
-            <td>{{ user.active }}</td>
+            <td>{{ index }}</td>
+            <td>{{ user.role | capitalizeFirstLetter }}</td>
+            <td>{{ user.active ? 'Active' : 'Inactive'}}</td>
           </tr>
         </tbody>
       </v-simple-table>

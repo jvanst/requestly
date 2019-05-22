@@ -12,23 +12,17 @@ export default new Vuetify({
     themes: {
       light: {
         primary: '#009688',
-        secondary: '#FF9800',
-        accent: '#D7EEFA',
-        error: '#FF5252',
+        error: '#F44336',
         info: '#2196F3',
         success: '#4CAF50',
-        warning: '#FFC107',
-        typhography: '#212121'
+        warning: '#FBC02D'
       },
       dark: {
         primary: '#009688',
-        secondary: '#FF9800',
-        accent: '#D7EEFA',
-        error: '#FF5252',
+        error: '#F44336',
         info: '#2196F3',
         success: '#4CAF50',
-        warning: '#FFC107',
-        typhography: '#212121'
+        warning: '#FBC02D'
       }
     }
   },

@@ -4,7 +4,7 @@
       <board-pipeline-refresh/>
     </v-flex>
     <v-flex xs6 class="text-xs-right">
-      <board-pipeline-create v-if="$store.getters['projects/isUserAdmin']($store.state.user.uid)"/>
+      <board-pipeline-create v-if="$store.getters['permissions/isUserAdmin']($store.state.user.uid)"/>
     </v-flex>
   </v-layout>
 </template>

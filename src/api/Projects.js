@@ -13,13 +13,23 @@ export default class ProjectAPI extends Endpoint {
   }
   async fetch (uid) {
     const data = []
-    const result = await this.ref.where(`permissions.${uid}.active`, '==', true).get()
-    for (let item of result.docs) {
-      data.push({
-        ...item.data(),
-        id: item.id
-      })
+    const projectIds = []
+
+    const permissions = await firebase.firestore().collectionGroup('permissions').where('uid', '==', uid).get()
+    // Get array of project ids
+    for (let project of permissions.docs) {
+      projectIds.push(project.data().projectId)
     }
+
+    projectIds.forEach(id => {
+      this.ref.doc(id).get()
+        .then(project => {
+          data.push({
+            ...project.data(),
+            id: project.id
+          })
+        })
+    })
     return data
   }
 }

@@ -171,7 +171,7 @@
       </v-flex>
 
       <v-flex xs6>
-        <v-btn text to="/forms" exact>
+        <v-btn text :to="{ name: 'Forms' }" exact>
           Back
         </v-btn>
       </v-flex>

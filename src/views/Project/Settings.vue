@@ -54,7 +54,7 @@
 
           <v-btn
             text
-            @click="dialog = false"
+            @click="deleteDialog = false"
           >
             Cancel
           </v-btn>

@@ -31,6 +31,7 @@ export default {
     async fetch () {
       this.loading = true
       await this.$store.dispatch('projects/fetch')
+      await this.$store.dispatch('permissions/fetch')
       this.loading = false
     }
   }

@@ -1,5 +1,7 @@
 import ProjectAPI from '@/api/projects'
 import UsersAPI from '@/api/users'
+import PermissionsAPI from '@/api/permissions'
+import InvitesAPI from '@/api/invites'
 import FormsAPI from '@/api/forms'
 import LabelsAPI from '@/api/labels'
 import PipelinesAPI from '@/api/pipelines'
@@ -10,6 +12,8 @@ import snackbar from '@/helpers/snackbar'
 const API = {
   projects: () => new ProjectAPI(),
   users: () => new UsersAPI(),
+  permissions: (projectId) => new PermissionsAPI(projectId),
+  invites: (projectId) => new InvitesAPI(projectId),
   forms: (projectId) => new FormsAPI(projectId),
   labels: (projectId) => new LabelsAPI(projectId),
   pipelines: (projectId) => new PipelinesAPI(projectId),

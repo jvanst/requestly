@@ -33,7 +33,7 @@
               </v-flex>
               <v-flex xs6 class="text-xs-right">
                 <v-btn
-                  class="secondary"
+                  class="primary"
                   :loading="loading"
                   @click.native="recover(email)"
                   >Recover</v-btn

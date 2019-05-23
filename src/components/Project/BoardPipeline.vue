@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-3'"
+    :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
     elevation="1"
     height="100%"
   >

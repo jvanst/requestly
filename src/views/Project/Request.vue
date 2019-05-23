@@ -28,7 +28,8 @@
               <v-icon left small>mdi-checkbox-marked-circle-outline</v-icon>
               <b>Closed</b>
             </v-chip>
-            Name opened this request on date · 0 Comments
+            Name opened this request on date ·
+            {{ this.$store.getters['timeline/getComments'].length }} Comments
           </v-flex>
         </v-layout>
       </v-flex>
@@ -38,7 +39,7 @@
       <v-flex xs9>
         <v-layout>
           <v-flex shrink>
-            <request-author :request="request"/>
+            <request-author :uid="request.creatorId"/>
           </v-flex>
           <v-flex>
             <request-single :request="request"/>
@@ -65,6 +66,7 @@ export default {
     RequestSkeleton: () => import('@/components/Project/RequestSkeleton')
   },
   created () {
+    this.$store.commit('requests/SET_ACTIVE', this.id)
     this.fetch()
   },
   data: () => ({

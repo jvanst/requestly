@@ -11,7 +11,7 @@
           </v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-avatar>
-          <request-author :request="request" :size="36"/>
+          <request-author :uid="request.creatorId" :size="36"/>
         </v-list-item-avatar>
       </v-list-item>
     </v-list>

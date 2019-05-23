@@ -136,6 +136,14 @@ exports.createRequest = functions.firestore
     })
   })
 
+exports.createTimelineItem = functions.firestore
+  .document('projects/{projectId}/requests/{requestId}/timeline/{timelineId}').onCreate((snap, context) => {
+    return snap.ref.set({
+      ...snap.data(),
+      createdOn: admin.firestore.FieldValue.serverTimestamp()
+    })
+  })
+
 exports.createForm = functions.firestore
   .document('projects/{projectId}/forms/{formsId}').onCreate((snap, context) => {
     return snap.ref.set({

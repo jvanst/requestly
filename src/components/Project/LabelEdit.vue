@@ -57,7 +57,7 @@
               @input="dialogColor = false"
             />
           </v-card>
-        </v-dialog>        
+        </v-dialog>
       </v-card-text>
 
       <v-card-actions>

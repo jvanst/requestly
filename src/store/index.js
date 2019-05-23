@@ -6,6 +6,7 @@ import projects from './modules/projects'
 import pipelines from './modules/pipelines'
 import requests from './modules/requests'
 import permissions from './modules/permissions'
+import timeline from './modules/timeline'
 
 Vue.use(Vuex)
 
@@ -37,6 +38,7 @@ export default new Vuex.Store({
     forms: _module('forms'),
     permissions,
     pipelines,
-    requests
+    requests,
+    timeline
   }
 })

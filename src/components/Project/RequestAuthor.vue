@@ -23,8 +23,8 @@
 export default {
   name: 'RequestAuthor',
   props: {
-    request: {
-      type: Object
+    uid: {
+      type: String
     },
     size: {
       type: Number,
@@ -39,7 +39,7 @@ export default {
   }),
   computed: {
     user () {
-      return this.$store.getters['users/getById'](this.request.creatorId)
+      return this.$store.getters['users/getById'](this.uid || this.$store.state.user.uid)
     }
   },
   created () {
@@ -49,7 +49,7 @@ export default {
     async fetch () {
       this.loading = true
       if (!this.user) {
-        await this.$store.dispatch('users/fetchById', this.request.creatorId)
+        await this.$store.dispatch('users/fetchById', this.uid || this.$store.state.user.uid)
       }
       this.loading = false
     }

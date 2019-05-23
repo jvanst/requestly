@@ -13,6 +13,7 @@ import './helpers/registerServiceWorker'
 import './helpers/snackbar'
 
 import './filters/string'
+import './filters/date'
 
 Vue.config.productionTip = false
 

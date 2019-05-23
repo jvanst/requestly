@@ -9,9 +9,8 @@
           depressed
           v-on="on"
           icon
-          small
           >
-            <v-icon small>mdi-dots-vertical</v-icon>
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
       </template>
       <v-card>

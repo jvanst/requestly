@@ -15,7 +15,7 @@
       <v-card-title
         class="subtitle-1"
       >
-        Delete Pipeline '{{ label.title }}'
+        Delete Label '{{ label.title }}'
       </v-card-title>
 
       <v-card-text>

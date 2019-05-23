@@ -25,9 +25,9 @@
 
       <v-card-text class="pb-0 pt-0">
         <v-text-field
-        label="Title"
-        v-model="label.title"
-        >
+          label="Title"
+          v-model="label.title"
+          >
         </v-text-field>
 
         <v-text-field
@@ -36,12 +36,33 @@
           >
         </v-text-field>
 
-        <v-text-field
-          label="Color"
-          v-model="label.color"
-          v-on:keyup.enter="create()"
-          >
-        </v-text-field>
+        <v-dialog
+          v-model="dialogColor"
+          persistent
+          width="300px"
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              label="Color"
+              readonly
+              :value="label.color"
+              v-on="on"
+              >
+            </v-text-field>
+          </template>
+          <v-card class="text-xs-center">
+            <v-color-picker
+              flat
+              show-swatches
+              hide-inputs
+              hide-canvas
+              hide-mode-switch
+              swatches-max-height
+              v-model="label.color"
+              @input="dialogColor = false"
+            />
+          </v-card>
+        </v-dialog>        
       </v-card-text>
 
       <v-card-actions>
@@ -62,6 +83,7 @@
 export default {
   name: 'LabelEdit',
   data: () => ({
+    dialogColor: false,
     dialog: false,
     label: {
       title: '',

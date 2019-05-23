@@ -1,5 +1,15 @@
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
+const nodemailer = require('nodemailer')
+
+const APP_NAME = 'Requestly'
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: functions.config().email.user,
+    pass: functions.config().email.password
+  }
+})
 
 admin.initializeApp()
 
@@ -92,7 +102,21 @@ exports.createInvite = functions.firestore
                 .doc(context.params.inviteId)
                 .delete())
         } else {
-          // TODO: Send Email
+          return admin.firestore()
+            .collection('users')
+            .doc(snap.data().creatorId)
+            .get()
+            .then(user =>
+              admin.firestore()
+                .collection('projects')
+                .doc(context.params.projectId)
+                .get()
+                .then(project =>
+                  sendInvitationEmail({
+                    to: snap.id,
+                    from: user.data(),
+                    project: project.data()
+                  })))
         }
       }))
 
@@ -119,3 +143,15 @@ exports.createForm = functions.firestore
       createdOn: admin.firestore.FieldValue.serverTimestamp()
     })
   })
+
+async function sendInvitationEmail ({ to, from, project }) {
+  const mailOptions = {
+    from: `${APP_NAME} <noreply.requestly@gmail.com>`,
+    to
+  }
+  mailOptions.subject = `You have been invited to ${project.title}!`
+  mailOptions.text = `Hi! You have been invited to by ${from.displayName} collaborate on the project ${project.title} on ${APP_NAME}. 
+  Head over to <a href="https://request-ly.firebaseapp.com/login">https://request-ly.firebaseapp.com/</a> and sign up with this email to join their project!`
+  await mailTransport.sendMail(mailOptions)
+  return null
+}

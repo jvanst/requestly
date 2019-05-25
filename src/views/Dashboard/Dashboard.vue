@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-xl>
-    <div id="skew-background-1" />
+    <!-- <div id="skew-background-1" /> -->
     <v-layout row wrap>
       <v-flex xs12>
         <v-card flat class="transparent pa-3">

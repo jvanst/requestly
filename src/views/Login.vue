@@ -57,7 +57,7 @@
                   </span>
                 </div>
               </v-flex>
-              <v-flex xs12 class="pr-1">
+              <v-flex xs6 class="pr-1">
                 <v-btn
                   block
                   dark
@@ -65,6 +65,16 @@
                   @click.native="google()"
                 >
                   <v-icon>mdi-google</v-icon>
+                </v-btn>
+              </v-flex>
+              <v-flex xs6>
+                <v-btn
+                  block
+                  dark
+                  color="blue darken-1"
+                  @click.native="facebook()"
+                >
+                  <v-icon>mdi-facebook</v-icon>
                 </v-btn>
               </v-flex>
               <v-flex xs12 class="pt-4">
@@ -105,6 +115,12 @@ export default {
     async google () {
       this.loading = true
       await AuthAPI.loginWithGoogle()
+      this.$router.replace('/')
+      this.loading = false
+    },
+    async facebook () {
+      this.loading = true
+      await AuthAPI.loginWithFacebook()
       this.$router.replace('/')
       this.loading = false
     }

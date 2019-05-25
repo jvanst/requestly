@@ -1,7 +1,7 @@
 <template>
   <v-container class="mb-5">
-    <div id="skew-background-1" />
-    <div id="skew-background-2" />
+    <!-- <div id="skew-background-1" /> -->
+    <!-- <div id="skew-background-2" /> -->
 
     <section>
       <v-layout
@@ -39,19 +39,22 @@
                   Feature Requests
                 </v-carousel-item>
                 <v-carousel-item>
+                  Business Inquiries
+                </v-carousel-item>
+                <v-carousel-item>
                   Bug Reports
                 </v-carousel-item>
                 <v-carousel-item>
                   Team Communication
                 </v-carousel-item>
                 <v-carousel-item>
+                  Customer support
+                </v-carousel-item>
+                <v-carousel-item>
                   Stakeholder demands
                 </v-carousel-item>
                 <v-carousel-item>
                   Software Projects
-                </v-carousel-item>
-                <v-carousel-item>
-                  Business Inquiries
                 </v-carousel-item>
               </v-carousel>
               <v-btn
@@ -212,7 +215,7 @@
             <v-flex xs12 grow class="ma-5">
               <v-divider/>
             </v-flex>
-            <v-flex xs12>
+            <!-- <v-flex xs12>
               <h1 class="display-1 text-xs-center mb-3">
                 Integrations
               </h1>
@@ -225,7 +228,7 @@
                   <p class="caption">Slack</p>
                 </v-flex>
               </v-layout>
-            </v-flex>
+            </v-flex> -->
           </v-layout>
         </v-layout>
       </v-sheet>

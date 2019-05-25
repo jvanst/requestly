@@ -33,6 +33,13 @@ class AuthAPI extends Endpoint {
       snackbar.showSnackbar(error.message, 'error')
     }
   }
+  async loginWithFacebook () {
+    try {
+      await firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    } catch (error) {
+      snackbar.showSnackbar(error.message, 'error')
+    }
+  }
   async logout () {
     try {
       await firebase.auth().signOut()

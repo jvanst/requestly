@@ -10,4 +10,26 @@ export default class Labels extends Endpoint {
       .doc(projectId)
       .collection('requests'))
   }
+  async fetch () {
+    const data = []
+    const result = await this.ref.orderBy('createdOn').where('closed', '==', false).get()
+    for (let item of result.docs) {
+      data.push({
+        ...item.data(),
+        id: item.id
+      })
+    }
+    return data
+  }
+  async fetchAll () {
+    const data = []
+    const result = await this.ref.orderBy('createdOn').get()
+    for (let item of result.docs) {
+      data.push({
+        ...item.data(),
+        id: item.id
+      })
+    }
+    return data
+  }
 }

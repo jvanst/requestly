@@ -1,5 +1,21 @@
 <template>
-  <v-card class="pa-2" style="min-width: 100%;">
+  <v-card style="min-width: 100%;">
+    <v-toolbar dense flat>
+      <v-toolbar-title class="body-2" v-if="user">
+        <b>{{ user.displayName }}</b>
+        commented
+          {{ request.createdOn.seconds | formatSeconds }}
+      </v-toolbar-title>
+      <v-spacer/>
+      <v-toolbar-items>
+        <request-single-options
+         v-if="
+          request.creatorId === $store.state.user.uid ||
+          $store.getters['permissions/isUserAdmin']($store.state.user.uid)"
+        />
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-divider/>
     <template  v-for="(section, index) in Object.keys(request.content)">
       <v-card-title
         class="title"
@@ -17,6 +33,29 @@
 <script>
 export default {
   name: 'RequestSingle',
-  props: ['request']
+  props: ['request'],
+  components: {
+    RequestSingleOptions: () => import('@/components/Project/RequestSingleOptions')
+  },
+  data: () => ({
+    loading: false
+  }),
+  computed: {
+    user () {
+      return this.$store.getters['users/getById'](this.request.creatorId)
+    }
+  },
+  created () {
+    this.fetch()
+  },
+  methods: {
+    async fetch () {
+      this.loading = true
+      if (!this.user) {
+        await this.$store.dispatch('users/fetchById', this.request.creatorId)
+      }
+      this.loading = false
+    }
+  }
 }
 </script>

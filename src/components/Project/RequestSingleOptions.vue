@@ -15,27 +15,16 @@
     </template>
     <v-card>
       <v-list dense class="transparent pa-0">
-        <v-list-item @click="$emit('edit', true)">
+        <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
-              Edit Comment
+              Edit Request
             </v-list-item-title>
           </v-list-item-content>
           <v-list-item-action-text>
             <v-icon small>mdi-pencil-outline</v-icon>
           </v-list-item-action-text>
         </v-list-item>
-        <v-list-item @click.stop="deleteDialog = true; menu = false">
-          <v-list-item-content>
-            <v-list-item-title class="error--text">
-              Delete Comment
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-action-text>
-            <v-icon small>mdi-delete</v-icon>
-          </v-list-item-action-text>
-        </v-list-item>
-        <request-timeline-comment-delete :id="item.id" v-model="deleteDialog"/>
       </v-list>
     </v-card>
   </v-menu>
@@ -43,11 +32,8 @@
 
 <script>
 export default {
-  name: 'RequestTimelineCommentOptions',
+  name: 'RequestSingleOptions',
   props: ['item'],
-  components: {
-    RequestTimelineCommentDelete: () => import('@/components/Project/RequestTimelineCommentDelete')
-  },
   data: () => ({
     menu: false,
     deleteDialog: false

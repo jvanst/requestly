@@ -17,6 +17,9 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer/>
+        <template v-if="
+          $store.getters['permissions/isUserAdmin']($store.state.user.uid)
+        ">
         <v-btn
           v-if="request.closed"
           color="primary"
@@ -33,6 +36,7 @@
           <template v-if="!comment">Close</template>
           <template v-else>Comment &amp; Close</template>
         </v-btn>
+        </template>
         <v-btn
           @click="post()"
           :disabled="request.closed"
@@ -57,7 +61,9 @@ export default {
   }),
   methods: {
     async postAndClose () {
-      await this.post()
+      if (this.comment.length) {
+        await this.post()
+      }
       await this.close()
     },
     async post () {
@@ -79,6 +85,15 @@ export default {
           closed: true
         }
       })
+      await this.$store.dispatch('timeline/create', {
+        createdOn: {
+          seconds: Math.trunc((new Date()).getTime() / 1000)
+        },
+        creatorId: this.$store.state.user.uid,
+        icon: 'mdi-cancel',
+        type: 'status',
+        value: 'closed this request'
+      })
     },
     async open () {
       await this.$store.dispatch('requests/put', {
@@ -87,6 +102,15 @@ export default {
           ...this.request,
           closed: false
         }
+      })
+      await this.$store.dispatch('timeline/create', {
+        createdOn: {
+          seconds: Math.trunc((new Date()).getTime() / 1000)
+        },
+        creatorId: this.$store.state.user.uid,
+        icon: 'mdi-lock-open-outline',
+        type: 'status',
+        value: 'reopened this request'
       })
     }
   }

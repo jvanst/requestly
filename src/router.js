@@ -71,6 +71,11 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "board" */ './views/Project/Board.vue')
         },
         {
+          path: 'requests/',
+          name: 'Requests',
+          component: () => import(/* webpackChunkName: "requests" */ './views/Project/Requests.vue')
+        },
+        {
           path: 'request/create/',
           name: 'Create Request',
           component: () => import(/* webpackChunkName: "create-request" */ './views/Project/CreateRequest.vue')

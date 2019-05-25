@@ -26,6 +26,15 @@
           <v-list-item-title>Board</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+      <v-list-item link :to="{ name: 'Requests' }" exact>
+        <v-list-item-icon>
+          <v-icon>mdi-table-of-contents</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>Requests</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
     <v-list
         dense

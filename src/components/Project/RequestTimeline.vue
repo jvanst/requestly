@@ -17,7 +17,11 @@
             :item="item"
           />
         </template>
-        <request-timeline-comment-new :request="request" key="new-comment"/>
+        <request-timeline-comment-new
+          v-if="request.open || (request.closed && $store.getters['permissions/isUserAdmin']($store.state.user.uid))"
+          :request="request"
+          key="new-comment"
+        />
       </v-slide-x-transition>
     </v-timeline>
   </div>

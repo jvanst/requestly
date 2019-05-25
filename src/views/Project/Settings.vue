@@ -10,7 +10,7 @@
     </v-card>
     <v-card class="mt-3">
       <v-list>
-        <v-list-item>
+        <!-- <v-list-item>
           <v-list-tile-action>
             <v-switch v-model="publicByLink"/>
           </v-list-tile-action>
@@ -22,10 +22,10 @@
               Allow anyone who has the link to your project view and contribute
             </v-list-item-subtitle>
           </v-list-item-content>
-        </v-list-item>
+        </v-list-item> -->
         <v-list-item to="#" @click.stop="deleteDialog = true">
-          <v-list-tile-action>
-            <div style="width:38px"/>
+          <v-list-tile-action style="width:38px">
+            <v-icon>mdi-delete</v-icon>
           </v-list-tile-action>
           <v-list-item-content>
             <v-list-item-title>

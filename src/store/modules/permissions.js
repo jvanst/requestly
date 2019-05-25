@@ -10,7 +10,7 @@ const getters = {
     if (permissions && permissions.role === 'admin') {
       return true
     }
-    return true
+    return false
   }
 }
 

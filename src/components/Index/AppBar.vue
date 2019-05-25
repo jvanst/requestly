@@ -16,12 +16,12 @@
       >
         Home
       </v-btn>
-      <v-btn
+      <!-- <v-btn
         text
         to="/usecases"
       >
         Use Cases
-      </v-btn>
+      </v-btn> -->
     </v-toolbar-items>
 
     <v-spacer/>

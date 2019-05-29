@@ -3,7 +3,7 @@ import 'firebase/firestore'
 
 import Endpoint from './Endpoint'
 
-export default class Labels extends Endpoint {
+export default class RequestAPI extends Endpoint {
   constructor (projectId) {
     super(firebase.firestore()
       .collection('projects')

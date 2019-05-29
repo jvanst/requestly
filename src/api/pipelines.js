@@ -3,7 +3,7 @@ import 'firebase/firestore'
 
 import Endpoint from './Endpoint'
 
-export default class Pipelines extends Endpoint {
+export default class PipelineAPI extends Endpoint {
   constructor (projectId) {
     super(firebase.firestore()
       .collection('projects')

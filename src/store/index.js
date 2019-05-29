@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import _module from './modules/_module'
-import projects from './modules/projects'
-import pipelines from './modules/pipelines'
-import requests from './modules/requests'
-import permissions from './modules/permissions'
-import timeline from './modules/timeline'
+import Module from './module/'
+import projects from './projects'
+import pipelines from './pipelines'
+import requests from './requests'
+import permissions from './permissions'
+import timeline from './timeline'
 
 Vue.use(Vuex)
 
@@ -32,10 +32,10 @@ export default new Vuex.Store({
   },
   modules: {
     projects,
-    users: _module('users'),
-    invites: _module('invites'),
-    labels: _module('labels'),
-    forms: _module('forms'),
+    users: Module('users'),
+    invites: Module('invites'),
+    labels: Module('labels'),
+    forms: Module('forms'),
     permissions,
     pipelines,
     requests,

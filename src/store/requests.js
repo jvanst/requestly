@@ -1,5 +1,5 @@
 import RequestsAPI from '@/api/requests'
-import _module from './_module'
+import Module from './module/'
 import snackbar from '@/helpers/snackbar'
 
 const state = {
@@ -27,4 +27,4 @@ const mutations = {
   }
 }
 
-export default _module('requests', { state, getters, mutations, actions })
+export default Module('requests', { state, getters, mutations, actions })

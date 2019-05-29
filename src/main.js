@@ -18,9 +18,9 @@ import './filters/date'
 Vue.config.productionTip = false
 
 new Vue({
+  vuetify,
   router,
   store,
-  vuetify,
   created () {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(user => {

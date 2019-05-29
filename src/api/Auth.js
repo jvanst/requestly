@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-import Endpoint from './_endpoint'
+import Endpoint from './Endpoint'
 
 import snackbar from '@/helpers/snackbar'
 

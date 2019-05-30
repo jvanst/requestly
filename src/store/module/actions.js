@@ -8,7 +8,7 @@ import PipelineAPI from '@/api/pipelines'
 import RequestAPI from '@/api/requests'
 import TimelineAPI from '@/api/timeline'
 
-import snackbar from '@/helpers/snackbar'
+// import snackbar from '@/helpers/snackbar'
 
 const API = {
   projects: () => new ProjectAPI(),
@@ -28,7 +28,7 @@ const actions = (resource) => ({
       const result = await API[resource](context).fetch()
       context.commit('SET', result)
     } catch (error) {
-      snackbar.showSnackbar(error.message, 'error')
+      // snackbar.showSnackbar(error.message, 'error')
     }
   },
   async fetchById (context, id) {
@@ -36,7 +36,7 @@ const actions = (resource) => ({
       const result = await API[resource](context).fetchById(id)
       context.commit('ADD', result)
     } catch (error) {
-      snackbar.showSnackbar(error.message, 'error')
+      // snackbar.showSnackbar(error.message, 'error')
     }
   },
   async create (context, payload) {
@@ -44,7 +44,7 @@ const actions = (resource) => ({
       const result = await API[resource](context).create(payload)
       context.commit('ADD', result)
     } catch (error) {
-      snackbar.showSnackbar(error.message, 'error')
+      // snackbar.showSnackbar(error.message, 'error')
     }
   },
   async put (context, { id, payload }) {
@@ -52,7 +52,7 @@ const actions = (resource) => ({
       const result = await API[resource](context).put(id, payload)
       context.commit('ADD', result)
     } catch (error) {
-      snackbar.showSnackbar(error.message, 'error')
+      // snackbar.showSnackbar(error.message, 'error')
     }
   },
   async delete (context, id) {
@@ -60,7 +60,7 @@ const actions = (resource) => ({
       await API[resource](context).delete(id)
       context.commit('REMOVE', id)
     } catch (error) {
-      snackbar.showSnackbar(error.message, 'error')
+      // snackbar.showSnackbar(error.message, 'error')
     }
   }
 })

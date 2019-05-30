@@ -1,4 +1,4 @@
-import Module from './module/'
+import globalModule from './module/'
 
 import PipelinesAPI from '@/api/pipelines'
 
@@ -16,4 +16,4 @@ const mutations = {
   }
 }
 
-export default Module('pipelines', { actions, mutations })
+export default globalModule('pipelines', { actions, mutations })

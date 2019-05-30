@@ -6,11 +6,12 @@ import './firebase'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store/'
+
+import store from './store/store'
 import vuetify from './plugins/vuetify'
 
 import './helpers/registerServiceWorker'
-import './helpers/snackbar'
+// import './helpers/snackbar'
 
 import './filters/string'
 import './filters/date'
@@ -19,8 +20,8 @@ Vue.config.productionTip = false
 
 new Vue({
   vuetify,
-  router,
   store,
+  router,
   created () {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(user => {

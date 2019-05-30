@@ -1,7 +1,7 @@
-import Module from './module/'
+import globalModule from './module/'
 
 const getters = {
   getComments: state => state.data.filter(e => e.type === 'comment')
 }
 
-export default Module('timeline', { getters })
+export default globalModule('timeline', { getters })

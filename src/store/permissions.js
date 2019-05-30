@@ -1,4 +1,4 @@
-import Module from './module/index'
+import globalModule from './module/index'
 
 const getters = {
   isUserAdmin: (state, getters) => uid => {
@@ -14,4 +14,4 @@ const getters = {
   }
 }
 
-export default Module('permissions', { getters })
+export default globalModule('permissions', { getters })

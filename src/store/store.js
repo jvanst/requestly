@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Module from './module/'
+import globalModule from './module'
 import projects from './projects'
 import pipelines from './pipelines'
 import requests from './requests'
@@ -13,7 +13,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     ui: {
-      dark: JSON.parse(localStorage.getItem('dark'))
+      dark: true
     },
     user: {},
     isLoggedIn: false
@@ -32,10 +32,10 @@ export default new Vuex.Store({
   },
   modules: {
     projects,
-    users: Module('users'),
-    invites: Module('invites'),
-    labels: Module('labels'),
-    forms: Module('forms'),
+    users: globalModule('users'),
+    invites: globalModule('invites'),
+    labels: globalModule('labels'),
+    forms: globalModule('forms'),
     permissions,
     pipelines,
     requests,

@@ -1,6 +1,6 @@
 import RequestsAPI from '@/api/requests'
-import Module from './module/'
-import snackbar from '@/helpers/snackbar'
+import globalModule from './module/'
+// import snackbar from '@/helpers/snackbar'
 
 const state = {
   activeId: null
@@ -16,7 +16,7 @@ const actions = {
       const result = await new RequestsAPI(context.rootState.projects.activeId).fetchAll()
       context.commit('SET', result)
     } catch (error) {
-      snackbar.showSnackbar(error.message, 'error')
+      // snackbar.showSnackbar(error.message, 'error')
     }
   }
 }
@@ -27,4 +27,4 @@ const mutations = {
   }
 }
 
-export default Module('requests', { state, getters, mutations, actions })
+export default globalModule('requests', { state, getters, mutations, actions })

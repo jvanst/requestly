@@ -47,14 +47,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'AppBar',
-  computed: {
-    ...mapState({
-      user: state => state
-    })
-  }
 }
 </script>

@@ -1,11 +1,9 @@
 <template>
-  <v-app id="app" :dark="$store.state.ui.dark">
+  <v-content id="content" class="teal" style="overflow:hidden">
     <app-bar/>
-    <v-content id="content" class="teal" style="overflow:hidden">
-      <router-view />
-      <snack-bar/>
-    </v-content>
-  </v-app>
+    <router-view />
+    <!-- <snack-bar/> -->
+  </v-content>
 </template>
 
 <script>
@@ -13,7 +11,7 @@ export default {
   name: 'Project',
   components: {
     AppBar: () => import(/* webpackPreload: true */ '@/components/Dashboard/AppBar.vue'),
-    SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
+    // SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
   },
   data: () => ({
     loading: false

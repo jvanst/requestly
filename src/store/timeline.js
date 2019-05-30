@@ -1,7 +1,7 @@
-import _module from './_module'
+import Module from './module/'
 
 const getters = {
   getComments: state => state.data.filter(e => e.type === 'comment')
 }
 
-export default _module('timeline', { getters })
+export default Module('timeline', { getters })

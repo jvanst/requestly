@@ -1,8 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-import ProjectsAPI from '@/api/projects'
-import _module from './_module'
+import ProjectAPI from '@/api/projects'
+import Module from './module/'
 import snackbar from '@/helpers/snackbar'
 
 const state = {
@@ -12,7 +12,7 @@ const state = {
 const actions = {
   async fetch (context, uid) {
     try {
-      const result = await new ProjectsAPI(context.rootState.projects.activeId).fetch(firebase.auth().currentUser.uid)
+      const result = await new ProjectAPI(context.rootState.projects.activeId).fetch(firebase.auth().currentUser.uid)
       context.commit('SET', result)
     } catch (error) {
       snackbar.showSnackbar(error.message, 'error')
@@ -26,4 +26,4 @@ const mutations = {
   }
 }
 
-export default _module('projects', { state, actions, mutations })
+export default Module('projects', { state, actions, mutations })

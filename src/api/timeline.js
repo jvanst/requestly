@@ -1,9 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-import Endpoint from './_endpoint'
+import Endpoint from './Endpoint'
 
-export default class Timeline extends Endpoint {
+export default class TimelineAPI extends Endpoint {
   constructor (projectId, requestId) {
     super(firebase.firestore()
       .collection('projects')

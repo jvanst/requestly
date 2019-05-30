@@ -1,9 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-import Endpoint from './_endpoint'
+import Endpoint from './Endpoint'
 
-export default class Forms extends Endpoint {
+export default class FormAPI extends Endpoint {
   constructor (projectId) {
     super(firebase.firestore()
       .collection('projects')

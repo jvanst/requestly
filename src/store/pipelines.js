@@ -1,4 +1,4 @@
-import _module from './_module'
+import Module from './module/'
 
 import PipelinesAPI from '@/api/pipelines'
 
@@ -16,4 +16,4 @@ const mutations = {
   }
 }
 
-export default _module('pipelines', { actions, mutations })
+export default Module('pipelines', { actions, mutations })

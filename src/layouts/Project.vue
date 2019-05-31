@@ -3,7 +3,6 @@
     <app-bar/>
     <nav-drawer/>
     <router-view />
-    <!-- <snack-bar/> -->
   </v-content>
 </template>
 
@@ -13,8 +12,7 @@ export default {
   name: 'Project',
   components: {
     AppBar: () => import(/* webpackPreload: true */ '@/components/Project/AppBar.vue'),
-    NavDrawer: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawer.vue'),
-    // SnackBar: () => import(/* webpackPreload: true */ '@/components/SnackBar.vue')
+    NavDrawer: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawer.vue')
   },
   created () {
     this.$store.commit('projects/SET_ACTIVE', this.$route.params.projectId)

@@ -10,8 +10,7 @@ import router from './router'
 import store from './store/store'
 import vuetify from './plugins/vuetify'
 
-import './helpers/registerServiceWorker'
-// import './helpers/snackbar'
+import './registerServiceWorker'
 
 import './filters/string'
 import './filters/date'

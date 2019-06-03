@@ -1,6 +1,6 @@
 {
-  "name": "requestly",
-  "short_name": "requestly",
+  "name": "Requestly",
+  "short_name": "Requestly",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -13,8 +13,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/app.html",
+  "start_url": "/login",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#FFFFFF",
   "theme_color": "#4DBA87"
 }

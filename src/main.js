@@ -14,6 +14,8 @@ import vuetify from './plugins/vuetify'
 import './filters/string'
 import './filters/date'
 
+import './registerServiceWorker'
+
 Vue.config.productionTip = false
 
 Vue.use(VueHead)
@@ -40,14 +42,5 @@ new Vue({
     })
   },
   render: h => h(App),
-  mounted: () => document.dispatchEvent(new Event('x-app-rendered'))
+  mounted: () => document.dispatchEvent(new Event('render-event'))
 }).$mount('#app')
-
-// Register Service Worker
-if (process.env.NODE_ENV === 'production') {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-    })
-  }
-}

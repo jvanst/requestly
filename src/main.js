@@ -4,6 +4,7 @@ import 'firebase/auth'
 import './firebase'
 
 import Vue from 'vue'
+import VueHead from 'vue-head'
 import App from './App.vue'
 import router from './router'
 
@@ -16,6 +17,8 @@ import './filters/string'
 import './filters/date'
 
 Vue.config.productionTip = false
+
+Vue.use(VueHead)
 
 new Vue({
   vuetify,
@@ -38,5 +41,6 @@ new Vue({
       }
     })
   },
-  render: h => h(App)
+  render: h => h(App),
+  mounted: () => document.dispatchEvent(new Event('x-app-rendered'))
 }).$mount('#app')

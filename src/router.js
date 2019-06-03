@@ -60,13 +60,13 @@ const router = new Router({
       ]
     },
     {
-      path: '/project/:projectId',
+      path: '/project/:projectId/',
       component: () => import(/* webpackChunkName: "home" */ './layouts/Project.vue'),
       beforeEnter: authGuard,
       props: true,
       children: [
         {
-          path: '',
+          path: 'board/',
           name: 'Board',
           component: () => import(/* webpackChunkName: "board" */ './views/Project/Board.vue')
         },

@@ -9,7 +9,7 @@
 export default {
   name: 'Project',
   components: {
-    AppBar: () => import(/* webpackPreload: true */ '@/components/Index/AppBar.vue')
+    AppBar: () => import('@/components/Index/AppBar.vue')
   }
 }
 </script>

@@ -30,7 +30,7 @@ export default new Vuex.Store({
     },
     isLoggedIn: false,
     ui: {
-      dark: true
+      dark: JSON.parse(localStorage.getItem('dark'))
     },
     user: {}
   },

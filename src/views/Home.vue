@@ -1,8 +1,7 @@
 <template>
   <v-container class="mb-5">
-    <!-- <div id="skew-background-1" /> -->
-    <!-- <div id="skew-background-2" /> -->
-
+    <!-- <div id="skew-background-1" />
+    <div id="skew-background-2" /> -->
     <section>
       <v-layout
         class="white--text"
@@ -72,9 +71,10 @@
           </v-layout>
         </v-flex>
         <v-flex sm6 xs12 align-self-center>
-          <v-img
-            :src="require('@/assets/creation_process.svg')"
-            width="100%"
+          <img
+            src="@/assets/creation_process.svg"
+            style="width:100%"
+            alt="Creation Process"
           />
         </v-flex>
       </v-layout>
@@ -157,9 +157,10 @@
               can be smoothed out with Requestly.
             </v-card-text>
           </v-card>
-          <v-img
-            :src="require('@/assets/building_blocks.svg')"
-            max-width="60%"
+          <img
+            src="@/assets/building_blocks.svg"
+            style="width:60%"
+            alt="Building Blocks"
           />
           <v-layout
               row
@@ -206,7 +207,6 @@
               <v-btn
                 depressed
                 large
-                class="primary"
                 to="/usecases"
                 >
                 See use cases
@@ -240,7 +240,65 @@
 <script>
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  head: {
+    meta: [
+      {
+        name: 'application-name',
+        content: 'Requestly'
+      },
+      {
+        name: 'description',
+        content: 'Requestly helps manage many types of inquiries your business needs may have.',
+        id: 'desc'
+      },
+      // Twitter tags
+      {
+        name: 'twitter:title',
+        content: 'Requestly: Take back control of communication.'
+      },
+      {
+        n: 'twitter:description',
+        c: 'Requestly helps manage many types of inquiries your business needs may have.'
+      },
+      // Google tags
+      {
+        itemprop: 'name',
+        content: 'Requestly: Take back control of communication.'
+      },
+      {
+        itemprop: 'description',
+        content: 'Requestly helps manage many types of inquiries your business needs may have.'
+      },
+      // Facebook / Open Graph
+      // {
+      //   property: 'fb:app_id',
+      //   content: '123456789'
+      // },
+      {
+        property: 'og:title',
+        content: 'Requestly: Take back control of communication.'
+      }
+      // with shorthand
+      // { p: 'og:image', c: 'https://example.com/image.jpg' },
+    ]
+    // link: [
+    //   {
+    //     rel: 'canonical',
+    //     href: 'http://example.com/#!/contact/',
+    //     id: 'canonical'
+    //   },
+    //   {
+    //     rel: 'author',
+    //     href: 'author',
+    //     undo: false
+    // }, // undo property - not to remove the element
+    // { rel: 'icon', href: require('./path/to/icon-16.png'), sizes: '16x16', type: 'image/png' },
+    // with shorthand
+    // { r: 'icon', h: 'path/to/icon-32.png', sz: '32x32', t: 'image/png' },
+    // ...
+    // ],
+  }
 }
 </script>
 

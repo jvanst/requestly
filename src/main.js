@@ -11,8 +11,6 @@ import router from './router'
 import store from './store/store'
 import vuetify from './plugins/vuetify'
 
-import './registerServiceWorker'
-
 import './filters/string'
 import './filters/date'
 
@@ -44,3 +42,12 @@ new Vue({
   render: h => h(App),
   mounted: () => document.dispatchEvent(new Event('x-app-rendered'))
 }).$mount('#app')
+
+// Register Service Worker
+if (process.env.NODE_ENV === 'production') {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+    })
+  }
+}

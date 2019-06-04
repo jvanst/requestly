@@ -10,8 +10,8 @@
       <v-toolbar-items>
         <request-single-options
          v-if="
-          request.creatorId === $store.state.user.uid ||
-          $store.getters['permissions/isUserAdmin']($store.state.user.uid)"
+          request.creatorId === $store.state.auth.user.uid ||
+          $store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
         />
       </v-toolbar-items>
     </v-toolbar>

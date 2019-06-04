@@ -38,7 +38,7 @@ export default {
   name: 'AppBarUserMenu',
   computed: {
     ...mapState({
-      user: state => state.user
+      user: state => state.auth.user
     }),
     dark: {
       get () {

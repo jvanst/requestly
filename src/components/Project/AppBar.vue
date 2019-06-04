@@ -50,7 +50,7 @@
 
     <v-spacer/>
 
-    <v-toolbar-items v-if="!$store.state.isLoggedIn">
+    <v-toolbar-items v-if="!$store.state.auth.isLoggedIn">
       <v-btn
         text
         to="/login"

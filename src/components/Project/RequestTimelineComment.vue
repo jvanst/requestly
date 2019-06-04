@@ -15,8 +15,8 @@
         <v-toolbar-items>
           <request-timeline-comment-options
             v-if="
-              item.creatorId === $store.state.user.uid ||
-              $store.getters['permissions/isUserAdmin']($store.state.user.uid)"
+              item.creatorId === $store.state.auth.user.uid ||
+              $store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
             :item="item"
             @edit="setEdit"
           />

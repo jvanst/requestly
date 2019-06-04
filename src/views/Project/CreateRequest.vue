@@ -165,7 +165,7 @@ export default {
         formId: this.formId,
         pipelineId: this.$store.state.pipelines.data[0].id,
         closed: false,
-        creatorId: this.$store.state.user.uid,
+        creatorId: this.$store.state.auth.user.uid,
         labels: this.form.labels
       })
       this.$router.replace({ name: 'Board' })

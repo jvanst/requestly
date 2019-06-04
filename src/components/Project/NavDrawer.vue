@@ -40,7 +40,7 @@
         dense
         nav
         shaped
-        v-if="$store.getters['permissions/isUserAdmin']($store.state.user.uid)"
+        v-if="$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
       >
       <v-subheader>
         Manage

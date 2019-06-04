@@ -8,7 +8,7 @@
         dense
         class="transparent"
         :class="{
-          'pipeline-header' : $store.getters['permissions/isUserAdmin']($store.state.user.uid)
+          'pipeline-header' : $store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)
         }"
       >
         <v-list-item>
@@ -23,7 +23,7 @@
           </v-list-item-content>
           <v-list-item-action>
             <board-pipeline-settings
-              v-if="$store.getters['permissions/isUserAdmin']($store.state.user.uid)"
+              v-if="$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
               :pipeline="pipeline"
             />
           </v-list-item-action>
@@ -36,7 +36,7 @@
         group="requests"
         style="height: 90%;"
         @change="handleChange"
-        :disabled="!$store.getters['permissions/isUserAdmin']($store.state.user.uid)"
+        :disabled="!$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
       >
         <v-flex
           v-for="request in requests"

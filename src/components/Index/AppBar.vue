@@ -3,6 +3,7 @@
     app
     dense
     tile
+    v-if="!isRunningStandalone()"
   >
 
     <v-toolbar-title class="pr-4">
@@ -26,7 +27,7 @@
 
     <v-spacer/>
 
-    <v-toolbar-items v-if="!$store.state.isLoggedIn">
+    <v-toolbar-items v-if="!$store.state.auth.isLoggedIn">
       <v-btn
         text
         to="/login"
@@ -48,6 +49,11 @@
 
 <script>
 export default {
-  name: 'AppBar'
+  name: 'AppBar',
+  methods: {
+    isRunningStandalone () {
+      return (window.matchMedia('(display-mode: standalone)').matches)
+    }
+  }
 }
 </script>

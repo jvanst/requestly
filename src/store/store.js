@@ -8,6 +8,8 @@ import requests from './modules/requests'
 import permissions from './modules/permissions'
 import timeline from './modules/timeline'
 
+import auth from './modules/auth'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -20,7 +22,8 @@ export default new Vuex.Store({
     permissions,
     pipelines,
     requests,
-    timeline
+    timeline,
+    auth
   },
   state: {
     snackbar: {
@@ -28,19 +31,11 @@ export default new Vuex.Store({
       message: '',
       color: 'info'
     },
-    isLoggedIn: false,
     ui: {
       dark: JSON.parse(localStorage.getItem('dark'))
-    },
-    user: {}
+    }
   },
   mutations: {
-    SET_USER (state, value) {
-      state.user = value
-    },
-    SET_LOGGEDIN (state, value) {
-      state.isLoggedIn = value
-    },
     SET_DARK (state, value) {
       state.ui.dark = value
       localStorage.setItem('dark', value)

@@ -39,7 +39,7 @@ export default {
   }),
   computed: {
     user () {
-      return this.$store.getters['users/getById'](this.uid || this.$store.state.user.uid)
+      return this.$store.getters['users/getById'](this.uid || this.$store.state.auth.user.uid)
     }
   },
   created () {
@@ -49,7 +49,7 @@ export default {
     async fetch () {
       this.loading = true
       if (!this.user) {
-        await this.$store.dispatch('users/fetchById', this.uid || this.$store.state.user.uid)
+        await this.$store.dispatch('users/fetchById', this.uid || this.$store.state.auth.user.uid)
       }
       this.loading = false
     }

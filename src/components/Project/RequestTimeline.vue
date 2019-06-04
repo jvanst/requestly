@@ -18,7 +18,7 @@
           />
         </template>
         <request-timeline-comment-new
-          v-if="request.open || (request.closed && $store.getters['permissions/isUserAdmin']($store.state.user.uid))"
+          v-if="request.open || (request.closed && $store.getters['permissions/isUserAdmin']($store.state.auth.user.uid))"
           :request="request"
           key="new-comment"
         />

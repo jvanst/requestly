@@ -18,7 +18,7 @@
       <v-card-actions>
         <v-spacer/>
         <template v-if="
-          $store.getters['permissions/isUserAdmin']($store.state.user.uid)
+          $store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)
         ">
         <v-btn
           v-if="request.closed"
@@ -70,7 +70,7 @@ export default {
       await this.$store.dispatch('timeline/create', {
         type: 'comment',
         value: this.comment,
-        creatorId: this.$store.state.user.uid,
+        creatorId: this.$store.state.auth.user.uid,
         createdOn: {
           seconds: Math.trunc((new Date()).getTime() / 1000)
         }
@@ -89,7 +89,7 @@ export default {
         createdOn: {
           seconds: Math.trunc((new Date()).getTime() / 1000)
         },
-        creatorId: this.$store.state.user.uid,
+        creatorId: this.$store.state.auth.user.uid,
         icon: 'mdi-cancel',
         type: 'status',
         value: 'closed this request'
@@ -107,7 +107,7 @@ export default {
         createdOn: {
           seconds: Math.trunc((new Date()).getTime() / 1000)
         },
-        creatorId: this.$store.state.user.uid,
+        creatorId: this.$store.state.auth.user.uid,
         icon: 'mdi-lock-open-outline',
         type: 'status',
         value: 'reopened this request'

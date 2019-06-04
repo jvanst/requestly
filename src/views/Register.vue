@@ -83,8 +83,6 @@
 </template>
 
 <script>
-import AuthAPI from '@/api/auth'
-
 export default {
   name: 'Register',
   data: () => ({
@@ -129,8 +127,11 @@ export default {
     },
     async register () {
       this.loading = true
-      await AuthAPI.register(this.email, this.password, this.displayName)
-      this.$router.replace('/')
+      await this.$store.dispatch('register', {
+        email: this.email,
+        password: this.password,
+        displayName: this.displayName
+      })
       this.loading = false
     }
   }

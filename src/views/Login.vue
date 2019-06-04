@@ -2,10 +2,12 @@
   <v-container fill-height>
     <v-layout wrap align-center justify-center style="max-width:500px;margin:auto">
       <v-flex xs12 class="text-xs-center">
-        <v-card class="pa-3">
-          <v-card-title class="mb-2 text-xs-center">
-            Sign In
-          </v-card-title>
+        <v-card class="pa-2">
+          <v-layout row align-center justify-center>
+            <v-card-title class="mb-2 text-xs-center" xs3>
+              <div>Sign In</div><br/>
+            </v-card-title>
+          </v-layout>
           <v-card-text>
             <v-layout wrap>
               <v-flex xs12>
@@ -67,7 +69,7 @@
                   <v-icon>mdi-google</v-icon>
                 </v-btn>
               </v-flex>
-              <v-flex xs6>
+              <v-flex xs6 class="pl-1">
                 <v-btn
                   block
                   dark
@@ -91,7 +93,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import AuthAPI from '@/api/auth'
 
 export default {
   name: 'Login',
@@ -102,26 +103,26 @@ export default {
   }),
   computed: {
     ...mapState({
-      user: state => state.user
+      user: state => state.auth.user
     })
   },
   methods: {
     async login () {
       this.loading = true
-      await AuthAPI.login(this.email, this.password)
-      this.$router.replace('/')
+      await this.$store.dispatch('login', {
+        email: this.email,
+        password: this.password
+      })
       this.loading = false
     },
     async google () {
       this.loading = true
-      await AuthAPI.loginWithGoogle()
-      this.$router.replace('/')
+      await this.$store.dispatch('loginWithGoogle')
       this.loading = false
     },
     async facebook () {
       this.loading = true
-      await AuthAPI.loginWithFacebook()
-      this.$router.replace('/')
+      await this.$store.dispatch('loginWithFacebook')
       this.loading = false
     }
   }

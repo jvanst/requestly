@@ -1,9 +1,17 @@
 <template>
-  <v-content id="content">
-    <app-bar/>
-    <nav-drawer/>
-    <router-view />
-  </v-content>
+  <v-app :dark="$store.state.ui.dark" data-server-rendered="true">
+
+    <app-bar v-if="$vuetify.breakpoint.mdAndUp"/>
+    <app-bar-mobile v-else/>
+
+    <nav-drawer v-if="$vuetify.breakpoint.mdAndUp"/>
+
+    <v-content id="content">
+      <router-view />
+    </v-content>
+
+    <bottom-nav v-if="$vuetify.breakpoint.smAndDown"/>
+  </v-app>
 </template>
 
 <script>
@@ -12,7 +20,9 @@ export default {
   name: 'Project',
   components: {
     AppBar: () => import(/* webpackPreload: true */ '@/components/Project/AppBar.vue'),
-    NavDrawer: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawer.vue')
+    AppBarMobile: () => import(/* webpackPreload: true */ '@/components/Project/AppBarMobile.vue'),
+    NavDrawer: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawer.vue'),
+    BottomNav: () => import(/* webpackPreload: true */ '@/components/Project/BottomNav.vue')
   },
   created () {
     this.$store.commit('projects/SET_ACTIVE', this.$route.params.projectId)

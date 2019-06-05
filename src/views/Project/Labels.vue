@@ -1,46 +1,62 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-card-title>
-        <v-icon left>mdi-information-outline</v-icon> Labels
-      </v-card-title>
-      <v-card-text>
-        Here you can manage labels. Labels help to give classifications to requests.
-      </v-card-text>
-    </v-card>
-    <v-card v-if="loading">
-      LOADING
-    </v-card>
-    <v-card v-else class="mt-3">
-      <v-simple-table>
-        <thead>
-          <tr>
-            <th>Action</th>
-            <th class="text-xs-left">Title</th>
-            <th class="text-xs-left">Description</th>
-            <th class="text-xs-left">Color</th>
-            <th class="text-xs-right">Preview</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="label in labels" :key="label.id">
-            <td>
-              <label-edit :label="label"/>
-              <label-delete :label="label"/>
-            </td>
-            <td>{{ label.title }}</td>
-            <td>{{ label.description }}</td>
-            <td>{{ label.color }}</td>
-            <td class="text-xs-right">
+  <v-container
+    :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
+  >
+      <v-list v-if="loading">
+        <template v-for="(n, index) in 5">
+          <v-list-item :key="'list-item' + index">
+            <v-list-item-content>
+              <v-list-item-subtitle>
+                <v-card
+                  :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
+                  width="100%"
+                  height="20px"
+                  flat
+                />
+              </v-list-item-subtitle>
+              <v-list-item-title>
+                <v-card
+                  :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
+                  width="50%"
+                  height="20px"
+                  flat
+                />
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider :key="'list-divider' + index"/>
+        </template>
+      </v-list>
+      <v-list v-else-if="labels.length">
+        <template v-for="label in labels">
+          <v-list-item
+            href="#edit"
+            @click.native="selectedLabel = label; $refs.edit.dialog = true;"
+            :key="'list-item' + label.id">
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ label.title }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                {{ label.description }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-action-text>
               <Label
                 :label="label"
               />
-            </td>
-          </tr>
-        </tbody>
-      </v-simple-table>
-    </v-card>
+            </v-list-item-action-text>
+          </v-list-item>
+          <v-divider :key="'list-divider' + label.id"/>
+        </template>
+      </v-list>
+      <v-list v-else>
+        <v-subheader>
+          You have no labels. Create one with the plus button below.
+        </v-subheader>
+      </v-list>
     <label-create/>
+    <label-edit :label="selectedLabel" ref="edit"/>
   </v-container>
 </template>
 
@@ -50,11 +66,11 @@ export default {
   components: {
     Label: () => import('@/components/Project/Label.vue'),
     LabelCreate: () => import('@/components/Project/LabelCreate.vue'),
-    LabelEdit: () => import('@/components/Project/LabelEdit.vue'),
-    LabelDelete: () => import('@/components/Project/LabelDelete.vue')
+    LabelEdit: () => import('@/components/Project/LabelEdit.vue')
   },
   data: () => ({
-    loading: false
+    loading: false,
+    selectedLabel: {}
   }),
   created () {
     this.fetch()

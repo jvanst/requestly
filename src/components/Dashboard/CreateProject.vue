@@ -4,14 +4,14 @@
       width="500px"
     >
       <template v-slot:activator="{ on }">
-        <v-card height="200" class="mt-2" v-on="on">
+        <v-card class="mt-2" height="90" v-on="on">
           <v-layout
             column
             align-center
             justify-center
             fill-height
             >
-            <v-icon size="64">mdi-plus</v-icon>
+            <v-icon size="32">mdi-plus</v-icon>
             Add Project
           </v-layout>
         </v-card>

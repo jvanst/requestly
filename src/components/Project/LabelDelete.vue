@@ -5,10 +5,12 @@
   >
     <template v-slot:activator="{ on }">
       <v-btn
-        icon
+        class="ml-2"
+        color="error"
+        text
         v-on="on"
       >
-        <v-icon>mdi-delete</v-icon>
+        <v-icon left>mdi-delete</v-icon> Delete
       </v-btn>
     </template>
     <v-card>
@@ -49,6 +51,7 @@ export default {
       this.loading = true
       await this.$store.dispatch('labels/delete', this.label.id)
       this.dialog = false
+      this.$emit('submit', true)
       this.loading = false
     }
   }

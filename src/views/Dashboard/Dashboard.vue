@@ -1,34 +1,27 @@
 <template>
-  <v-container grid-list-xl>
+  <v-container v-bind="{ [`grid-list-${$vuetify.breakpoint.name}`]: true }">
     <!-- <div id="skew-background-1" /> -->
     <v-layout row wrap>
-      <v-flex xs12>
-        <v-card flat class="transparent pa-3">
-          <h3 class="display-1 white--text">
-            Welcome to Requestly!
-          </h3>
-        </v-card>
-      </v-flex>
       <v-flex xs12>
         <v-subheader class="white--text">
           Your projects
         </v-subheader>
         <v-layout row wrap>
-          <v-flex xs3 class="pt-3">
+          <v-flex md3 xs12>
             <CreateProject/>
           </v-flex>
           <template v-for="project in projects">
-            <v-flex :key="'flex'+project.id" xs3>
+            <v-flex :key="'flex'+project.id" md3 xs12>
               <v-card
+                height="90"
                 :to="{ name: 'Board', params: { projectId: project.id } }"
-                height="200"
               >
                 <v-card-title class="title pb-0">
                   {{ project.title }}
                 </v-card-title>
-                <v-card-title class="subtitle-1 pt-0">
+                <v-card-text class="subtitle-1 pt-0">
                   {{ project.id }}
-                </v-card-title>
+                </v-card-text>
               </v-card>
             </v-flex>
           </template>

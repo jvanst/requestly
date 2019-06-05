@@ -2,7 +2,7 @@
   <v-container fill-height>
     <v-layout wrap align-center justify-center style="max-width:500px;margin:auto">
       <v-flex xs12>
-        <v-card class="pa-3">
+        <v-card class="pa-2">
           <v-card-title class="mb-2 text-xs-center">
             <span class="headline">Register</span>
           </v-card-title>

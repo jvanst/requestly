@@ -47,20 +47,8 @@
           </v-card>
         </v-menu>
     </v-toolbar-items>
-
     <v-spacer/>
-
-    <v-toolbar-items v-if="!$store.state.auth.isLoggedIn">
-      <v-btn
-        text
-        to="/login"
-      >
-        Login
-      </v-btn>
-    </v-toolbar-items>
-
-    <user-menu v-else class="ml-3"/>
-
+    <user-menu class="ml-3"/>
   </v-app-bar>
 </template>
 

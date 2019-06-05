@@ -1,11 +1,15 @@
 <template>
   <v-dialog
       v-model="dialog"
+      :fullscreen="$vuetify.breakpoint.smAndDown"
+      :hide-overlay="$vuetify.breakpoint.smAndDown"
+      transition="dialog-bottom-transition"
       width="500"
     >
       <template v-slot:activator="{ on }">
         <v-btn
           class="primary"
+          :class="{ 'mb-5' : $vuetify.breakpoint.smAndDown }"
           fab
           fixed
           bottom
@@ -17,57 +21,80 @@
         </v-btn>
       </template>
     <v-card>
-      <v-card-title
-        class="subtitle-1"
+      <v-toolbar
+        flat
       >
-        Create Label
-      </v-card-title>
+        <v-app-bar-nav-icon @click="dialog = false">
+          <v-icon>mdi-close</v-icon>
+        </v-app-bar-nav-icon>
+        <v-toolbar-title>
+          Create Label
+        </v-toolbar-title>
+        <v-spacer/>
+        <v-toolbar-items>
+          <v-btn
+            text
+            @click="create()"
+            :loading="loading"
+            v-if="$vuetify.breakpoint.smAndDown"
+          >
+            Create
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
 
-      <v-card-text class="pb-0 pt-0">
+      <v-card-text>
         <v-text-field
           label="Title"
+          outlined
           v-model="label.title"
+          :disabled="loading"
           >
         </v-text-field>
 
         <v-text-field
           label="Description"
+          outlined
           v-model="label.description"
+          :disabled="loading"
           >
         </v-text-field>
 
-        <v-dialog
-          v-model="dialogColor"
-          persistent
-          width="300px"
-        >
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              label="Color"
-              readonly
-              :value="label.color"
-              v-on="on"
-              >
-            </v-text-field>
-          </template>
-          <v-card class="text-xs-center">
-            <v-color-picker
-              flat
-              show-swatches
-              hide-inputs
-              hide-canvas
-              hide-mode-switch
-              swatches-max-height
-              v-model="label.color"
-              @input="dialogColor = false"
-            />
-          </v-card>
-        </v-dialog>
+        <v-text-field
+          label="Click to choose color"
+          name="color"
+          readonly
+          :value="label.color"
+          :disabled="loading"
+          outlined
+          hide-details
+          @click.stop="dialogColor = true"
+          >
+        </v-text-field>
       </v-card-text>
+
+      <v-dialog
+        v-model="dialogColor"
+        width="300px"
+      >
+        <v-card class="text-xs-center">
+          <v-color-picker
+            flat
+            show-swatches
+            hide-inputs
+            hide-canvas
+            hide-mode-switch
+            swatches-max-height
+            v-model="label.color"
+            @input="dialogColor = false"
+          />
+        </v-card>
+      </v-dialog>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
+          v-if="!$vuetify.breakpoint.smAndDown"
           color="primary"
           :loading="loading"
           @click="create()"
@@ -81,14 +108,14 @@
 
 <script>
 export default {
-  name: 'LabelEdit',
+  name: 'LabelCreate',
   data: () => ({
     dialogColor: false,
     dialog: false,
     label: {
       title: '',
       description: '',
-      color: ''
+      color: '#FFFFFF'
     },
     loading: false
   }),
@@ -100,7 +127,7 @@ export default {
       this.label = {
         title: '',
         description: '',
-        color: ''
+        color: '#FFFFFF'
       }
       this.loading = false
     }

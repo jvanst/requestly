@@ -6,18 +6,12 @@
         <thead>
           <tr>
             <th class="text-xs-left">Label</th>
-            <th class="text-xs-left">Description</th>
-            <th class="text-xs-left">Type</th>
-            <th class="text-xs-left">Required</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(field, j) in fields" :key="'field'+j">
             <td>{{ field.label }}</td>
-            <td>{{ field.description }}</td>
-            <td>{{ field.type }}</td>
-            <td>{{ field.required }}</td>
             <td class="text-xs-right">
               <v-btn icon @click="removeField(j)">
                 <v-icon>mdi-delete</v-icon>
@@ -46,28 +40,36 @@
             </template>
 
             <v-card>
-              <v-card-title>
-                Create Field
-              </v-card-title>
+              <v-toolbar
+                flat
+              >
+                <v-app-bar-nav-icon @click="dialog = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-app-bar-nav-icon>
+                <v-toolbar-title>
+                  Create Field
+                </v-toolbar-title>
+                <v-spacer/>
+              </v-toolbar>
 
               <v-card-text>
                 <v-text-field
-                  filled
                   label="Title"
                   v-model="label"
+                  outlined
                   ></v-text-field>
 
                 <v-textarea
-                  filled
                   label="Description"
                   v-model="description"
+                  outlined
                 ></v-textarea>
 
                 <v-select
-                  filled
                   label="Field Type"
                   v-model="type"
                   :items="fieldTypes"
+                  outlined
                 />
 
                 <v-switch v-model="required" label="Required"/>

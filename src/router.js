@@ -92,17 +92,6 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "forms" */ './views/Project/Forms.vue')
         },
         {
-          path: 'forms/create/',
-          name: 'Create Form',
-          component: () => import(/* webpackChunkName: "create-form" */ './views/Project/FormBuilder.vue')
-        },
-        {
-          path: 'forms/edit/:id/',
-          name: 'Edit Form',
-          props: true,
-          component: () => import(/* webpackChunkName: "create-edit" */ './views/Project/FormBuilder.vue')
-        },
-        {
           path: 'labels/',
           name: 'Labels',
           component: () => import(/* webpackChunkName: "labels" */ './views/Project/Labels.vue')

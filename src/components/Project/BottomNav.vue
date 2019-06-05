@@ -2,35 +2,58 @@
     <v-bottom-navigation
       app
       v-model="bottomNav"
-      absolute
       grow
     >
       <v-btn
         color="teal"
         text
-        value="recent"
+        value="board"
+        :to="{ name: 'Board' }"
       >
-        <span>Recent</span>
-        <v-icon>mdi-history</v-icon>
+        <span>Board</span>
+        <v-icon>mdi-view-dashboard-outline</v-icon>
       </v-btn>
 
       <v-btn
         color="teal"
         text
-        value="favorites"
+        value="requests"
+        :to="{ name: 'Requests' }"
       >
-        <span>Favorites</span>
-        <v-icon>mdi-avorite</v-icon>
+        <span>Requests</span>
+        <v-icon>mdi-table-of-contents</v-icon>
       </v-btn>
 
       <v-btn
         color="teal"
         text
-        value="nearby"
+        value="labels"
+        :to="{ name: 'Labels' }"
       >
-        <span>Nearby</span>
-        <v-icon>mdi-place</v-icon>
+        <span>Labels</span>
+        <v-icon>mdi-label-outline</v-icon>
       </v-btn>
+
+      <v-btn
+        color="teal"
+        text
+        value="forms"
+        :to="{ name: 'Forms' }"
+      >
+        <span>Forms</span>
+        <v-icon>mdi-shape</v-icon>
+      </v-btn>
+
+      <v-btn
+        color="teal"
+        text
+        value="users"
+        :to="{ name: 'Users' }"
+      >
+        <span>Users</span>
+        <v-icon>mdi-account-supervisor</v-icon>
+      </v-btn>
+
     </v-bottom-navigation>
 </template>
 
@@ -39,7 +62,7 @@ export default {
   name: 'BottomNav',
   data () {
     return {
-      bottomNav: 'recent'
+      bottomNav: 'board'
     }
   }
 }

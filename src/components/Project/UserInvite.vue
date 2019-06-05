@@ -6,6 +6,7 @@
       <template v-slot:activator="{ on }">
         <v-btn
           class="primary"
+          :class="{ 'mb-5' : $vuetify.breakpoint.smAndDown }"
           fab
           fixed
           bottom

@@ -17,11 +17,11 @@
       <v-card-title
         class="subtitle-1"
       >
-        Delete Form '{{ form.title }}'
+        Delete User?
       </v-card-title>
 
       <v-card-text>
-        Are you sure you wish to permanently delete this form?
+        Are you sure you wish to remove this user from your project?
       </v-card-text>
 
       <v-card-actions>
@@ -40,17 +40,16 @@
 
 <script>
 export default {
-  name: 'FormDelete',
-  props: ['form'],
+  name: 'UserDelete',
+  props: ['user'],
   data: () => ({
-    title: '',
-    loading: false,
-    dialog: false
+    dialog: false,
+    loading: false
   }),
   methods: {
     async remove () {
       this.loading = true
-      await this.$store.dispatch('forms/delete', this.form.id)
+      await this.$store.dispatch('permissions/delete', this.user.id)
       this.dialog = false
       this.$emit('submit', true)
       this.loading = false

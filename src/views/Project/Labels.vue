@@ -2,31 +2,10 @@
   <v-container
     :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
   >
-      <v-list v-if="loading">
-        <template v-for="(n, index) in 5">
-          <v-list-item :key="'list-item' + index">
-            <v-list-item-content>
-              <v-list-item-subtitle>
-                <v-card
-                  :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
-                  width="100%"
-                  height="20px"
-                  flat
-                />
-              </v-list-item-subtitle>
-              <v-list-item-title>
-                <v-card
-                  :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
-                  width="50%"
-                  height="20px"
-                  flat
-                />
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-divider :key="'list-divider' + index"/>
-        </template>
-      </v-list>
+    <v-subheader>
+      Labels
+    </v-subheader>
+      <list-skeleton v-if="loading"/>
       <v-list v-else-if="labels.length">
         <template v-for="label in labels">
           <v-list-item
@@ -64,6 +43,7 @@
 export default {
   name: 'Labels',
   components: {
+    ListSkeleton: () => import('@/components/Project/ListSkeleton'),
     Label: () => import('@/components/Project/Label.vue'),
     LabelCreate: () => import('@/components/Project/LabelCreate.vue'),
     LabelEdit: () => import('@/components/Project/LabelEdit.vue')

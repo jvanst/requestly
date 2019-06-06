@@ -32,7 +32,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import AuthAPI from '@/api/auth'
 
 export default {
   name: 'AppBarUserMenu',
@@ -51,7 +50,7 @@ export default {
   },
   methods: {
     async logout () {
-      await AuthAPI.logout()
+      this.$store.dispatch('logout')
       this.$router.replace('/')
     }
   }

@@ -2,34 +2,15 @@
   <v-container
     :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
   >
-    <v-list v-if="loading">
-      <template v-for="(n, index) in 5">
-        <v-list-item :key="'list-item' + index">
-          <v-list-item-content>
-            <v-list-item-subtitle>
-              <v-card
-                :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
-                width="100%"
-                height="20px"
-                flat
-              />
-            </v-list-item-subtitle>
-            <v-list-item-title>
-              <v-card
-                :color="$store.state.ui.dark ? 'grey darken-4' : 'grey lighten-4'"
-                width="50%"
-                height="20px"
-                flat
-              />
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider :key="'list-divider' + index"/>
-      </template>
-    </v-list>
+    <v-subheader>
+      Forms
+    </v-subheader>
+    <list-skeleton v-if="loading"/>
     <v-list v-else-if="forms.length">
       <template v-for="(form, i) in forms">
         <v-list-item
+          href="#edit"
+          @click.native="selectedForm = form; $refs.createForm.dialog = true;"
           :key="'form'+i"
         >
           <v-list-item-content>
@@ -57,11 +38,11 @@
       bottom
       right
       large
-      @click.native="$refs.createForm.dialog = true"
+      @click="selectedForm = undefined; $refs.createForm.dialog = true"
     >
       <v-icon>mdi-plus</v-icon>
     </v-btn>
-    <create-form ref="createForm"/>
+    <create-form ref="createForm" :form="selectedForm"/>
   </v-container>
 </template>
 
@@ -69,9 +50,11 @@
 export default {
   name: 'Forms',
   data: () => ({
-    loading: false
+    loading: false,
+    selectedForm: undefined
   }),
   components: {
+    ListSkeleton: () => import('@/components/Project/ListSkeleton'),
     CreateForm: () => import('@/components/Project/FormBuilder')
   },
   created () {

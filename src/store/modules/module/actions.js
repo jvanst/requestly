@@ -40,7 +40,7 @@ const actions = (resource) => ({
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
-      })
+      }, { root: true })
     }
   },
   async create (context, payload) {
@@ -51,7 +51,7 @@ const actions = (resource) => ({
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
-      })
+      }, { root: true })
     }
   },
   async put (context, { id, payload }) {
@@ -62,7 +62,7 @@ const actions = (resource) => ({
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
-      })
+      }, { root: true })
     }
   },
   async delete (context, id) {
@@ -73,7 +73,7 @@ const actions = (resource) => ({
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
-      })
+      }, { root: true })
     }
   }
 })

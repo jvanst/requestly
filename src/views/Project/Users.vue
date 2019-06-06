@@ -1,56 +1,66 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-card-title>
-        <v-icon left>mdi-information-outline</v-icon> Users
-      </v-card-title>
-      <v-card-text>
-        Here you can manage users, permissions and invitations.
-      </v-card-text>
-    </v-card>
-    <v-card class="mt-3">
-      <v-simple-table>
-        <thead>
-          <tr>
-            <th class="text-xs-left">Name</th>
-            <th class="text-xs-left">Role</th>
-            <th class="text-xs-left">Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, index) in users" :key="'user'+index">
-            <td>{{ user.uid }}</td>
-            <td>{{ user.role | capitalizeFirstLetter }}</td>
-            <td>{{ user.active ? 'Active' : 'Inactive'}}</td>
-          </tr>
-        </tbody>
-      </v-simple-table>
-    </v-card>
-    <!-- <v-card class="mt-3" v-if="invites.length">
-      <v-card-title class="title">
-        Manage invited users
-      </v-card-title>
-      <v-card-text>
-        Users you have invited to Requestly and have not yet accepted.
-      </v-card-text>
-      <v-simple-table>
-        <thead>
-          <tr>
-            <th class="text-xs-left">Email</th>
-            <th class="text-xs-left">Role</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, index) in invites" :key="'user'+index">
-            <td>{{ user.id }}</td>
-            <td>{{ user.role | capitalizeFirstLetter }}</td>
-            <td class="text-xs-right"><user-invite-cancel :invite="user"/></td>
-          </tr>
-        </tbody>
-      </v-simple-table>
-    </v-card> -->
+  <v-container
+    :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
+  >
+    <v-subheader>
+      Users
+    </v-subheader>
+    <list-skeleton v-if="loadingPermissions"/>
+    <v-list v-else>
+      <template v-for="user in users">
+        <v-list-item
+          href="#edit"
+          @click.native="selectedUser = user; $refs.userManage.dialog = true;"
+          :key="'list-item' + user.id">
+          <v-list-item-avatar>
+            <v-avatar size="36">
+              <v-img :src="userById(user.id).photoURL"/>
+            </v-avatar>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ userById(user.id).email }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              {{ user.role | capitalizeFirstLetter }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider :key="'list-divider' + user.id"/>
+      </template>
+    </v-list>
+
+    <v-subheader>
+      Invited Users
+    </v-subheader>
+    <list-skeleton v-if="loadingInvites"/>
+    <v-list v-else-if="invites.length">
+      <template v-for="user in invites">
+        <v-list-item
+          href="#edit"
+          @click.native="selectedInvite = user; $refs.cancelInvite.dialog = true;"
+          :key="'list-item' + user.id">
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ user.email }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              {{ user.role | capitalizeFirstLetter }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider :key="'list-divider' + user.id"/>
+      </template>
+    </v-list>
+    <v-list v-else>
+      <v-subheader>
+        No outstanding invitations.
+      </v-subheader>
+    </v-list>
+
     <user-invite/>
+    <user-invite-cancel ref="cancelInvite" :invite="selectedInvite"/>
+    <user-manage ref="userManage" :user="selectedUser"/>
   </v-container>
 </template>
 
@@ -58,9 +68,18 @@
 export default {
   name: 'Users',
   components: {
-    UserInvite: () => import('@/components/Project/UserInvite')
-    // UserInviteCancel: () => import('@/components/Project/UserInviteCancel')
+    ListSkeleton: () => import('@/components/Project/ListSkeleton'),
+    UserManage: () => import('@/components/Project/UserManage'),
+    UserInvite: () => import('@/components/Project/UserInvite'),
+    UserInviteCancel: () => import('@/components/Project/UserInviteCancel')
   },
+  data: () => ({
+    loadingInvites: false,
+    loadingPermissions: false,
+    loadingUser: false,
+    selectedUser: undefined,
+    selectedInvite: undefined
+  }),
   created () {
     this.fetchInvites()
     this.fetchPermissions()
@@ -77,11 +96,24 @@ export default {
     }
   },
   methods: {
+    userById (id) {
+      if (this.$store.getters['users/getById'](id)) {
+        return this.$store.getters['users/getById'](id)
+      }
+      return { email: '', photoURL: '' }
+    },
     async fetchInvites () {
-      this.$store.dispatch('invites/fetch', this.$store.state.projects.activeId)
+      this.loadingInvites = true
+      await this.$store.dispatch('invites/fetch', this.$store.state.projects.activeId)
+      this.loadingInvites = false
     },
     async fetchPermissions () {
-      this.$store.dispatch('permissions/fetch', this.$store.state.projects.activeId)
+      this.loadingPermissions = true
+      await this.$store.dispatch('permissions/fetch', this.$store.state.projects.activeId)
+      this.$store.state.permissions.data.forEach((perm) => {
+        this.$store.dispatch('users/fetchById', perm.id)
+      })
+      this.loadingPermissions = false
     }
   }
 }

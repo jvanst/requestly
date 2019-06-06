@@ -28,6 +28,7 @@
         <v-text-field
           label="Email"
           v-model="email"
+          outlined
         >
         </v-text-field>
 
@@ -35,6 +36,7 @@
           label='Role'
           v-model="role"
           :items="['admin', 'viewer']"
+          outlined
         />
 
       </v-card-text>

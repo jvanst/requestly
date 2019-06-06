@@ -14,16 +14,27 @@
       <v-app-bar-nav-icon @click="dialog = false">
         <v-icon>mdi-close</v-icon>
       </v-app-bar-nav-icon>
-      <v-toolbar-title>
+      <v-toolbar-title v-if="editing">
+        Edit Form
+      </v-toolbar-title>
+      <v-toolbar-title v-else>
         Create Form
       </v-toolbar-title>
       <v-spacer/>
       <v-toolbar-items>
         <v-btn
           text
+          @click="update()"
+          :loading="loading"
+          v-if="editing && $vuetify.breakpoint.smAndDown"
+        >
+          Update
+        </v-btn>
+        <v-btn
+          text
           @click="create()"
           :loading="loading"
-          v-if="$vuetify.breakpoint.smAndDown"
+          v-else-if="$vuetify.breakpoint.smAndDown"
         >
           Create
         </v-btn>
@@ -33,13 +44,13 @@
     <v-card-text>
       <v-text-field
         label="Title"
-        v-model="request.title"
+        v-model="form.title"
         outlined
       ></v-text-field>
 
       <v-textarea
         label="Description"
-        v-model="request.description"
+        v-model="form.description"
         outlined
       ></v-textarea>
 
@@ -93,16 +104,16 @@
             </v-card>
           </v-dialog>
       </v-subheader>
-      
-      <v-list v-if="!request.steps.length" class="pt-0">
+
+      <v-list v-if="!form.steps.length" class="pt-0">
         <v-subheader>
           You have no steps yet.
         </v-subheader>
       </v-list>
 
-      <v-expansion-panels v-else>
+      <v-expansion-panels v-else accordion :value="true">
         <v-expansion-panel
-          v-for="(step, i) in request.steps"
+          v-for="(step, i) in form.steps"
           :key="'step'+i"
         >
           <v-expansion-panel-header>
@@ -122,7 +133,7 @@
       <v-divider/>
 
       <v-subheader>
-        Labels - Pick labels that will be automatically applied.
+        Automatically apply these labels.
       </v-subheader>
 
       <div v-if="loadingLabels">
@@ -139,7 +150,7 @@
           >
           {{ label.title }}
           <v-icon
-            v-if="request.labels.find(e => e === label.id)"
+            v-if="form.labels.find(e => e === label.id)"
             right
           >mdi-check-circle-outline</v-icon>
         </v-btn>
@@ -147,8 +158,21 @@
     </v-card-text>
 
     <v-card-actions>
+      <form-delete
+        v-if="editing"
+        :form="form"
+        @submit="() => (dialog = false)"
+      />
       <v-spacer/>
       <v-btn
+        v-if="editing && !$vuetify.breakpoint.smAndDown"
+        color="primary"
+        @click.native="update()"
+      >
+        Update
+      </v-btn>
+      <v-btn
+        v-else-if="!editing && !$vuetify.breakpoint.smAndDown"
         color="primary"
         @click.native="create()"
       >
@@ -161,42 +185,47 @@
 
 <script>
 export default {
-  props: ['id'],
+  props: {
+    form: {
+      Type: Object,
+      default: () => ({
+        title: '',
+        description: '',
+        labels: [],
+        steps: []
+      })
+    }
+  },
   name: 'FormBuilder',
   components: {
     FieldBuilder: () => import('@/components/Project/FieldBuilder'),
     FormDelete: () => import('@/components/Project/FormDelete')
   },
   data: () => ({
-    editing: true,
     loading: false,
     loadingLabels: false,
     dialog: false,
     addDialog: false,
     deleteDialog: false,
-    stepTitle: '',
-    request: {
-      title: '',
-      description: '',
-      labels: [],
-      steps: []
-    }
+    stepTitle: ''
   }),
   computed: {
-    form () {
-      return this.$store.getters['forms/getById'](this.id)
-    },
     labels () {
       return this.$store.state.labels.data
+    },
+    editing () {
+      if (this.form.id) {
+        return true
+      }
+      return false
     }
   },
   created () {
-    this.fetch()
     this.fetchLabels()
   },
   methods: {
     addStep () {
-      this.request.steps.push({
+      this.form.steps.push({
         title: this.stepTitle,
         fields: []
       })
@@ -204,44 +233,38 @@ export default {
       this.addDialog = false
     },
     removeStep (index) {
-      this.request.steps.splice(index, 1)
+      this.form.steps.splice(index, 1)
     },
     toggleLabel (id) {
-      let label = this.request.labels.findIndex(e => e === id)
+      let label = this.form.labels.findIndex(e => e === id)
 
       if (label !== -1) {
-        this.request.labels.splice(label, 1)
+        this.form.labels.splice(label, 1)
         return
       }
-      this.request.labels.push(id)
+      this.form.labels.push(id)
     },
     async fetchLabels () {
       this.loadingLabels = true
       await this.$store.dispatch('labels/fetch')
       this.loadingLabels = false
     },
-    async fetch () {
-      if (!this.id) {
-        return
-      }
-      this.editing = true
-      this.loading = true
-      await this.$store.dispatch('forms/fetchById', this.id)
-      this.request = this.form
-      this.loading = false
-    },
     async create () {
       this.loading = true
-      await this.$store.dispatch('forms/create', this.request)
+      await this.$store.dispatch('forms/create', this.form)
       this.loading = false
       this.dialog = false
-      this.$router.replace({ name: 'Forms' })
     },
     async update () {
       this.loading = true
-      await this.$store.dispatch('forms/put', { id: this.id, payload: this.request })
+      const payload = Object.assign({}, this.form)
+      delete payload.id // Remove id from beind submitted
+      await this.$store.dispatch('forms/put', {
+        id: this.form.id,
+        payload
+      })
       this.loading = false
-      this.$router.replace({ name: 'Forms' })
+      this.dialog = false
     }
   }
 }

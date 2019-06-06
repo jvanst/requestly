@@ -3,15 +3,6 @@
       v-model="dialog"
       width="350"
     >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          icon
-          text
-          v-on="on"
-        >
-          <v-icon>mdi-cancel</v-icon>
-        </v-btn>
-      </template>
     <v-card>
       <v-card-title
         class="subtitle-1"
@@ -40,7 +31,14 @@
 <script>
 export default {
   name: 'UserInviteCancel',
-  props: ['invite'],
+  props: {
+    invite: {
+      Type: Object,
+      default: () => ({
+        email: ''
+      })
+    }
+  },
   data: () => ({
     dialog: false,
     loading: false

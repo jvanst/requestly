@@ -2,14 +2,14 @@
   <v-container
     :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
   >
-    <v-subheader>
+    <v-subheader v-if="!$vuetify.breakpoint.smAndDown">
       Users
     </v-subheader>
     <list-skeleton v-if="loadingPermissions"/>
     <v-list v-else>
       <template v-for="user in users">
         <v-list-item
-          href="#edit"
+          :href="$route.hash"
           @click.native="selectedUser = user; $refs.userManage.dialog = true;"
           :key="'list-item' + user.id">
           <v-list-item-avatar>
@@ -37,7 +37,7 @@
     <v-list v-else-if="invites.length">
       <template v-for="user in invites">
         <v-list-item
-          href="#edit"
+          :href="$route.hash"
           @click.native="selectedInvite = user; $refs.cancelInvite.dialog = true;"
           :key="'list-item' + user.id">
           <v-list-item-content>
@@ -58,7 +58,9 @@
       </v-subheader>
     </v-list>
 
-    <user-invite/>
+    <v-fab-transition>
+      <user-invite/>
+    </v-fab-transition>
     <user-invite-cancel ref="cancelInvite" :invite="selectedInvite"/>
     <user-manage ref="userManage" :user="selectedUser"/>
   </v-container>

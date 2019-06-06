@@ -5,7 +5,7 @@
     :min-width="250"
     >
     <template v-slot:activator="{ on }">
-      <v-avatar v-on="on" size="34">
+      <v-avatar v-on="on" :size="size">
         <v-img v-if="user.photoURL" :src="user.photoURL" />
         <v-icon v-else>mdi-account-circle</v-icon>
       </v-avatar>
@@ -35,6 +35,12 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'AppBarUserMenu',
+  props: {
+    size: {
+      type: Number,
+      default: 32
+    }
+  },
   computed: {
     ...mapState({
       user: state => state.auth.user

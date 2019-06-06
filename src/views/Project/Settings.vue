@@ -2,11 +2,11 @@
   <v-container
     :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
   >
-    <v-subheader>
+    <v-subheader v-if="!$vuetify.breakpoint.smAndDown">
       Project Settings
     </v-subheader>
     <v-list>
-      <v-list-item href="#" @click.stop="deleteDialog = true">
+      <v-list-item :href="$route.hash" @click.stop="deleteDialog = true">
         <v-list-tile-action style="width:38px">
           <v-icon>mdi-delete</v-icon>
         </v-list-tile-action>

@@ -5,7 +5,6 @@
     <app-bar-mobile v-else/>
 
     <nav-drawer v-if="$vuetify.breakpoint.mdAndUp"/>
-    <nav-drawer-mobile v-else/>
 
     <v-content id="content">
       <router-view />
@@ -23,7 +22,6 @@ export default {
     AppBar: () => import(/* webpackPreload: true */ '@/components/Project/AppBar.vue'),
     AppBarMobile: () => import(/* webpackPreload: true */ '@/components/Project/AppBarMobile.vue'),
     NavDrawer: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawer.vue'),
-    NavDrawerMobile: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawerMobile.vue'),
     BottomNav: () => import(/* webpackPreload: true */ '@/components/Project/BottomNav.vue')
   },
   created () {

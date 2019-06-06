@@ -5,12 +5,6 @@
     tile
     flat
   >
-    <v-app-bar-nav-icon
-      v-if="$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
-      @click.native="toggleMobileMenu()"
-    >
-      <v-icon>mdi-menu</v-icon>
-    </v-app-bar-nav-icon>
     <v-toolbar-items>
       <v-menu
         v-model="projectMenu"
@@ -45,8 +39,47 @@
         </v-card>
       </v-menu>
     </v-toolbar-items>
+
+    <template v-slot:extension v-if="showTabMenu()">
+      <v-tabs
+        v-model="projectTabs"
+        centered
+        grow
+        dense
+      >
+        <v-tab
+          href="#labels"
+          :to="{ name: 'Labels' }"
+          active-class=""
+        >
+          Labels
+        </v-tab>
+        <v-tab
+          href="#forms"
+          :to="{ name: 'Forms' }"
+          active-class=""
+        >
+          Forms
+        </v-tab>
+        <v-tab
+          href="#users"
+          :to="{ name: 'Users' }"
+          active-class=""
+        >
+          Users
+        </v-tab>
+        <v-tab
+          href="#settings"
+          :to="{ name: 'Settings' }"
+          active-class=""
+        >
+          Settings
+        </v-tab>
+      </v-tabs>
+    </template>
+
     <v-spacer/>
-    <user-menu class="ml-3"/>
+    <app-bar-user-menu-mobile-sheet class="ml-3" :size="28" />
   </v-app-bar>
 </template>
 
@@ -54,10 +87,11 @@
 export default {
   name: 'AppBarMobile',
   components: {
-    UserMenu: () => import('@/components/AppBarUserMenu.vue')
+    AppBarUserMenuMobileSheet: () => import('@/components/AppBarUserMenuMobileSheet')
   },
   data: () => ({
-    projectMenu: false
+    projectMenu: false,
+    projectTabs: 'labels'
   }),
   computed: {
     projectId: {
@@ -70,8 +104,14 @@ export default {
     }
   },
   methods: {
-    toggleMobileMenu () {
-      this.$store.commit('TOGGLE_MOBILE_MENU')
+    showTabMenu () {
+      if (this.$route.name === 'Labels' ||
+        this.$route.name === 'Forms' ||
+        this.$route.name === 'Settings' ||
+        this.$route.name === 'Users') {
+        return true
+      }
+      return false
     }
   }
 }

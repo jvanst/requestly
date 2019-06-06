@@ -20,40 +20,22 @@
         text
         value="board"
         :to="{ name: 'Board' }"
+        exact
       >
         <span>Board</span>
         <v-icon>mdi-view-dashboard-outline</v-icon>
       </v-btn>
 
-      <!-- <v-btn
+      <v-btn
+        v-if="$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
         color="teal"
         text
-        value="labels"
+        value="project"
         :to="{ name: 'Labels' }"
       >
-        <span>Labels</span>
-        <v-icon>mdi-label-outline</v-icon>
+        <span>Project</span>
+        <v-icon>mdi-folder-outline</v-icon>
       </v-btn>
-
-      <v-btn
-        color="teal"
-        text
-        value="forms"
-        :to="{ name: 'Forms' }"
-      >
-        <span>Forms</span>
-        <v-icon>mdi-shape</v-icon>
-      </v-btn>
-
-      <v-btn
-        color="teal"
-        text
-        value="users"
-        :to="{ name: 'Users' }"
-      >
-        <span>Users</span>
-        <v-icon>mdi-account-supervisor</v-icon>
-      </v-btn> -->
 
     </v-bottom-navigation>
 </template>

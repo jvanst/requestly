@@ -2,14 +2,14 @@
   <v-container
     :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
   >
-    <v-subheader>
+    <v-subheader v-if="!$vuetify.breakpoint.smAndDown">
       Forms
     </v-subheader>
     <list-skeleton v-if="loading"/>
     <v-list v-else-if="forms.length">
       <template v-for="(form, i) in forms">
         <v-list-item
-          href="#edit"
+          :href="$route.hash"
           @click.native="selectedForm = form; $refs.createForm.dialog = true;"
           :key="'form'+i"
         >
@@ -42,7 +42,9 @@
     >
       <v-icon>mdi-plus</v-icon>
     </v-btn>
-    <create-form ref="createForm" :form="selectedForm"/>
+    <v-fab-transition>
+      <create-form ref="createForm" :form="selectedForm"/>
+    </v-fab-transition>
   </v-container>
 </template>
 

@@ -2,14 +2,14 @@
   <v-container
     :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
   >
-    <v-subheader>
+    <v-subheader v-if="!$vuetify.breakpoint.smAndDown">
       Labels
     </v-subheader>
       <list-skeleton v-if="loading"/>
       <v-list v-else-if="labels.length">
         <template v-for="label in labels">
           <v-list-item
-            href="#edit"
+            :href="$route.hash"
             @click.native="selectedLabel = label; $refs.edit.dialog = true;"
             :key="'list-item' + label.id">
             <v-list-item-content>
@@ -34,7 +34,9 @@
           You have no labels. Create one with the plus button below.
         </v-subheader>
       </v-list>
-    <label-create/>
+    <v-fab-transition>
+      <label-create/>
+    </v-fab-transition>
     <label-edit :label="selectedLabel" ref="edit"/>
   </v-container>
 </template>

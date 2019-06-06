@@ -1,25 +1,43 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-list v-if="loading">
-        LOADING
-      </v-list>
-      <v-list v-else>
-        <template v-for="request in requests">
-          <v-list-item :key="request.id" :to="{ name: 'Request', params: { id: request.id } }">
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ request.title }}
-              </v-list-item-title>
-              <v-list-item-subtitle>
-                {{ request.title }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-          <v-divider :key="'divider-'+request.id"/>
-        </template>
-      </v-list>
-    </v-card>
+  <v-container
+    :class="{ 'px-0' : $vuetify.breakpoint.smAndDown }"
+  >
+    <v-subheader>
+      Requests
+    </v-subheader>
+    <list-skeleton v-if="loading"/>
+    <v-list v-else-if="requests.length">
+      <template v-for="request in requests">
+        <v-list-item :key="request.id" :to="{ name: 'Request', params: { id: request.id } }">
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ request.title }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              {{ request.title }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider :key="'divider-'+request.id"/>
+      </template>
+    </v-list>
+    <v-list v-else>
+      <v-subheader>
+        No requests. Create one with the plus button below.
+      </v-subheader>
+    </v-list>
+    <v-btn
+      :to="{ name: 'Create Request' }"
+      class="primary"
+      :class="{ 'mb-5' : $vuetify.breakpoint.smAndDown }"
+      fab
+      fixed
+      bottom
+      right
+      large
+    >
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
   </v-container>
 </template>
 
@@ -29,6 +47,9 @@ export default {
   data: () => ({
     loading: false
   }),
+  components: {
+    ListSkeleton: () => import('@/components/Project/ListSkeleton')
+  },
   computed: {
     requests () {
       return this.$store.state.requests.data

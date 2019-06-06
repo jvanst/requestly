@@ -83,7 +83,7 @@ const router = new Router({
         {
           path: 'request/:id/',
           name: 'Request',
-          component: () => import(/* webpackChunkName: "request" */ './views/Project/Request.vue'),
+          component: () => import(/* webpackChunkName: "request" */ './views/Project/RequestSingle.vue'),
           props: true
         },
         {

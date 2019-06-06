@@ -32,10 +32,14 @@ export default new Vuex.Store({
       color: 'info'
     },
     ui: {
-      dark: JSON.parse(localStorage.getItem('dark'))
+      dark: JSON.parse(localStorage.getItem('dark')),
+      mobileMenu: false
     }
   },
   mutations: {
+    TOGGLE_MOBILE_MENU (state) {
+      state.ui.mobileMenu = !state.ui.mobileMenu
+    },
     SET_DARK (state, value) {
       state.ui.dark = value
       localStorage.setItem('dark', value)

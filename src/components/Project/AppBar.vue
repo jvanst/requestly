@@ -13,39 +13,38 @@
     </v-toolbar-title>
 
     <v-toolbar-items class="ml-4">
+      <v-menu
+        v-model="projectMenu"
+        v-if="$store.state.projects.data.length"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn small text v-on="on">
+            {{ $store.getters['projects/getById'](projectId).title }}
+            <v-icon right class="">mdi-menu-down</v-icon>
+          </v-btn>
+        </template>
 
-        <v-menu
-          v-model="projectMenu"
-          v-if="$store.state.projects.data.length"
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn small text v-on="on">
-              {{ $store.getters['projects/getById'](projectId).title }}
-              <v-icon right class="">mdi-menu-down</v-icon>
-            </v-btn>
-          </template>
-
-          <v-card>
-            <v-list dense>
-              <v-list-item :to="{ name: 'Dashboard' }">
-                View all projects
+        <v-card>
+          <v-list dense>
+            <v-list-item :to="{ name: 'Dashboard' }">
+              View all projects
+            </v-list-item>
+            <v-divider/>
+            <v-subheader>
+              Your Projects
+            </v-subheader>
+            <template v-for="project in $store.state.projects.data">
+              <v-list-item
+                :key="'tile'+project.id"
+                :to="{ name: 'Board', params: { projectId: project.id }}"
+                @click="$router.go({ name: 'Board', params: { projectId: project.id }})"
+              >
+                {{ project.title }}
               </v-list-item>
-              <v-divider/>
-              <v-subheader>
-                Your Projects
-              </v-subheader>
-              <template v-for="project in $store.state.projects.data">
-                <v-list-item
-                  :key="'tile'+project.id"
-                  :to="{ name: 'Board', params: { projectId: project.id }}"
-                  @click="$router.go({ name: 'Board', params: { projectId: project.id }})"
-                >
-                  {{ project.title }}
-                </v-list-item>
-              </template>
-            </v-list>
-          </v-card>
-        </v-menu>
+            </template>
+          </v-list>
+        </v-card>
+      </v-menu>
     </v-toolbar-items>
     <v-spacer/>
     <user-menu class="ml-3"/>

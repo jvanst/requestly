@@ -4,15 +4,6 @@
       v-model="bottomNav"
       grow
     >
-      <v-btn
-        color="teal"
-        text
-        value="board"
-        :to="{ name: 'Board' }"
-      >
-        <span>Board</span>
-        <v-icon>mdi-view-dashboard-outline</v-icon>
-      </v-btn>
 
       <v-btn
         color="teal"
@@ -25,6 +16,16 @@
       </v-btn>
 
       <v-btn
+        color="teal"
+        text
+        value="board"
+        :to="{ name: 'Board' }"
+      >
+        <span>Board</span>
+        <v-icon>mdi-view-dashboard-outline</v-icon>
+      </v-btn>
+
+      <!-- <v-btn
         color="teal"
         text
         value="labels"
@@ -52,7 +53,7 @@
       >
         <span>Users</span>
         <v-icon>mdi-account-supervisor</v-icon>
-      </v-btn>
+      </v-btn> -->
 
     </v-bottom-navigation>
 </template>

@@ -15,6 +15,7 @@
         :rules="field.required ? [v => !!v || field.label + ' is required'] : ''"
         :prefix="field.prefix"
         class="mb-3"
+        outlined
       ></v-textarea>
 
       <!-- if textfield -->
@@ -27,6 +28,7 @@
         :rules="field.required ? [v => !!v || field.label + ' is required'] : ''"
         :prefix="field.prefix"
         class="mb-3"
+        outlined
       ></v-text-field>
 
       <!-- if fileupload -->
@@ -35,6 +37,7 @@
         :label="field.label"
         :accepts="field.accepts"
         :required="field.required"
+        outlined
       />
 
     </v-flex>

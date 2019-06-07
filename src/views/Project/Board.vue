@@ -1,5 +1,10 @@
 <template>
-  <v-container fill-height fluid class="pa-0">
+  <v-container
+    fill-height
+    fluid
+    class="pa-0"
+    style="overflow-x:scroll"
+    >
     <v-layout column>
       <v-flex v-if="loading" shrink>
         <v-toolbar
@@ -8,7 +13,7 @@
           class="transparent"
         />
       </v-flex>
-      <v-flex v-else shrink>
+      <v-flex v-else-if="!$vuetify.breakpoint.smAndDown" shrink>
         <BoardToolbar/>
       </v-flex>
       <v-flex v-if="loading" grow>
@@ -26,7 +31,7 @@
             v-for="(pipelines, i) in pipelines"
             :key="'flex-pipelines'+i"
             pa-1
-            style="max-width:300px"
+            style="max-width:300px;min-width:300px"
             fill-height
           >
             <board-pipeline :pipeline="pipelines"/>

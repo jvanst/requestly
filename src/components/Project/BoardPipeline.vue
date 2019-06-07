@@ -34,7 +34,7 @@
         class="layout column ma-2"
         v-model="requests"
         group="requests"
-        style="height: 90%;"
+        style="height:100%"
         @change="handleChange"
         :disabled="!$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
       >

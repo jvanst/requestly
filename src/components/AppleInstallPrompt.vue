@@ -41,7 +41,7 @@ export default {
   computed: {
     dialog: {
       get () {
-        return this.$store.state.ui.showAppleInstallPrompt
+        return this.$store.state.app.showAppleInstallPrompt
       },
       set (value) {
         this.$store.commit('SHOW_APPLE_INSTALL_PROMPT', value)

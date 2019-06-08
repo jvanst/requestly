@@ -5,7 +5,7 @@
         <v-list-item-content>
           <v-list-item-subtitle>
             <v-card
-              :color="$store.state.ui.dark ? 'grey darken-2' : 'grey lighten-4'"
+              :color="$store.state.app.dark ? 'grey darken-2' : 'grey lighten-4'"
               width="100%"
               height="20px"
               flat
@@ -13,7 +13,7 @@
           </v-list-item-subtitle>
           <v-list-item-title>
             <v-card
-              :color="$store.state.ui.dark ? 'grey darken-2' : 'grey lighten-4'"
+              :color="$store.state.app.dark ? 'grey darken-2' : 'grey lighten-4'"
               width="50%"
               height="20px"
               flat

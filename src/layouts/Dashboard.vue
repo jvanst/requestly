@@ -1,8 +1,8 @@
 <template>
-  <v-app :dark="$store.state.ui.dark" data-server-rendered="true">
+  <v-app :dark="$store.state.app.dark" data-server-rendered="true">
     <app-bar/>
     <v-content id="content" class="teal" style="overflow:hidden">
-      <new-content/>
+      <new-content-banner/>
       <router-view />
     </v-content>
   </v-app>
@@ -13,7 +13,7 @@ export default {
   name: 'Project',
   components: {
     AppBar: () => import(/* webpackPreload: true */ '@/components/Dashboard/AppBar.vue'),
-    NewContent: () => import('@/components/NewContentSW')
+    NewContentBanner: () => import(/* webpackPreload: true */ '@/components/NewContentBanner')
   },
   data: () => ({
     loading: false

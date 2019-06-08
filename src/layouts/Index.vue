@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="$store.state.ui.dark" data-server-rendered="true">
+  <v-app :dark="$store.state.app.dark" data-server-rendered="true">
     <app-bar/>
     <v-content id="content" class="teal" style="overflow:hidden">
       <router-view />
@@ -11,7 +11,7 @@
 export default {
   name: 'Project',
   components: {
-    AppBar: () => import('@/components/Index/AppBar.vue')
+    AppBar: () => import(/* webpackPreload: true */ '@/components/Index/AppBar.vue')
   }
 }
 </script>

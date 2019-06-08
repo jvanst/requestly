@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="$store.state.ui.dark" data-server-rendered="true">
+  <v-app :dark="$store.state.app.dark" data-server-rendered="true">
     <router-view />
     <snack-bar/>
     <apple-install-prompt/>

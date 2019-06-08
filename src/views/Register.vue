@@ -71,7 +71,7 @@
               <v-flex xs12 class="text-xs-center pt-4">
                 <router-link
                   to="/login"
-                  :class="{ 'black--text': !$store.state.ui.dark, 'white--text': $store.state.ui.dark }"
+                  :class="{ 'black--text': !$store.state.app.dark, 'white--text': $store.state.app.dark }"
                   >Back to login</router-link>
               </v-flex>
             </v-layout>

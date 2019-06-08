@@ -11,7 +11,8 @@
 
     <v-spacer/>
 
-    <user-menu v-if="$store.state.auth.isLoggedIn" class="ml-3"/>
+    <user-menu v-if="$vuetify.breakpoint.mdAndUp" class="ml-3"/>
+    <app-bar-user-menu-mobile-sheet v-else/>
 
   </v-app-bar>
 </template>
@@ -22,7 +23,8 @@ import { mapState } from 'vuex'
 export default {
   name: 'AppBar',
   components: {
-    UserMenu: () => import('@/components/AppBarUserMenu.vue')
+    UserMenu: () => import('@/components/AppBarUserMenu.vue'),
+    AppBarUserMenuMobileSheet: () => import('@/components/AppBarUserMenuMobileSheet')
   },
   computed: {
     ...mapState({

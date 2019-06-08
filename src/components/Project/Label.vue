@@ -6,6 +6,7 @@
         label
         dark
         v-on="on"
+        :small="$vuetify.breakpoint.smAndDown"
       >
         <b>{{ label.title }}</b>
       </v-chip>

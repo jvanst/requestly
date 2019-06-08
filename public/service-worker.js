@@ -18,3 +18,7 @@ workbox.routing.registerNavigationRoute('/index.html', {
     new RegExp('/.well-known')
   ]
 })
+
+addEventListener('message', messageEvent => {
+  if (messageEvent.data === 'skipWaiting') return self.skipWaiting()
+})

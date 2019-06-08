@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
       console.log('New content is downloading.')
     },
     updated (reg) {
-      store.commit(`SET_SW_FOR_NEW_CONTENT`, reg)
+      store.commit(`SET_NEW_CONTENT_AVAILABLE`, reg)
       console.log('New content is available; please refresh.')
     },
     offline () {
@@ -30,3 +30,12 @@ if (process.env.NODE_ENV === 'production') {
     }
   })
 }
+
+let refreshing = false
+// This is triggered when a new service worker take over
+navigator.serviceWorker.addEventListener('controllerchange', () => {
+  if (refreshing) return
+  refreshing = true
+
+  window.location.reload()
+})

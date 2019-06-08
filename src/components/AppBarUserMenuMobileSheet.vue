@@ -63,7 +63,7 @@ export default {
     }),
     dark: {
       get () {
-        return this.$store.state.ui.dark
+        return this.$store.state.app.dark
       },
       set (value) {
         this.$store.commit('SET_DARK', value)

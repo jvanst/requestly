@@ -4,7 +4,6 @@
     <v-content id="content" class="teal" style="overflow:hidden">
       <router-view />
     </v-content>
-    <snack-bar/>
   </v-app>
 </template>
 
@@ -12,8 +11,7 @@
 export default {
   name: 'Project',
   components: {
-    AppBar: () => import('@/components/Index/AppBar.vue'),
-    SnackBar: () => import('@/components/SnackBar.vue')
+    AppBar: () => import('@/components/Index/AppBar.vue')
   }
 }
 </script>

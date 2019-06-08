@@ -3,7 +3,7 @@
     app
     dense
     tile
-    flat
+    elevate-on-scroll
   >
     <v-toolbar-items>
       <v-menu

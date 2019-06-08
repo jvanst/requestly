@@ -2,9 +2,9 @@
   <v-app :dark="$store.state.ui.dark" data-server-rendered="true">
     <app-bar/>
     <v-content id="content" class="teal" style="overflow:hidden">
+      <new-content/>
       <router-view />
     </v-content>
-    <snack-bar/>
   </v-app>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   name: 'Project',
   components: {
     AppBar: () => import(/* webpackPreload: true */ '@/components/Dashboard/AppBar.vue'),
-    SnackBar: () => import('@/components/SnackBar.vue')
+    NewContent: () => import('@/components/NewContentSW')
   },
   data: () => ({
     loading: false

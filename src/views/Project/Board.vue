@@ -1,5 +1,4 @@
 <template>
-
     <v-layout column fill-height>
       <v-flex v-if="loading" shrink>
         <v-toolbar
@@ -34,7 +33,6 @@
         </draggable>
       </v-flex>
     </v-layout>
-
 </template>
 
 <script>

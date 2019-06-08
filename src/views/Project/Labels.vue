@@ -9,7 +9,7 @@
       <v-list v-else-if="labels.length">
         <template v-for="label in labels">
           <v-list-item
-            :href="$route.hash"
+            href="#edit"
             @click.native="selectedLabel = label; $refs.edit.dialog = true;"
             :key="'list-item' + label.id">
             <v-list-item-content>

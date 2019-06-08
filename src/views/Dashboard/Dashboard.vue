@@ -1,6 +1,8 @@
 <template>
-  <v-container v-bind="{ [`grid-list-${$vuetify.breakpoint.name}`]: true }">
-    <!-- <div id="skew-background-1" /> -->
+  <v-container
+    v-bind="{ [`grid-list-${$vuetify.breakpoint.name}`]: true }"
+  >
+    <div id="skew-background-1" />
     <v-layout row wrap>
       <v-flex xs12>
         <v-subheader class="white--text">

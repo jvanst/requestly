@@ -18,6 +18,11 @@
     <v-divider/>
     <v-card-actions class="pb-1">
       <request-labels :request="request"/>
+      <v-spacer/>
+      <v-icon
+        class="card-drag-handle"
+        v-if="$vuetify.breakpoint.smAndDown"
+      >mdi-drag</v-icon>
     </v-card-actions>
   </v-card>
 </template>

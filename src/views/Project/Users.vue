@@ -9,7 +9,7 @@
     <v-list v-else>
       <template v-for="user in users">
         <v-list-item
-          :href="$route.hash"
+          href="#edit"
           @click.native="selectedUser = user; $refs.userManage.dialog = true;"
           :key="'list-item' + user.id">
           <v-list-item-avatar>
@@ -33,11 +33,10 @@
     <v-subheader>
       Invited Users
     </v-subheader>
-    <list-skeleton v-if="loadingInvites"/>
-    <v-list v-else-if="invites.length">
+    <v-list v-if="!loadingInvites && invites.length">
       <template v-for="user in invites">
         <v-list-item
-          :href="$route.hash"
+          href="#edit"
           @click.native="selectedInvite = user; $refs.cancelInvite.dialog = true;"
           :key="'list-item' + user.id">
           <v-list-item-content>

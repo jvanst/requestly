@@ -26,6 +26,9 @@ export default new Vuex.Store({
     auth
   },
   state: {
+    sw: {
+      SWRegistrationForNewContent: null
+    },
     snackbar: {
       visible: false,
       message: '',
@@ -33,7 +36,8 @@ export default new Vuex.Store({
     },
     ui: {
       dark: JSON.parse(localStorage.getItem('dark')),
-      mobileMenu: false
+      mobileMenu: false,
+      showAppleInstallPrompt: false
     }
   },
   mutations: {
@@ -49,6 +53,12 @@ export default new Vuex.Store({
       state.snackbar.message = message
       state.snackbar.color = color
       state.snackbar.visible = true
+    },
+    SHOW_APPLE_INSTALL_PROMPT (state, value) {
+      state.ui.showAppleInstallPrompt = value
+    },
+    SET_SW_FOR_NEW_CONTENT (state, value) {
+      state.SWRegistrationForNewContent = value
     }
   }
 })

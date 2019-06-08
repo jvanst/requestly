@@ -6,10 +6,10 @@ import router from './router'
 import store from './store/store'
 import vuetify from './plugins/vuetify'
 
-import './registerServiceWorker'
-
 import '@/firebase/init'
 import '@/firebase/authentication'
+import '@/misc/registerServiceWorker'
+import '@/misc/handle-apple-install'
 
 import './filters/string'
 import './filters/date'

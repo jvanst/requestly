@@ -9,7 +9,7 @@
     <v-list v-else-if="forms.length">
       <template v-for="(form, i) in forms">
         <v-list-item
-          :href="$route.hash"
+          href="#edit"
           @click.native="selectedForm = form; $refs.createForm.dialog = true;"
           :key="'form'+i"
         >

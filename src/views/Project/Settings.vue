@@ -6,7 +6,7 @@
       Project Settings
     </v-subheader>
     <v-list>
-      <v-list-item :href="$route.hash" @click.stop="deleteDialog = true">
+      <v-list-item href="#edit" @click.stop="deleteDialog = true">
         <v-list-tile-action style="width:38px">
           <v-icon>mdi-delete</v-icon>
         </v-list-tile-action>

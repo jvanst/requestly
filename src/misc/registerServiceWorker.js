@@ -1,6 +1,6 @@
 import { register } from 'register-service-worker'
 
-// import store from '@/store'
+import store from '@/store/store'
 
 if (process.env.NODE_ENV === 'production') {
   register('/service-worker.js', {
@@ -16,7 +16,8 @@ if (process.env.NODE_ENV === 'production') {
     updatefound () {
       console.log('New content is downloading.')
     },
-    updated () {
+    updated (reg) {
+      store.commit(`SET_SW_FOR_NEW_CONTENT`, reg)
       console.log('New content is available; please refresh.')
     },
     offline () {

@@ -3,6 +3,7 @@
       app
       v-model="bottomNav"
       grow
+      style="position:fixed"
     >
 
       <v-btn
@@ -10,6 +11,7 @@
         text
         value="requests"
         :to="{ name: 'Requests' }"
+        style="height:56px"
       >
         <span>Requests</span>
         <v-icon>mdi-table-of-contents</v-icon>
@@ -21,6 +23,7 @@
         value="board"
         :to="{ name: 'Board' }"
         exact
+        style="height:56px"
       >
         <span>Board</span>
         <v-icon>mdi-view-dashboard-outline</v-icon>
@@ -32,6 +35,7 @@
         text
         value="project"
         :to="{ name: 'Labels' }"
+        style="height:56px"
       >
         <span>Project</span>
         <v-icon>mdi-folder-outline</v-icon>

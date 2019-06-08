@@ -34,8 +34,9 @@
         class="layout column ma-2"
         v-model="requests"
         group="requests"
-        style="height:100%;overflow:scroll"
+        style="height:100%"
         @change="handleChange"
+        :handle="$vuetify.breakpoint.smAndDown ? '.card-drag-handle' : null"
         :disabled="!$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"
       >
         <v-flex

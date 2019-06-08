@@ -1,10 +1,11 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firestore from '@/firebase/firestore'
 
 import Endpoint from './Endpoint'
 
 export default class UserAPI extends Endpoint {
   constructor () {
-    super(firebase.firestore().collection('users'))
+    super(async () =>
+      (await firestore())
+        .collection('users'))
   }
 }

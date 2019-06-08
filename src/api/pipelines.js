@@ -1,19 +1,25 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firestore from '@/firebase/firestore'
 
 import Endpoint from './Endpoint'
 
 export default class PipelineAPI extends Endpoint {
   constructor (projectId) {
-    super(firebase.firestore()
-      .collection('projects')
-      .doc(projectId)
-      .collection('pipelines'))
+    super(async () =>
+      (await firestore())
+        .collection('projects')
+        .doc(projectId)
+        .collection('pipelines'))
+
+    this.projectId = projectId
   }
   // Override default fetch method
   async fetch () {
     const data = []
-    const result = await this.ref.orderBy('order').get()
+    const result = await (await firestore())
+      .collection('projects')
+      .doc(this.projectId)
+      .collection('pipelines')
+      .orderBy('order').get()
     for (let item of result.docs) {
       data.push({
         ...item.data(),
@@ -23,7 +29,7 @@ export default class PipelineAPI extends Endpoint {
     return data
   }
   async updateBatch (pipelines) {
-    const batch = firebase.firestore().batch()
+    const batch = firestore().batch()
     pipelines.forEach((p) => {
       const doc = { ...p }
       delete doc.id

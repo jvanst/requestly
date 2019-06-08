@@ -45,7 +45,6 @@ export default new Vuex.Store({
       localStorage.setItem('dark', value)
     },
     SHOW_SNACKBAR (state, { message, color }) {
-      console.log(message)
       state.snackbar.visible = false
       state.snackbar.message = message
       state.snackbar.color = color

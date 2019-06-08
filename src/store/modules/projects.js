@@ -15,7 +15,10 @@ const actions = {
       const result = await new ProjectAPI(context.rootState.projects.activeId).fetch(firebase.auth().currentUser.uid)
       context.commit('SET', result)
     } catch (error) {
-      // snackbar.showSnackbar(error.message, 'error')
+      context.commit('SHOW_SNACKBAR', {
+        message: error.message,
+        color: 'red'
+      }, { root: true })
     }
   }
 }

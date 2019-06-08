@@ -26,10 +26,11 @@ const actions = (resource) => ({
       const result = await API[resource](context).fetch()
       context.commit('SET', result)
     } catch (error) {
+      console.log(error)
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
-      })
+      }, { root: true })
     }
   },
   async fetchById (context, id) {

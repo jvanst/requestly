@@ -1,5 +1,4 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firestore from '@/firebase/firestore'
 
 import Endpoint from './Endpoint'
 
@@ -7,7 +6,7 @@ import Endpoint from './Endpoint'
 
 class AuthAPI extends Endpoint {
   constructor (projectId) {
-    super(firebase.firestore()
+    super(firestore()
       .collection('user'))
   }
 }

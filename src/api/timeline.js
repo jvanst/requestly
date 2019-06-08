@@ -1,21 +1,32 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firestore from '@/firebase/firestore'
 
 import Endpoint from './Endpoint'
 
 export default class TimelineAPI extends Endpoint {
   constructor (projectId, requestId) {
-    super(firebase.firestore()
-      .collection('projects')
-      .doc(projectId)
-      .collection('requests')
-      .doc(requestId)
-      .collection('timeline'))
+    super(async () =>
+      (await firestore())
+        .collection('projects')
+        .doc(projectId)
+        .collection('requests')
+        .doc(requestId)
+        .collection('timeline'))
+
+    this.projectId = projectId
+    this.requestId = requestId
   }
 
   async fetch () {
     const data = []
-    const result = await this.ref.orderBy('createdOn').get()
+    const result = await (await firestore())
+      .collection('projects')
+      .doc(this.projectId)
+      .collection('requests')
+      .doc(this.requestId)
+      .collection('timeline')
+      .orderBy('createdOn')
+      .get()
+
     for (let item of result.docs) {
       data.push({
         ...item.data(),

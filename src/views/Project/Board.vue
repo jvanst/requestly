@@ -1,11 +1,6 @@
 <template>
-  <v-container
-    fill-height
-    fluid
-    class="pa-0"
-    style="overflow-x:scroll"
-    >
-    <v-layout column>
+
+    <v-layout column fill-height>
       <v-flex v-if="loading" shrink>
         <v-toolbar
           flat
@@ -16,10 +11,10 @@
       <v-flex v-else-if="!$vuetify.breakpoint.smAndDown" shrink>
         <BoardToolbar/>
       </v-flex>
-      <v-flex v-if="loading" grow>
+      <v-flex v-if="loading">
         <board-pipeline-skeleton/>
       </v-flex>
-      <v-flex v-else grow class="pa-1">
+      <v-flex v-else class="pa-1" style="overflow-x:scroll;overflow-y:hidden">
         <draggable
           class="layout row fill-height justify-start align-start"
           v-model="pipelines"
@@ -39,7 +34,7 @@
         </draggable>
       </v-flex>
     </v-layout>
-  </v-container>
+
 </template>
 
 <script>

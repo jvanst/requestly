@@ -1,13 +1,13 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firestore from '@/firebase/firestore'
 
 import Endpoint from './Endpoint'
 
 export default class InviteAPI extends Endpoint {
   constructor (projectId) {
-    super(firebase.firestore()
-      .collection('projects')
-      .doc(projectId)
-      .collection('invites'))
+    super(async () =>
+      (await firestore())
+        .collection('projects')
+        .doc(projectId)
+        .collection('invites'))
   }
 }

@@ -1,5 +1,5 @@
 import firebase from 'firebase/app'
-import 'firebase/firestore'
+import 'firebase/auth'
 
 import router from '@/router'
 
@@ -11,6 +11,7 @@ const state = {
 const actions = {
   async register (context, { email, password, displayName }) {
     try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase.auth().createUserWithEmailAndPassword(email, password)
       const user = firebase.auth().currentUser
       await user.updateProfile({ displayName, photoURL: null })
@@ -24,6 +25,7 @@ const actions = {
   },
   async login (context, { email, password }) {
     try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase.auth().signInWithEmailAndPassword(email, password)
       router.replace('/dashboard')
     } catch (error) {
@@ -35,6 +37,7 @@ const actions = {
   },
   async loginWithGoogle (context) {
     try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
       router.replace('/dashboard')
     } catch (error) {
@@ -46,6 +49,7 @@ const actions = {
   },
   async loginWithFacebook (context) {
     try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
       router.replace('/dashboard')
     } catch (error) {

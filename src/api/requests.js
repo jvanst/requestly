@@ -1,18 +1,27 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firestore from '@/firebase/firestore'
 
 import Endpoint from './Endpoint'
 
 export default class RequestAPI extends Endpoint {
   constructor (projectId) {
-    super(firebase.firestore()
-      .collection('projects')
-      .doc(projectId)
-      .collection('requests'))
+    super(async () =>
+      (await firestore())
+        .collection('projects')
+        .doc(projectId)
+        .collection('requests'))
+
+    this.projectId = projectId
   }
   async fetch () {
     const data = []
-    const result = await this.ref.orderBy('createdOn').where('closed', '==', false).get()
+    const result = await (await firestore())
+      .collection('projects')
+      .doc(this.projectId)
+      .collection('requests')
+      .orderBy('createdOn')
+      .where('closed', '==', false)
+      .get()
+
     for (let item of result.docs) {
       data.push({
         ...item.data(),
@@ -23,7 +32,13 @@ export default class RequestAPI extends Endpoint {
   }
   async fetchAll () {
     const data = []
-    const result = await this.ref.orderBy('createdOn').get()
+    const result = await (await firestore())
+      .collection('projects')
+      .doc(this.projectId)
+      .collection('requests')
+      .orderBy('createdOn')
+      .get()
+
     for (let item of result.docs) {
       data.push({
         ...item.data(),

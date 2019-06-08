@@ -1,6 +1,5 @@
 import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/performance'
+import 'firebase/auth'
 
 const config = {
   'apiKey': 'AIzaSyABSb8kJ2guZL4EPSeuyUO-L_ZMli-Hf-Q',
@@ -12,6 +11,5 @@ const config = {
 }
 
 firebase.initializeApp(config)
-firebase.performance()
 
 export default firebase

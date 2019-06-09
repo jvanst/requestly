@@ -8,13 +8,24 @@ Vue.use(Router)
 
 function authGuard (to, from, next) {
   new Promise((resolve, reject) => {
-    firebase.auth().onAuthStateChanged(() => {
-      resolve()
+    firebase.auth().onAuthStateChanged((user) => {
+      // If user is authenticated
+      if (user) {
+        if (to.meta && to.meta.noAuthRequired) {
+          resolve({ name: 'Dashboard' })
+        }
+        resolve()
+      }
+      // No user
+      if (to.meta && to.meta.noAuthRequired) {
+        resolve()
+      }
+      resolve({ name: 'Login', query: { redirect: to.path } })
     }, (error) => {
       reject(error)
     })
   })
-    .then(() => next())
+    .then((path) => next(path))
     .catch(() => next({ name: 'Login' }))
 }
 
@@ -28,21 +39,39 @@ const router = new Router({
         {
           path: '/',
           name: 'Home',
-          component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
+          component: () => import(/* webpackChunkName: "home" */ './views/Home.vue'),
+          beforeEnter: (to, from, next) => {
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+              return next({ name: 'Login' })
+            }
+            next()
+          }
         },
         {
           path: '/login',
           name: 'Login',
+          meta: {
+            noAuthRequired: true
+          },
+          beforeEnter: authGuard,
           component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
         },
         {
           path: '/register',
           name: 'Register',
+          meta: {
+            noAuthRequired: true
+          },
+          beforeEnter: authGuard,
           component: () => import(/* webpackChunkName: "register" */ './views/Register.vue')
         },
         {
           path: '/recover',
           name: 'Recover',
+          meta: {
+            noAuthRequired: true
+          },
+          beforeEnter: authGuard,
           component: () => import(/* webpackChunkName: "recover" */ './views/Recover.vue')
         }
       ]

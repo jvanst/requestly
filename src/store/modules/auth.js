@@ -3,8 +3,15 @@ import 'firebase/auth'
 
 import router from '@/router'
 
+function redirect () {
+  if (router.history.current.query.redirect) {
+    return router.replace(router.currentRoute.query.redirect)
+  }
+  router.replace({ name: 'Dashboard' })
+}
+
 const state = {
-  user: {},
+  user: null,
   isLoggedIn: false
 }
 
@@ -15,7 +22,7 @@ const actions = {
       await firebase.auth().createUserWithEmailAndPassword(email, password)
       const user = firebase.auth().currentUser
       await user.updateProfile({ displayName, photoURL: null })
-      router.replace('/dashboard')
+      redirect()
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
@@ -27,7 +34,7 @@ const actions = {
     try {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase.auth().signInWithEmailAndPassword(email, password)
-      router.replace('/dashboard')
+      redirect()
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
@@ -39,7 +46,7 @@ const actions = {
     try {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      router.replace('/dashboard')
+      redirect()
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
@@ -51,7 +58,7 @@ const actions = {
     try {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      router.replace('/dashboard')
+      redirect()
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
@@ -62,7 +69,7 @@ const actions = {
   async logout (context) {
     try {
       await firebase.auth().signOut()
-      router.replace('/login')
+      router.replace({ name: 'Login' })
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
@@ -73,7 +80,7 @@ const actions = {
   async recover (context, email) {
     try {
       await firebase.auth().sendPasswordResetEmail(email)
-      router.replace('/login')
+      router.replace({ name: 'Login' })
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
         message: error.message,

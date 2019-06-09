@@ -4,13 +4,20 @@
     transition="slide-y-transition"
   >
     <div v-if="refreshingApp">
-      Loading new content...
+      <v-progress-linear
+        indeterminate
+        absolute
+        bottom
+        color="secondary"
+      ></v-progress-linear>
+      Installing new content...
     </div>
     <div v-else>
       New version available, would you like to update now?
     </div>
     <template #actions>
       <v-btn
+        v-if="!refreshingApp"
         text
         color="primary"
         @click="dialog = false"

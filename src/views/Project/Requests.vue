@@ -26,18 +26,6 @@
         No requests. Create one with the plus button below.
       </v-subheader>
     </v-list>
-    <v-btn
-      :to="{ name: 'Create Request' }"
-      class="primary"
-      :class="{ 'mb-5' : $vuetify.breakpoint.smAndDown }"
-      fab
-      fixed
-      bottom
-      right
-      large
-    >
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
   </v-container>
 </template>
 

@@ -10,7 +10,7 @@
         bottom
         color="secondary"
       ></v-progress-linear>
-      Installing new content...
+      Installing new version...
     </div>
     <div v-else>
       New version available, would you like to update now?

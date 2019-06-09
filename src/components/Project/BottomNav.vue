@@ -5,6 +5,17 @@
       grow
       style="position:fixed"
     >
+      <v-btn
+        color="teal"
+        text
+        value="new"
+        :to="{ name: 'Create Request' }"
+        exact
+        style="height:56px"
+      >
+        <span>New</span>
+        <v-icon>mdi-plus-circle-outline</v-icon>
+      </v-btn>
 
       <v-btn
         color="teal"

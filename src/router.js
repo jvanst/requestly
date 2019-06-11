@@ -34,21 +34,16 @@ const router = new Router({
   routes: [
     {
       path: '/',
+      redirect: 'home/',
       component: () => import(/* webpackChunkName: "index" */ './layouts/Index.vue'),
       children: [
         {
-          path: '/',
+          path: 'home/',
           name: 'Home',
-          component: () => import(/* webpackChunkName: "home" */ './views/Home.vue'),
-          beforeEnter: (to, from, next) => {
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-              return next({ name: 'Login' })
-            }
-            next()
-          }
+          component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
         },
         {
-          path: '/login',
+          path: 'login/',
           name: 'Login',
           meta: {
             noAuthRequired: true
@@ -57,7 +52,7 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
         },
         {
-          path: '/register',
+          path: 'register/',
           name: 'Register',
           meta: {
             noAuthRequired: true
@@ -66,7 +61,7 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "register" */ './views/Register.vue')
         },
         {
-          path: '/recover',
+          path: 'recover/',
           name: 'Recover',
           meta: {
             noAuthRequired: true
@@ -136,7 +131,8 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "settings" */ './views/Project/Settings.vue')
         }
       ]
-    }
+    },
+    { path: '*', redirect: '/home' }
   ]
 })
 

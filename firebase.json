@@ -19,7 +19,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "max-age=31557600"
           }
         ]
       },
@@ -36,10 +36,6 @@
     "public": "dist/",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
-      {
-        "source": "/login",
-        "destination": "/login/index.html"
-      },
       {
         "source": "**",
         "destination": "/index.html"

@@ -1,19 +1,13 @@
 // vue.config.js
-
-var path = require('path')
+const path = require('path')
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
-const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
 module.exports = {
   configureWebpack: {
     plugins: [
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, 'dist'),
-        routes: [ '/', '/login' ],
-        renderer: new Renderer({
-          headless: true,
-          renderAfterDocumentEvent: 'render-event'
-        })
+        routes: [ '/', '/login', '/home' ]
       })
     ]
   },

@@ -8,10 +8,12 @@
 </template>
 
 <script>
+import AppBar from '@/components/Index/AppBar.vue'
+
 export default {
   name: 'Project',
   components: {
-    AppBar: () => import(/* webpackPreload: true */ '@/components/Index/AppBar.vue')
+    AppBar
   }
 }
 </script>

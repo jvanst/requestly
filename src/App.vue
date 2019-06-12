@@ -10,8 +10,8 @@
 export default {
   name: 'app',
   components: {
-    SnackBar: () => import('@/components/SnackBar.vue'),
-    AppleInstallPrompt: () => import('@/components/AppleInstallPrompt')
+    SnackBar: () => import(/* webpackPrefetch: true */ '@/components/SnackBar.vue'),
+    AppleInstallPrompt: () => import(/* webpackPrefetch: true */ '@/components/AppleInstallPrompt')
   }
 }
 </script>

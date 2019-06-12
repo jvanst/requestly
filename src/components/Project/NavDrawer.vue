@@ -81,6 +81,27 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+    <template v-slot:append>
+      <v-divider></v-divider>
+      <v-list class="pa-0">
+        <v-list-item href="#">
+          <v-list-item-content>
+            <v-list-item-title>
+              Install to Desktop
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              Download our Web App
+            </v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-btn icon>
+              <v-icon>mdi-download</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+    </template>
   </v-navigation-drawer>
 </template>
 

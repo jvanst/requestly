@@ -37,5 +37,23 @@
     "vue-cli-plugin-vuetify": "^0.5.0",
     "vue-template-compiler": "^2.5.21",
     "vuetify-loader": "^1.0.5"
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/js/chunk-vendors*.js",
+      "maxSize": "125 kB"
+    },
+    {
+      "path": "./dist/js/chunk-firestore*.js",
+      "maxSize": "95 kB"
+    },
+    {
+      "path": "./dist/js/app*.js",
+      "maxSize": "15 kB"
+    },
+    {
+      "path": "./dist/js/client-chunk-*.js",
+      "maxSize": "6 kB"
+    }
+  ]
 }

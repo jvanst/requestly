@@ -3,8 +3,16 @@ import 'firebase/auth'
 
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueHead from 'vue-head'
+
+import Index from '@/layouts/Index'
+import Home from '@/views/Home'
 
 Vue.use(Router)
+
+Vue.use(VueHead, {
+  complement: 'Requestly'
+})
 
 function authGuard (to, from, next) {
   new Promise((resolve, reject) => {
@@ -34,13 +42,12 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: 'home/',
-      component: () => import(/* webpackChunkName: "index" */ './layouts/Index.vue'),
+      component: Index,
       children: [
         {
-          path: 'home/',
+          path: '/',
           name: 'Home',
-          component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
+          component: Home
         },
         {
           path: 'login/',

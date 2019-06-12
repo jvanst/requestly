@@ -3,12 +3,12 @@
   "short_name": "Requestly",
   "icons": [
     {
-      "src": "./img/icons/android-chrome-192x192.png?v=mdlyewqw13v",
+      "src": "./android-chrome-192x192.png?v=476pP4aeQA",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./img/icons/android-chrome-512x512.png?v=mdlyewqw13v",
+      "src": "./android-chrome-512x512.png?v=476pP4aeQA",
       "sizes": "384x384",
       "type": "image/png"
     }

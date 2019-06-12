@@ -7,14 +7,14 @@
         class="transparent"
       >
         <v-toolbar-title>
-          Create Label
+          Create a new Request
         </v-toolbar-title>
     </v-toolbar>
 
     <v-stepper
       v-model="stepperValue"
       vertical
-      class="stepper-custom"
+      style="box-shadow: none;"
     >
 
       <v-stepper-step
@@ -176,9 +176,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.stepper-custom {
-  box-shadow: none;
-}
-</style>

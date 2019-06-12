@@ -82,7 +82,7 @@
         </v-list-item>
       </v-list>
 
-    <template v-slot:append>
+    <!-- <template v-slot:append>
       <v-divider></v-divider>
       <v-list class="pa-0">
         <v-list-item href="#">
@@ -101,7 +101,7 @@
           </v-list-item-action>
         </v-list-item>
       </v-list>
-    </template>
+    </template> -->
   </v-navigation-drawer>
 </template>
 

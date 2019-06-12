@@ -8,7 +8,7 @@ module.exports = {
     plugins: [
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, 'dist'),
-        routes: [ '/', '/login', '/home' ],
+        routes: [ '/', '/login', '/register' ],
         renderer: new Renderer({
           headless: true,
           renderAfterDocumentEvent: 'render-event'

@@ -3,9 +3,6 @@
     <v-flex xs6>
       <board-pipeline-refresh/>
     </v-flex>
-    <v-flex xs6 class="text-xs-right">
-      <board-pipeline-create v-if="$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"/>
-    </v-flex>
   </v-layout>
 </template>
 
@@ -13,8 +10,7 @@
 export default {
   name: 'BoardToolbar',
   components: {
-    BoardPipelineRefresh: () => import('@/components/Project/BoardPipelineRefresh'),
-    BoardPipelineCreate: () => import('@/components/Project/BoardPipelineCreate')
+    BoardPipelineRefresh: () => import('@/components/Project/BoardPipelineRefresh')
   }
 }
 </script>

@@ -57,6 +57,7 @@ export default {
       await this.$store.dispatch('pipelines/put', {
         id: this.pipeline.id,
         payload: {
+          ...this.pipeline,
           title: this.title
         }
       })

@@ -32,6 +32,7 @@
           </v-flex>
         </draggable>
       </v-flex>
+      <board-pipeline-create v-if="$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"/>
     </v-layout>
 </template>
 
@@ -44,7 +45,8 @@ export default {
     draggable,
     BoardPipelineSkeleton: () => import('@/components/Project/BoardPipelineSkeleton'),
     BoardToolbar: () => import('@/components/Project/BoardToolbar'),
-    BoardPipeline: () => import('@/components/Project/BoardPipeline')
+    BoardPipeline: () => import('@/components/Project/BoardPipeline'),
+    BoardPipelineCreate: () => import('@/components/Project/BoardPipelineCreate')
   },
   created () {
     this.fetch()

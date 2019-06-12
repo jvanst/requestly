@@ -1,18 +1,22 @@
 <template>
-  <v-menu
-      v-model="menu"
-      :close-on-content-click="false"
-      :nudge-width="200"
-      offset-x
+  <v-dialog
+      v-model="dialog"
+      transition="dialog-bottom-transition"
+      width="300"
     >
-
       <template v-slot:activator="{ on }">
         <v-btn
-          depressed
+          class="primary"
+          :class="{ 'mb-5' : $vuetify.breakpoint.smAndDown }"
+          fab
+          fixed
+          bottom
+          right
+          large
           v-on="on"
-          >
-            <v-icon>mdi-shape-square-plus</v-icon>
-          </v-btn>
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
       </template>
 
       <v-card>
@@ -22,13 +26,14 @@
 
         <v-divider/>
 
-        <v-card-text class="pb-0 pt-0">
+        <v-card-text>
           <v-text-field
           label="Title"
           v-model="title"
           v-on:keyup.enter="create()"
-          >
-          </v-text-field>
+          hide-details
+          outlined
+        />
         </v-card-text>
 
         <v-card-actions>
@@ -44,14 +49,14 @@
         </v-card-actions>
 
       </v-card>
-    </v-menu>
+    </v-dialog>
 </template>
 
 <script>
 export default {
   name: 'CreatePipeline',
   data: () => ({
-    menu: false,
+    dialog: false,
     title: '',
     loading: false
   }),
@@ -63,7 +68,7 @@ export default {
         order: this.$store.state.pipelines.data.length
       })
       this.title = ''
-      this.menu = false
+      this.dialog = false
       this.loading = false
     }
   }

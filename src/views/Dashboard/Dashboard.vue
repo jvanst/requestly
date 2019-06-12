@@ -1,33 +1,41 @@
 <template>
   <v-container
-    v-bind="{ [`grid-list-${$vuetify.breakpoint.name}`]: true }"
+    grid-list-sm
   >
-    <div id="skew-background-1" />
-    <v-layout row wrap>
-      <v-flex xs12>
-        <v-subheader class="white--text">
-          Your projects
-        </v-subheader>
-        <v-layout row wrap>
-          <v-flex md3 xs12>
-            <CreateProject/>
-          </v-flex>
-          <template v-for="project in projects">
-            <v-flex :key="'flex'+project.id" md3 xs12>
-              <v-card
-                height="90"
-                :to="{ name: 'Board', params: { projectId: project.id } }"
-              >
-                <v-card-title class="title pb-0">
-                  {{ project.title }}
-                </v-card-title>
-                <v-card-text class="subtitle-1 pt-0">
-                  {{ project.id }}
-                </v-card-text>
-              </v-card>
-            </v-flex>
-          </template>
-        </v-layout>
+    <v-subheader class="white--text">
+      Your projects
+    </v-subheader>
+    <v-layout
+      v-if="!loading"
+      row
+      wrap
+      >
+      <v-flex
+        v-for="project in projects"
+        :key="'flex'+project.id"
+        md3
+        xs12
+      >
+        <project-card :project="project"/>
+      </v-flex>
+    </v-layout>
+    <v-layout
+      v-else
+      row
+      wrap
+      >
+      <v-flex
+        v-for="n in 3"
+        :key="'flex'+n"
+        md3
+        xs12
+      >
+        <project-card-skeleton/>
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex md3 xs12>
+        <create-project/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -40,24 +48,24 @@ export default {
     loading: false
   }),
   components: {
-    CreateProject: () => import('@/components/Dashboard/CreateProject')
+    CreateProject: () => import('@/components/Dashboard/CreateProject'),
+    ProjectCard: () => import('@/components/Dashboard/ProjectCard'),
+    ProjectCardSkeleton: () => import('@/components/Dashboard/ProjectCardSkeleton')
   },
   computed: {
     projects () {
       return this.$store.state.projects.data
     }
+  },
+  created () {
+    this.fetch()
+  },
+  methods: {
+    async fetch () {
+      this.loading = true
+      await this.$store.dispatch('projects/fetch')
+      this.loading = false
+    }
   }
 }
 </script>
-
-<style>
-#skew-background-1 {
-  width: 200vw;
-  height: 120vh;
-  background-color: #ffa726;
-  position: absolute;
-  left: -50vw;
-  top: 70vh;
-  transform: skew(-10deg, 10deg);
-}
-</style>

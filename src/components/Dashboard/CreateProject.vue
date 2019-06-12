@@ -2,9 +2,13 @@
   <v-dialog
       v-model="dialog"
       width="500px"
+      class="mt-1"
     >
       <template v-slot:activator="{ on }">
-        <v-card class="mt-2" height="90" v-on="on">
+        <v-card
+          height="90"
+          v-on="on"
+        >
           <v-layout
             column
             align-center
@@ -23,27 +27,30 @@
         </v-card-title>
 
         <v-form
-          ref="form"
+          ref="createProjectForm"
           v-model="valid"
           lazy-validation
           >
           <v-card-text class="pb-0 pt-0">
             <v-text-field
-              label="Title"
+              label="Project Title"
+              name='Project Title'
               v-model="title"
-              :rules="nameRules"
-              required
               @input="titleChange"
-              >
-            </v-text-field>
+              :rules="titleRules"
+              outlined
+              required
+            />
           </v-card-text>
 
           <v-card-text class="pb-0 pt-0">
             <v-text-field
               label="Project Tag"
+              name="Project Tag"
               v-model="tag"
-              :rules="nameRules"
+              :rules="tagRules"
               :disabled="!title.length"
+              outlined
               required
             >
               <template v-slot:append>
@@ -65,8 +72,7 @@
           <v-spacer/>
           <v-btn
             color="primary"
-            :disabled="!title"
-            @click.native="validate"
+            @click.native="validate()"
             :loading="loading"
           >
             Create
@@ -87,24 +93,28 @@ export default {
     randomEnding: '',
     loading: false,
     valid: false,
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => v.length <= 30 || 'Name must be less than 10 characters',
-      v => /^[a-zA-Z0-9_-]*$/.test(v) || 'Must be url safe'
-    ]
+    titleRules: [
+      v => !!v || 'Project Title is required',
+      v => v.length <= 30 || 'Project Title must be less than 10 characters'
+    ],
+    duplicateTag: false
   }),
-  created () {
-    this.generatorRE()
+  computed: {
+    tagRules () {
+      return [
+        v => !!v || 'Project tag is required',
+        v => v.length <= 30 || 'Project tag must be less than 10 characters',
+        v => /^[a-zA-Z0-9_-]*$/.test(v) || 'Must be url safe',
+        () => (this.duplicateTag === false) || 'This tag is already in use'
+      ]
+    }
   },
   methods: {
-    generatorRE () {
-      this.randomEnding = '-' + Math.floor(Math.random() * 90000)
-    },
     titleChange (e) {
-      this.tag = e + this.randomEnding
+      this.tag = e.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9_-]/g, '')
     },
     validate () {
-      if (this.$refs.form.validate()) {
+      if (this.$refs.createProjectForm.validate()) {
         this.create()
       }
     },
@@ -115,7 +125,7 @@ export default {
       this.tag = ''
       this.dialog = false
       this.loading = false
-      this.generatorRE()
+      this.valid = false
     }
   }
 }

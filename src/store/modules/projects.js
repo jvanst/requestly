@@ -12,7 +12,7 @@ const state = {
 const actions = {
   async fetch (context, uid) {
     try {
-      const result = await new ProjectAPI(context.rootState.projects.activeId).fetch(firebase.auth().currentUser.uid)
+      const result = await new ProjectAPI().fetch(firebase.auth().currentUser.uid)
       context.commit('SET', result)
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {

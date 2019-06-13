@@ -82,42 +82,28 @@
         </v-list-item>
       </v-list>
 
-    <!-- <template v-slot:append> -->
-      <v-card class="primary mt-3" tile v-show="canInstall">
-        <v-card-title class="subtitle-1">
-          Get the Desktop App
-        </v-card-title>
-        <v-card-text class="body-2">
-          Install our PWA for a seamless experience!
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn text @click="dismiss()">
-            Not Now
-          </v-btn>
-          <v-btn @click="install()">
-            Install
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-      <!-- <v-list class="teal mt-2">
-        <v-list-item href="#">
-          <v-list-item-content>
-            <v-list-item-title>
-              Install to Desktop
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              Download our Web App
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-btn icon>
-              <v-icon>mdi-download</v-icon>
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list> -->
-    <!-- </template> -->
+    <v-card
+      class="primary mt-3"
+      tile
+      dark
+      v-show="canInstall"
+      >
+      <v-card-title class="subtitle-1">
+        Get the Desktop App
+      </v-card-title>
+      <v-card-text class="body-2">
+        Install our PWA for a seamless experience!
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer/>
+        <v-btn text @click="dismiss()">
+          Not Now
+        </v-btn>
+        <v-btn @click="install()">
+          Install
+        </v-btn>
+      </v-card-actions>
+    </v-card>
   </v-navigation-drawer>
 </template>
 

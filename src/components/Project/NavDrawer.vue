@@ -82,9 +82,25 @@
         </v-list-item>
       </v-list>
 
-    <!-- <template v-slot:append>
-      <v-divider></v-divider>
-      <v-list class="pa-0">
+    <!-- <template v-slot:append> -->
+      <v-card class="primary mt-3" tile v-show="canInstall">
+        <v-card-title class="subtitle-1">
+          Get the Desktop App
+        </v-card-title>
+        <v-card-text class="body-2">
+          Install our PWA for a seamless experience!
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn text @click="dismiss()">
+            Not Now
+          </v-btn>
+          <v-btn @click="install()">
+            Install
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <!-- <v-list class="teal mt-2">
         <v-list-item href="#">
           <v-list-item-content>
             <v-list-item-title>
@@ -100,13 +116,39 @@
             </v-btn>
           </v-list-item-action>
         </v-list-item>
-      </v-list>
-    </template> -->
+      </v-list> -->
+    <!-- </template> -->
   </v-navigation-drawer>
 </template>
 
 <script>
 export default {
-  name: 'NavDrawer'
+  name: 'NavDrawer',
+  computed: {
+    canInstall () {
+      const standalone = window.matchMedia('(display-mode: standalone)').matches
+      if (!standalone && // not standalone
+        (window.deferredPrompt != null) && // can install
+        !this.$store.state.app.installPromptDismissed) { // not dismissed
+        return true
+      }
+      return false
+    }
+  },
+  methods: {
+    install () {
+      window.deferredPrompt.prompt()
+      window.deferredPrompt.userChoice
+        .then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            this.dismiss()
+          }
+          window.deferredPrompt = null
+        })
+    },
+    dismiss () {
+      this.$store.commit('DISMISS_INSTALL_PROMPT', true)
+    }
+  }
 }
 </script>

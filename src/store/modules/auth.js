@@ -7,7 +7,7 @@ function redirect () {
   if (router.history.current.query.redirect) {
     return router.replace(router.currentRoute.query.redirect)
   }
-  router.replace({ name: 'Dashboard' })
+  router.go({ name: 'Dashboard' })
 }
 
 const state = {

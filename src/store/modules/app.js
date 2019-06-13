@@ -5,10 +5,11 @@ const state = {
   // Apple Install Prompt
   showAppleInstallPrompt: false,
 
-  // Service worker
+  // Service worker / PWA stuff
   newContentAvailable: null,
   refreshingApp: false,
-  updateDismissed: false
+  updateDismissed: false,
+  installPromptDismissed: false
 }
 
 const actions = {
@@ -45,6 +46,9 @@ const mutations = {
   },
   DISMISS_UPDATE (state, value) {
     state.updateDismissed = value
+  },
+  DISMISS_INSTALL_PROMPT (state, value) {
+    state.installPromptDismissed = value
   }
 }
 

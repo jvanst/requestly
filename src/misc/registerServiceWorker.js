@@ -39,3 +39,8 @@ navigator.serviceWorker.addEventListener('controllerchange', () => {
 
   window.location.reload()
 })
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault()
+  window.deferredPrompt = e
+})

@@ -42,10 +42,11 @@ const router = new Router({
   routes: [
     {
       path: '/',
+      redirect: '/home',
       component: Index,
       children: [
         {
-          path: '/',
+          path: '/home',
           name: 'Home',
           component: Home
         },
@@ -138,8 +139,7 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "client-chunk-settings" */ './views/Project/Settings.vue')
         }
       ]
-    },
-    { path: '*', redirect: '/home' }
+    }
   ]
 })
 

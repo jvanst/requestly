@@ -11,19 +11,11 @@ export default new Vuetify({
     themes: {
       light: {
         primary: '#00796B',
-        secondary: '#00796B',
-        error: '#F44336',
-        info: '#2196F3',
-        success: '#4CAF50',
-        warning: '#FBC02D'
+        secondary: '#00796B'
       },
       dark: {
         primary: '#00796B',
-        secondary: '#00796B',
-        error: '#F44336',
-        info: '#2196F3',
-        success: '#4CAF50',
-        warning: '#FBC02D'
+        secondary: '#00796B'
       }
     }
   },

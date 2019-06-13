@@ -9,7 +9,7 @@
       <v-card
         width="100%"
         height="30"
-        :color="$store.state.app.dark ? 'grey darken-4' : 'grey lighten-4'"
+        :color="$store.state.app.dark ? 'grey darken-2' : 'grey lighten-4'"
         flat
       />
     </v-card-title>
@@ -17,7 +17,7 @@
       <v-card
         width="100%"
         height="20"
-        :color="$store.state.app.dark ? 'grey darken-4' : 'grey lighten-4'"
+        :color="$store.state.app.dark ? 'grey darken-2' : 'grey lighten-4'"
         flat
       />
     </v-card-text>

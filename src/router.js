@@ -56,7 +56,7 @@ const router = new Router({
             noAuthRequired: true
           },
           beforeEnter: authGuard,
-          component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-login" */ './views/Login.vue')
         },
         {
           path: 'register/',
@@ -65,7 +65,7 @@ const router = new Router({
             noAuthRequired: true
           },
           beforeEnter: authGuard,
-          component: () => import(/* webpackChunkName: "register" */ './views/Register.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-register" */ './views/Register.vue')
         },
         {
           path: 'recover/',
@@ -74,68 +74,68 @@ const router = new Router({
             noAuthRequired: true
           },
           beforeEnter: authGuard,
-          component: () => import(/* webpackChunkName: "recover" */ './views/Recover.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-recover" */ './views/Recover.vue')
         }
       ]
     },
     {
       path: '/dashboard',
-      component: () => import(/* webpackChunkName: "dashboard" */ './layouts/Dashboard.vue'),
+      component: () => import(/* webpackChunkName: "client-chunk-dashboard" */ './layouts/Dashboard.vue'),
       beforeEnter: authGuard,
       children: [
         {
           path: '/',
           name: 'Dashboard',
-          component: () => import(/* webpackChunkName: "dashboard-index" */ './views/Dashboard/Dashboard.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-dashboard-index" */ './views/Dashboard/Dashboard.vue')
         }
       ]
     },
     {
       path: '/project/:projectId/',
-      component: () => import(/* webpackChunkName: "home" */ './layouts/Project.vue'),
+      component: () => import(/* webpackChunkName: "client-chunk-home" */ './layouts/Project.vue'),
       beforeEnter: authGuard,
       props: true,
       children: [
         {
           path: 'board/',
           name: 'Board',
-          component: () => import(/* webpackChunkName: "board" */ './views/Project/Board.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-board" */ './views/Project/Board.vue')
         },
         {
           path: 'requests/',
           name: 'Requests',
-          component: () => import(/* webpackChunkName: "requests" */ './views/Project/Requests.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-requests" */ './views/Project/Requests.vue')
         },
         {
           path: 'request/create/',
           name: 'Create Request',
-          component: () => import(/* webpackChunkName: "create-request" */ './views/Project/CreateRequest.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-create-request" */ './views/Project/CreateRequest.vue')
         },
         {
           path: 'request/:id/',
           name: 'Request',
-          component: () => import(/* webpackChunkName: "request" */ './views/Project/RequestSingle.vue'),
+          component: () => import(/* webpackChunkName: "client-chunk-request" */ './views/Project/RequestSingle.vue'),
           props: true
         },
         {
           path: 'forms/',
           name: 'Forms',
-          component: () => import(/* webpackChunkName: "forms" */ './views/Project/Forms.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-forms" */ './views/Project/Forms.vue')
         },
         {
           path: 'labels/',
           name: 'Labels',
-          component: () => import(/* webpackChunkName: "labels" */ './views/Project/Labels.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-labels" */ './views/Project/Labels.vue')
         },
         {
           path: 'users/',
           name: 'Users',
-          component: () => import(/* webpackChunkName: "users" */ './views/Project/Users.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-users" */ './views/Project/Users.vue')
         },
         {
           path: 'settings/',
           name: 'Settings',
-          component: () => import(/* webpackChunkName: "settings" */ './views/Project/Settings.vue')
+          component: () => import(/* webpackChunkName: "client-chunk-settings" */ './views/Project/Settings.vue')
         }
       ]
     },

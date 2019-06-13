@@ -11,6 +11,9 @@
       <router-view />
     </v-content>
 
+    <snack-bar/>
+    <apple-install-prompt/>
+
     <bottom-nav v-if="$vuetify.breakpoint.smAndDown"/>
   </v-app>
 </template>
@@ -24,7 +27,9 @@ export default {
     AppBarMobile: () => import(/* webpackPreload: true */ '@/components/Project/AppBarMobile.vue'),
     NavDrawer: () => import(/* webpackPreload: true */ '@/components/Project/NavDrawer.vue'),
     BottomNav: () => import(/* webpackPreload: true */ '@/components/Project/BottomNav.vue'),
-    NewContentBanner: () => import(/* webpackPreload: true */ '@/components/NewContentBanner')
+    NewContentBanner: () => import(/* webpackPreload: true */ '@/components/NewContentBanner'),
+    SnackBar: () => import(/* webpackPrefetch: true */ '@/components/SnackBar.vue'),
+    AppleInstallPrompt: () => import(/* webpackPrefetch: true */ '@/components/AppleInstallPrompt')
   },
   created () {
     this.$store.commit('projects/SET_ACTIVE', this.$route.params.projectId)

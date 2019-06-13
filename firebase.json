@@ -1,4 +1,8 @@
 {
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "hosting": {
     "headers": [
       {
@@ -19,7 +23,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=31557600"
+            "value": "max-age=604800"
           }
         ]
       },
@@ -41,9 +45,5 @@
         "destination": "/index.html"
       }
     ]
-  },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
   }
 }

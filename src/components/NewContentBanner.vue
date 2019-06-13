@@ -19,13 +19,11 @@
       <v-btn
         v-if="!refreshingApp"
         text
-        color="primary"
         @click="dialog = false"
       >Dismiss</v-btn>
       <v-btn
         v-if="!refreshingApp"
         text
-        color="primary"
         @click="update()"
       >Update</v-btn>
     </template>

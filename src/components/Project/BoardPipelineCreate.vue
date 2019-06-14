@@ -12,7 +12,6 @@
           fixed
           bottom
           right
-          large
           v-on="on"
         >
           <v-icon>mdi-plus</v-icon>

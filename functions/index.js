@@ -74,6 +74,23 @@ exports.createProject = functions.firestore
       })
   })
 
+exports.deleteProject = functions.firestore
+  .document('projects/{projectId}')
+  .onDelete((snap, context) => {
+    var batch = admin.firestore().batch()
+
+    return admin.firestore()
+      .collection('projects')
+      .doc(context.params.projectId)
+      .collection('permissions')
+      .listDocuments().then(val => {
+        val.map((val) => {
+          batch.delete(val)
+        })
+        batch.commit()
+      })
+  })
+
 exports.createInvite = functions.firestore
   .document('projects/{projectId}/invites/{inviteId}').onCreate((snap, context) =>
     admin.firestore()

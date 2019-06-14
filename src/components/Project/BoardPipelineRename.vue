@@ -12,11 +12,12 @@
 
       <v-card-text class="pb-0 pt-0">
         <v-text-field
-        label="Title"
-        v-model="title"
-        v-on:keyup.enter="update()"
-        >
-        </v-text-field>
+          label="Title"
+          v-model="title"
+          v-on:keyup.enter="update()"
+          outlined
+          hide-details
+        />
       </v-card-text>
 
       <v-card-actions>

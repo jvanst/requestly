@@ -6,7 +6,7 @@
   >
       <v-list
         dense
-        class="transparent"
+        class="transparent pa-0"
         :class="{
           'pipeline-header' : $store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)
         }"

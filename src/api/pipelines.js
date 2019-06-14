@@ -29,11 +29,16 @@ export default class PipelineAPI extends Endpoint {
     return data
   }
   async updateBatch (pipelines) {
-    const batch = firestore().batch()
+    const batch = (await firestore()).batch()
+    const ref = (await firestore())
+      .collection('projects')
+      .doc(this.projectId)
+      .collection('pipelines')
+
     pipelines.forEach((p) => {
       const doc = { ...p }
       delete doc.id
-      batch.set(this.ref.doc(p.id), doc)
+      batch.set(ref.doc(p.id), doc)
     })
     await batch.commit()
   }

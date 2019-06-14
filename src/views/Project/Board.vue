@@ -7,13 +7,7 @@
           class="transparent"
         />
       </v-flex>
-      <v-flex v-else-if="!$vuetify.breakpoint.smAndDown" shrink>
-        <BoardToolbar/>
-      </v-flex>
-      <v-flex v-if="loading">
-        <board-pipeline-skeleton/>
-      </v-flex>
-      <v-flex v-else class="pa-1" style="overflow-x:scroll;overflow-y:hidden">
+      <v-flex v-if="!loading" class="pa-1" style="overflow-x:scroll;overflow-y:hidden">
         <draggable
           class="layout row fill-height justify-start align-start"
           v-model="pipelines"
@@ -32,6 +26,9 @@
           </v-flex>
         </draggable>
       </v-flex>
+      <v-flex v-else>
+        <board-pipeline-skeleton/>
+      </v-flex>
       <board-pipeline-create v-if="$store.getters['permissions/isUserAdmin']($store.state.auth.user.uid)"/>
     </v-layout>
 </template>
@@ -44,7 +41,6 @@ export default {
   components: {
     draggable,
     BoardPipelineSkeleton: () => import('@/components/Project/BoardPipelineSkeleton'),
-    BoardToolbar: () => import('@/components/Project/BoardToolbar'),
     BoardPipeline: () => import('@/components/Project/BoardPipeline'),
     BoardPipelineCreate: () => import('@/components/Project/BoardPipelineCreate')
   },

@@ -15,7 +15,7 @@
     <v-toolbar-items class="ml-4">
       <v-menu
         v-model="projectMenu"
-        v-if="$store.state.projects.data.length"
+        v-if="$store.getters['projects/getById'](projectId)"
       >
         <template v-slot:activator="{ on }">
           <v-btn small text v-on="on">

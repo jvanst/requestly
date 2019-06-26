@@ -7,9 +7,9 @@
     </v-subheader>
     <v-list>
       <v-list-item href="#edit" @click.stop="deleteDialog = true">
-        <v-list-tile-action style="width:38px">
+        <v-list-item-action style="width:38px">
           <v-icon>mdi-delete</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title>
             Close Project

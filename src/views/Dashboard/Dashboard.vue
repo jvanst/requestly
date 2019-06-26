@@ -10,6 +10,9 @@
       row
       wrap
       >
+      <v-flex md3 xs12>
+        <create-project/>
+      </v-flex>
       <v-flex
         v-for="project in projects"
         :key="'flex'+project.id"
@@ -31,11 +34,6 @@
         xs12
       >
         <project-card-skeleton/>
-      </v-flex>
-    </v-layout>
-    <v-layout>
-      <v-flex md3 xs12>
-        <create-project/>
       </v-flex>
     </v-layout>
   </v-container>

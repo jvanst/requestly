@@ -14,6 +14,7 @@
             align-center
             justify-center
             fill-height
+            class="pa-0 ma-0"
             >
             <v-icon size="32">mdi-plus</v-icon>
             Add Project

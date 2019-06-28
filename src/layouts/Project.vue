@@ -43,8 +43,10 @@ export default {
   methods: {
     async fetch () {
       this.loading = true
-      await this.$store.dispatch('projects/fetch')
-      await this.$store.dispatch('permissions/fetch')
+      await Promise.all([
+        this.$store.dispatch('projects/fetch'),
+        this.$store.dispatch('permissions/fetchById', this.$store.state.auth.user.uid)
+      ])
       this.loading = false
     }
   }

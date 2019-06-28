@@ -20,18 +20,18 @@
           elevation="1"
           height="100%"
         >
-          <v-list dense class="transparent pipeline-header">
+          <v-list dense class="transparent pipeline-header pa-0">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-subtitle>
-                  <v-card width="100px" height="20px" flat/>
+                  <v-card width="100px" height="15px" flat/>
                 </v-list-item-subtitle>
                 <v-list-item-title>
-                  <v-card width="130px" height="20px" flat/>
+                  <v-card width="130px" height="18px" flat/>
                 </v-list-item-title>
               </v-list-item-content>
               <v-list-item-action>
-                <v-icon small disabled>mdi-dots-vertical</v-icon>
+                <v-icon disabled>mdi-dots-vertical</v-icon>
               </v-list-item-action>
             </v-list-item>
              <v-divider/>

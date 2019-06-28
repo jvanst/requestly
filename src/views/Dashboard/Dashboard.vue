@@ -28,7 +28,7 @@
       wrap
       >
       <v-flex
-        v-for="n in 3"
+        v-for="n in 4"
         :key="'flex'+n"
         md3
         xs12

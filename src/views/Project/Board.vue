@@ -1,12 +1,5 @@
 <template>
     <v-layout column fill-height>
-      <v-flex v-if="loading" shrink>
-        <v-toolbar
-          flat
-          dense
-          class="transparent"
-        />
-      </v-flex>
       <v-flex v-if="!loading" class="pa-1" style="overflow-x:scroll;overflow-y:hidden">
         <draggable
           class="layout row fill-height justify-start align-start"

@@ -26,9 +26,6 @@ const actions = (resource) => ({
       const result = await API[resource](context).fetch()
       context.commit('SET', result)
     } catch (error) {
-      console.log('fetch')
-      console.log(resource)
-      console.log(error)
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
@@ -36,17 +33,17 @@ const actions = (resource) => ({
     }
   },
   async fetchById (context, id) {
+    context.commit('SET_LOADING', true)
     try {
       const result = await API[resource](context).fetchById(id)
       context.commit('ADD', result)
+      context.commit('SET_LOADING', false)
     } catch (error) {
-      console.log('fetchById')
-      console.log(resource)
-      console.log(error)
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
       }, { root: true })
+      context.commit('SET_LOADING', false)
     }
   },
   async create (context, payload) {
@@ -54,9 +51,6 @@ const actions = (resource) => ({
       const result = await API[resource](context).create(payload)
       context.commit('ADD', result)
     } catch (error) {
-      console.log('create')
-      console.log(resource)
-      console.log(error)
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
@@ -68,9 +62,6 @@ const actions = (resource) => ({
       const result = await API[resource](context).put(id, payload)
       context.commit('ADD', result)
     } catch (error) {
-      console.log('put')
-      console.log(resource)
-      console.log(error)
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'
@@ -82,9 +73,6 @@ const actions = (resource) => ({
       await API[resource](context).delete(id)
       context.commit('REMOVE', id)
     } catch (error) {
-      console.log('remove')
-      console.log(resource)
-      console.log(error)
       context.commit('SHOW_SNACKBAR', {
         message: error.message,
         color: 'red'

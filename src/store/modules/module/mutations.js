@@ -12,5 +12,8 @@ export default {
   },
   REMOVE (state, id) {
     state.data.splice(state.data.findIndex(p => p.id === id), 1)
+  },
+  SET_LOADING (state, value) {
+    state.loading = value
   }
 }

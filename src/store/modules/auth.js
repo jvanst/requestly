@@ -45,7 +45,7 @@ const actions = {
   async loginWithGoogle (context) {
     try {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      await firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
       redirect()
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
@@ -57,7 +57,7 @@ const actions = {
   async loginWithFacebook (context) {
     try {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      await firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      await firebase.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider())
       redirect()
     } catch (error) {
       context.commit('SHOW_SNACKBAR', {
